@@ -1,0 +1,103 @@
+- name: New Zealand
+  code: NZL
+  group: A
+- name: Norway
+  code: NOR
+  group: A
+- name: Philippines
+  code: PHI
+  group: A
+- name: Switzerland
+  code: SUI
+  group: A
+
+- name: Australia
+  code: AUS
+  group: B
+- name: Republic of Ireland
+  code: IRL
+  group: B
+- name: Nigeria
+  code: NGA
+  group: B
+- name: Canada
+  code: CAN
+  group: B
+
+- name: Spain
+  code: ESP
+  group: C
+- name: Costa Rica
+  code: CRC
+  group: C
+- name: Zambia
+  code: ZAM
+  group: C
+- name: Japan
+  code: JPN
+  group: C
+
+- name: England
+  code: ENG
+  group: D
+- name: Haiti
+  code: HAI
+  group: D
+- name: Denmark
+  code: DEN
+  group: D
+- name: China
+  code: CHN
+  group: D
+
+- name: United States
+  code: USA
+  group: E
+- name: Vietnam
+  code: VIE
+  group: E
+- name: Netherlands
+  code: NED
+  group: E
+- name: Portugal
+  code: POR
+  group: E
+
+- name: France
+  code: FRA
+  group: F
+- name: Jamaica
+  code: JAM
+  group: F
+- name: Brazil
+  code: BRA
+  group: F
+- name: Panama
+  code: PAN
+  group: F
+
+- name: Sweden
+  code: SWE
+  group: G
+- name: South Africa
+  code: RSA
+  group: G
+- name: Italy
+  code: ITA
+  group: G
+- name: Argentina
+  code: ARG
+  group: G
+
+- name: Germany
+  code: GER
+  group: H
+- name: Morocco
+  code: MAR
+  group: H
+- name: Colombia
+  code: COL
+  group: H
+- name: South Korea
+  code: KOR
+  group: H
