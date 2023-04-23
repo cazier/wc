@@ -1,240 +1,320 @@
 - a: New Zealand
   b: Norway
   date: 20-Jul-23
-  group: A
+  stage: GROUP
   time: '8:00'
 - a: Australia
   b: Republic of Ireland
   date: 20-Jul-23
-  group: B
+  stage: GROUP
   time: '11:00'
 - a: Nigeria
   b: Canada
   date: 20-Jul-23
-  group: B
+  stage: GROUP
   time: '3:30'
 - a: Philippines
   b: Switzerland
   date: 21-Jul-23
-  group: A
+  stage: GROUP
   time: '6:00'
 - a: Spain
   b: Costa Rica
   date: 21-Jul-23
-  group: C
+  stage: GROUP
   time: '8:30'
 - a: United States
   b: Vietnam
   date: 22-Jul-23
-  group: E
+  stage: GROUP
   time: '2:00'
 - a: Zambia
   b: Japan
   date: 22-Jul-23
-  group: C
+  stage: GROUP
   time: '8:00'
 - a: England
   b: Haiti
   date: 22-Jul-23
-  group: D
+  stage: GROUP
   time: '10:30'
 - a: Denmark
   b: China
   date: 22-Jul-23
-  group: D
+  stage: GROUP
   time: '13:00'
 - a: Sweden
   b: South Africa
   date: 23-Jul-23
-  group: G
+  stage: GROUP
   time: '6:00'
 - a: Netherlands
   b: Portugal
   date: 23-Jul-23
-  group: E
+  stage: GROUP
   time: '8:30'
 - a: France
   b: Jamaica
   date: 23-Jul-23
-  group: F
+  stage: GROUP
   time: '13:00'
 - a: Italy
   b: Argentina
   date: 24-Jul-23
-  group: G
+  stage: GROUP
   time: '7:00'
 - a: Germany
   b: Morocco
   date: 24-Jul-23
-  group: H
+  stage: GROUP
   time: '9:30'
 - a: Brazil
   b: Panama
   date: 24-Jul-23
-  group: F
+  stage: GROUP
   time: '12:30'
 - a: Colombia
   b: South Korea
   date: 25-Jul-23
-  group: H
+  stage: GROUP
   time: '3:00'
 - a: New Zealand
   b: Philippines
   date: 25-Jul-23
-  group: A
+  stage: GROUP
   time: '6:30'
 - a: Switzerland
   b: Norway
   date: 25-Jul-23
-  group: A
+  stage: GROUP
   time: '9:00'
 - a: Spain
   b: Zambia
   date: 26-Jul-23
-  group: C
+  stage: GROUP
   time: '8:30'
 - a: Japan
   b: Costa Rica
   date: 26-Jul-23
-  group: C
+  stage: GROUP
   time: '6:00'
 - a: Canada
   b: Republic of Ireland
   date: 26-Jul-23
-  group: B
+  stage: GROUP
   time: '13:00'
 - a: United States
   b: Netherlands
   date: 27-Jul-23
-  group: E
+  stage: GROUP
   time: '2:00'
 - a: Portugal
   b: Vietnam
   date: 27-Jul-23
-  group: E
+  stage: GROUP
   time: '8:30'
 - a: Australia
   b: Nigeria
   date: 27-Jul-23
-  group: B
+  stage: GROUP
   time: '11:00'
 - a: England
   b: Denmark
   date: 28-Jul-23
-  group: D
+  stage: GROUP
   time: '9:30'
 - a: Argentina
   b: South Africa
   date: 28-Jul-23
-  group: G
+  stage: GROUP
   time: '1:00'
 - a: China
   b: Haiti
   date: 28-Jul-23
-  group: D
+  stage: GROUP
   time: '12:30'
 - a: Sweden
   b: Italy
   date: 29-Jul-23
-  group: G
+  stage: GROUP
   time: '8:30'
 - a: France
   b: Brazil
   date: 29-Jul-23
-  group: F
+  stage: GROUP
   time: '11:00'
 - a: Panama
   b: Jamaica
   date: 29-Jul-23
-  group: F
+  stage: GROUP
   time: '13:30'
 - a: Germany
   b: Colombia
   date: 30-Jul-23
-  group: H
+  stage: GROUP
   time: '10:30'
 - a: South Korea
   b: Morocco
   date: 30-Jul-23
-  group: H
+  stage: GROUP
   time: '11:00'
 - a: Norway
   b: Philippines
   date: 30-Jul-23
-  group: A
+  stage: GROUP
   time: '8:00'
 - a: Switzerland
   b: New Zealand
   date: 30-Jul-23
-  group: A
+  stage: GROUP
   time: '8:00'
 - a: Canada
   b: Australia
   date: 31-Jul-23
-  group: B
+  stage: GROUP
   time: '11:00'
 - a: Japan
   b: Spain
   date: 31-Jul-23
-  group: C
+  stage: GROUP
   time: '8:00'
 - a: Costa Rica
   b: Zambia
   date: 31-Jul-23
-  group: C
+  stage: GROUP
   time: '8:00'
 - a: Republic of Ireland
   b: Nigeria
   date: 31-Jul-23
-  group: B
+  stage: GROUP
   time: '11:00'
 - a: Portugal
   b: United States
   date: 01-Aug-23
-  group: E
+  stage: GROUP
   time: '8:00'
 - a: Vietnam
   b: Netherlands
   date: 01-Aug-23
-  group: E
+  stage: GROUP
   time: '8:00'
 - a: Haiti
   b: Denmark
   date: 01-Aug-23
-  group: D
+  stage: GROUP
   time: '12:00'
 - a: China
   b: England
   date: 01-Aug-23
-  group: D
+  stage: GROUP
   time: '11:30'
 - a: Panama
   b: France
   date: 02-Aug-23
-  group: F
+  stage: GROUP
   time: '11:00'
 - a: Jamaica
   b: Brazil
   date: 02-Aug-23
-  group: F
+  stage: GROUP
   time: '11:00'
 - a: South Africa
   b: Italy
   date: 02-Aug-23
-  group: G
+  stage: GROUP
   time: '8:00'
 - a: Argentina
   b: Sweden
   date: 02-Aug-23
-  group: G
+  stage: GROUP
   time: '8:00'
 - a: South Korea
   b: Germany
   date: 03-Aug-23
-  group: H
+  stage: GROUP
   time: '11:00'
 - a: Morocco
   b: Colombia
   date: 03-Aug-23
-  group: H
+  stage: GROUP
   time: '7:00'
+- a: Team A
+  b: Team B
+  date: 05-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '06:00'
+- a: Team A
+  b: Team B
+  date: 05-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '09:00'
+- a: Team A
+  b: Team B
+  date: 06-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '03:00'
+- a: Team A
+  b: Team B
+  date: 06-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '10:00'
+- a: Team A
+  b: Team B
+  date: 07-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '8:30'
+- a: Team A
+  b: Team B
+  date: 07-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '11:30'
+- a: Team A
+  b: Team B
+  date: 08-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '09:00'
+- a: Team A
+  b: Team B
+  date: 08-Aug-23
+  stage: ROUND_OF_SIXTEEN
+  time: '12:00'
+- a: Team A
+  b: Team B
+  date: 11-Aug-23
+  stage: QUARTERFINALS
+  time: '8:30'
+- a: Team A
+  b: Team B
+  date: 11-Aug-23
+  stage: QUARTERFINALS
+  time: '02:00'
+- a: Team A
+  b: Team B
+  date: 12-Aug-23
+  stage: QUARTERFINALS
+  time: '08:00'
+- a: Team A
+  b: Team B
+  date: 12-Aug-23
+  stage: QUARTERFINALS
+  time: '12:30'
+- a: Team A
+  b: Team B
+  date: 15-Aug-23
+  stage: SEMIFINALS
+  time: '09:00'
+- a: Team A
+  b: Team B
+  date: 16-Aug-23
+  stage: SEMIFINALS
+  time: '11:00'
+- a: Team A
+  b: Team B
+  date: 19-Aug-23
+  stage: THIRD_PLACE
+  time: '09:00'
+- a: Team A
+  b: Team B
+  date: 20-Aug-23
+  stage: FINAL
+  time: '11:00'
