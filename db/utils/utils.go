@@ -1,6 +1,8 @@
 package utils
 
 import (
+	"fmt"
+	"log"
 	"os"
 	"time"
 
@@ -16,7 +18,7 @@ type Team struct {
 type Match struct {
 	A     string
 	B     string
-	Group string
+	Stage Stage
 	Date  time.Time
 }
 
@@ -24,7 +26,7 @@ func (m *Match) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var base struct {
 		A     string
 		B     string
-		Group string
+		Stage string
 		Date  string
 		Time  string
 	}
@@ -49,20 +51,65 @@ func (m *Match) UnmarshalYAML(unmarshal func(interface{}) error) error {
 
 	m.A = base.A
 	m.B = base.B
-	m.Group = base.Group
+	m.Stage = UnmarshalText(base.Stage)
 	m.Date = time.Date(dd.Year(), dd.Month(), dd.Day(), tt.Hour(), tt.Minute(), 0, 0, time.UTC)
 
 	return nil
 }
 
-func Import() ([]Team, []Match) {
-	f, _ := os.ReadFile("teams.yaml")
-	t := []Team{}
-	_ = yaml.Unmarshal(f, &t)
+type Stage uint
 
-	f2, _ := os.ReadFile("matches.yaml")
-	m := []Match{}
-	_ = yaml.Unmarshal(f2, &m)
+const (
+	GROUP Stage = iota
+	ROUND_OF_SIXTEEN
+	QUARTERFINALS
+	SEMIFINALS
+	THIRD_PLACE
+	FINAL
+)
 
-	return t, m
+func UnmarshalText(s string) Stage {
+	switch s {
+	case "GROUP":
+		return GROUP
+	case "ROUND_OF_SIXTEEN":
+		return ROUND_OF_SIXTEEN
+	case "QUARTERFINALS":
+		return QUARTERFINALS
+	case "SEMIFINALS":
+		return SEMIFINALS
+	case "THIRD_PLACE":
+		return THIRD_PLACE
+	case "FINAL":
+		return FINAL
+	}
+	log.Fatalf("Could not parse stage value: %s", s)
+	return 6
+}
+
+func load(path string, i interface{}) {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		panic(fmt.Errorf("could not read the yaml file %s because: %w", path, err))
+	}
+
+	err = yaml.Unmarshal(data, i)
+
+	if err != nil {
+		panic(fmt.Errorf("could not parse the yaml file %s because: %w", path, err))
+	}
+}
+
+func LoadTeams(path string) []Team {
+	team := []Team{}
+	load(path, &team)
+
+	return team
+}
+
+func LoadMatches(path string) []Match {
+	match := []Match{}
+	load(path, &match)
+
+	return match
 }
