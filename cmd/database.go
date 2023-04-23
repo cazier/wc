@@ -1,32 +1,61 @@
-/*
-Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
-*/
 package cmd
 
 import (
-	"fmt"
-
+	"github.com/cazier/wc/db"
 	"github.com/spf13/cobra"
 )
 
+var databasePath string
+var importTeamPath string
+var importMatchPath string
+
 // databaseCmd represents the database command
 var databaseCmd = &cobra.Command{
-	Use:   "database",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
+	Use:   "db",
+	Short: "Manage the backend database",
+}
 
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+var initializeCmd = &cobra.Command{
+	Use:     "initialize",
+	Aliases: []string{"init"},
+	Short:   "Initialize an empty database for use",
+	Long: `Create a database with all of its tables. Optionally, you can supply
+a set of import flags to fill the database with values`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("database called")
+		db.Init(databasePath)
+		db.LinkTables()
+
+		if importTeamPath != "" || importMatchPath != "" {
+			db.LoadYaml(importTeamPath, importMatchPath)
+		}
+	},
+}
+
+var importCmd = &cobra.Command{
+	Use:   "import",
+	Short: "Import details from a yaml file into the database",
+	Run: func(cmd *cobra.Command, args []string) {
+		db.Init(databasePath)
+		db.LoadYaml(importTeamPath, importMatchPath)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(databaseCmd)
+	databaseCmd.AddCommand(initializeCmd)
+	databaseCmd.AddCommand(importCmd)
+
+	databaseCmd.PersistentFlags().StringVar(&databasePath, "db", ".", "path to a database")
+
+	for _, cmd := range []*cobra.Command{initializeCmd, importCmd} {
+		cmd.Flags().StringVar(&importTeamPath, "teams", "", "team yaml file for importing")
+		cmd.Flags().StringVar(&importMatchPath, "matches", "", "match yaml file for importing")
+
+		// if cmd == importCmd {
+		// 	// cmd.MarkFlagRequired("teams")
+		// 	// cmd.MarkFlagRequired("matches")
+		// }
+	}
 
 	// Here you will define your flags and configuration settings.
 

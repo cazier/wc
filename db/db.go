@@ -3,6 +3,8 @@ package db
 import (
 	"log"
 	"os"
+	"path/filepath"
+	"time"
 
 	"github.com/cazier/wc/db/models"
 	"github.com/cazier/wc/db/utils"
@@ -12,76 +14,128 @@ import (
 	"gorm.io/gorm/logger"
 )
 
-func Init() *gorm.DB {
+var Database *gorm.DB
+
+func Init(databasePath string) {
+	var err error
+
+	var logPath = filepath.Dir(databasePath)
+
+	logFile, _ := os.OpenFile(logPath, os.O_CREATE|os.O_APPEND|os.O_RDWR, 0644)
+
 	newLogger := logger.New(
-		log.New(os.Stdout, "\r\n", log.LstdFlags), // io writer
+		log.New(logFile, "db.db", log.LstdFlags), // io writer
 		logger.Config{
-			// SlowThreshold:             time.Second,   // Slow SQL threshold
-			// LogLevel:                  logger.Info, // Log level
-			// IgnoreRecordNotFoundError: true,        // Ignore ErrRecordNotFound error for logger
-			// // ParameterizedQueries:      true,          // Don't include params in the SQL log
-			// Colorful: true, // Disable color
+			SlowThreshold:             time.Second, // Slow SQL threshold
+			LogLevel:                  logger.Info, // Log level
+			IgnoreRecordNotFoundError: true,        // Ignore ErrRecordNotFound error for logger
+			ParameterizedQueries:      false,       // Do include params in the SQL log
+			Colorful:                  false,       // Disable color
 		},
 	)
 
-	// Globally mode
-	database, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{
-		Logger: newLogger,
-	})
-	if err != nil {
-		panic("Could not connect to the database")
-	}
+	defer logFile.Close()
 
-	database.AutoMigrate(&models.Country{}, &models.Match{})
-	// load(database)
-	LoadYaml(database)
-	return database
+	Database, err = gorm.Open(sqlite.Open(databasePath), &gorm.Config{Logger: newLogger})
+
+	if err != nil {
+		log.Fatalf("Could not connect to the database. %s", err)
+	}
 }
 
-func LoadYaml(database *gorm.DB) {
-	teams, matches := utils.Import()
+// Create tables in the database for the specific data models
+func LinkTables() {
+	Database.AutoMigrate(
+		&models.Country{},
+		&models.Player{},
+		&models.Match{},
+		&models.MatchResult{},
+	)
+}
 
+// Import yaml file data into the database
+func LoadYaml(importTeams, importMatches string) {
+	var counter int64
 	storage := make(map[string]uint)
 
-	for _, team := range teams {
-		input := models.Country{Name: team.Name, FifaCode: team.Code, Group: team.Group}
-		output := models.Country{}
+	if importTeams != "" {
+		teams := utils.LoadTeams(importTeams)
 
-		database.FirstOrCreate(&output, input)
-		storage[team.Name] = output.ID
-	}
+		teams = append([]utils.Team{
+			{Name: "Team A", Group: "", Code: "<A>"},
+			{Name: "Team B", Group: "", Code: "<B>"},
+		}, teams...)
 
-	for _, match := range matches {
-		input := models.Match{Day: 0, Played: false, AID: storage[match.A], BID: storage[match.B], Group: match.Group, When: match.Date}
-		output := models.Match{}
+		for _, team := range teams {
+			input := models.Country{Name: team.Name, FifaCode: team.Code, Group: team.Group}
+			output := models.Country{}
 
-		database.FirstOrCreate(&output, input)
+			Database.FirstOrCreate(&output, input)
+			storage[team.Name] = output.ID
 
-		database.Model(storage[match.A]).Association("Matches").Append(&output)
-		database.Model(storage[match.B]).Association("Matches").Append(&output)
-	}
+			counter++
+		}
+		log.Printf("Added %d countries to the database", counter)
 
-	addMatchDays(database)
-}
+	} else {
+		var teams []models.Country
+		tx := Database.Find(&teams)
 
-func addMatchDays(database *gorm.DB) {
-	countries := []models.Country{}
-	database.Find(&countries)
-
-	for _, country := range countries {
-		matches := []models.Match{}
-
-		database.Where(&models.Match{AID: country.ID}).Or(&models.Match{BID: country.ID}).Find(&matches).Order("when")
-
-		for index, match := range matches {
-			if match.Day == 0 {
-				match.Day = uint(index + 1)
-				database.Save(&match)
-			}
+		if tx.Error != nil {
+			log.Fatalf("An error occurred with the database. %s", tx.Error)
 		}
 
-		// litter.Dump(matches)
+		if tx.RowsAffected == 0 {
+			log.Fatal("Cannot import match data when there are no countries in the table.")
+		}
 
+		for _, team := range teams {
+			storage[team.Name] = team.ID
+		}
+
+		log.Printf("Retrieved %d countries from the database", len(teams))
 	}
 
+	counter = 0
+
+	if importMatches != "" {
+		matches := utils.LoadMatches(importMatches)
+
+		for _, match := range matches {
+			input := models.Match{AID: storage[match.A], BID: storage[match.B], When: match.Date, Stage: match.Stage}
+			output := models.Match{}
+
+			if Database.FirstOrCreate(&output, input).RowsAffected == 0 {
+				break
+			}
+
+			counter++
+
+			Database.Model(storage[match.A]).Association("Matches").Append(&output)
+			Database.Model(storage[match.B]).Association("Matches").Append(&output)
+		}
+		log.Printf("Added %d matches to the database", counter)
+
+		addMatchDays()
+	}
+
+}
+
+func addMatchDays() {
+	var teams []models.Country
+	Database.Find(&teams)
+
+	for _, team := range teams {
+		matches := []models.Match{}
+
+		Database.Where(&models.Match{AID: team.ID}).Or(&models.Match{BID: team.ID}).Find(&matches).Order("when")
+
+		for index, match := range matches {
+			if match.Day == 0 && match.Stage == utils.GROUP {
+				match.Day = uint(index + 1)
+				match.Assigned = true
+				Database.Save(&match)
+			}
+		}
+	}
 }
