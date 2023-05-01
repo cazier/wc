@@ -15,6 +15,12 @@ type Team struct {
 	Group string
 }
 
+type Player struct {
+	Name      string
+	Number    int
+	Postition string
+}
+
 type Match struct {
 	A     string
 	B     string
@@ -87,6 +93,10 @@ func UnmarshalText(s string) Stage {
 	return 6
 }
 
+type HasName interface {
+	Name() string
+}
+
 func load(path string, i interface{}) {
 	data, err := os.ReadFile(path)
 	if err != nil {
@@ -112,4 +122,11 @@ func LoadMatches(path string) []Match {
 	load(path, &match)
 
 	return match
+}
+
+func LoadPlayers(path string) map[string][]Player {
+	players := map[string][]Player{}
+	load(path, &players)
+
+	return players
 }

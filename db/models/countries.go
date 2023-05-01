@@ -19,9 +19,10 @@ type Player struct {
 
 	Name     string
 	Position string
-	Number   uint
-	Goals    uint
-	Yellow   uint
-	Red      uint
-	Saves    int `gorm:"default:-1"`
+	Number   int `gorm:"default:-1"`
+
+	Goals  uint `gorm:"default:0"`
+	Yellow uint `gorm:"default:0"`
+	Red    uint `gorm:"default:0"`
+	Saves  int  `gorm:"default:-1"`
 }

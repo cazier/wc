@@ -20,8 +20,8 @@ type Match struct {
 	When     time.Time
 	Assigned bool `gorm:"default:false"`
 
-	AResult MatchResult `gorm:"foreignKey:ID"`
-	BResult MatchResult `gorm:"foreignKey:ID"`
+	// AResult MatchResult `gorm:"foreignKey:ID"`
+	// BResult MatchResult `gorm:"foreignKey:ID"`
 }
 
 type MatchResult struct {

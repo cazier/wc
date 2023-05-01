@@ -6,8 +6,10 @@ import (
 )
 
 var databasePath string
+
 var importTeamPath string
 var importMatchPath string
+var importPlayerPath string
 
 // databaseCmd represents the database command
 var databaseCmd = &cobra.Command{
@@ -25,9 +27,7 @@ a set of import flags to fill the database with values`,
 		db.Init(databasePath)
 		db.LinkTables()
 
-		if importTeamPath != "" || importMatchPath != "" {
-			db.LoadYaml(importTeamPath, importMatchPath)
-		}
+		importCmd.Run(cmd, args)
 	},
 }
 
@@ -36,7 +36,18 @@ var importCmd = &cobra.Command{
 	Short: "Import details from a yaml file into the database",
 	Run: func(cmd *cobra.Command, args []string) {
 		db.Init(databasePath)
-		db.LoadYaml(importTeamPath, importMatchPath)
+
+		if importTeamPath != "" {
+			db.LoadTeams(importTeamPath)
+		}
+
+		if importMatchPath != "" {
+			db.LoadMatches(importMatchPath)
+		}
+
+		if importPlayerPath != "" {
+			db.LoadPlayers(importPlayerPath)
+		}
 	},
 }
 
@@ -50,6 +61,7 @@ func init() {
 	for _, cmd := range []*cobra.Command{initializeCmd, importCmd} {
 		cmd.Flags().StringVar(&importTeamPath, "teams", "", "team yaml file for importing")
 		cmd.Flags().StringVar(&importMatchPath, "matches", "", "match yaml file for importing")
+		cmd.Flags().StringVar(&importPlayerPath, "players", "", "player yaml file for importing")
 
 		// if cmd == importCmd {
 		// 	// cmd.MarkFlagRequired("teams")
