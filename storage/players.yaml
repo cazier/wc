@@ -1,0 +1,2327 @@
+ARG:
+- name: Vanina Correa
+  number: 1
+  position: GK
+- name: Laurina Oliveros
+  number: 23
+  position: GK
+- name: Agustina Barroso
+  number: 2
+  position: DF
+- name: "Eliana St\xE1bile"
+  number: 3
+  position: DF
+- name: Julieta Cruz
+  number: 4
+  position: DF
+- name: Aldana Cometti
+  number: 6
+  position: DF
+- name: Sophia Braun
+  number: 13
+  position: DF
+- name: Marina Delgado
+  number: 16
+  position: DF
+- name: "Romina N\xFA\xF1ez"
+  number: 18
+  position: DF
+- name: Adriana Sachs
+  number: 21
+  position: DF
+- name: Vanina Preininger
+  number: 5
+  position: MF
+- name: Marianela Szymanowski
+  number: 8
+  position: MF
+- name: "Daiana Falf\xE1n"
+  number: 10
+  position: MF
+- name: Miriam Mayorga
+  number: 14
+  position: MF
+- name: Florencia Bonsegundo
+  number: 15
+  position: MF
+- name: Mariana Larroquette
+  number: 19
+  position: MF
+- name: Ruth Bravo
+  number: 20
+  position: MF
+- name: "Estefan\xEDa Banini"
+  number: 22
+  position: MF
+- name: Amancay Urbani
+  number: 7
+  position: FW
+- name: Soledad Jaimes
+  number: 9
+  position: FW
+- name: "Yamila Rodr\xEDguez"
+  number: 11
+  position: FW
+- name: Erica Lonigro
+  number: 17
+  position: FW
+- name: Catalina Primo
+  number: 24
+  position: FW
+AUS:
+- name: Lydia Williams
+  number: 1
+  position: GK
+- name: Teagan Micah
+  number: 12
+  position: GK
+- name: Mackenzie Arnold
+  number: 18
+  position: GK
+- name: Jada Mathyssen-Whyman
+  number: 28
+  position: GK
+- name: Courtney Nevin
+  number: 2
+  position: DF
+- name: Aivi Luik
+  number: 3
+  position: DF
+- name: Clare Polkinghorne
+  number: 4
+  position: DF
+- name: Ellie Carpenter
+  number: 21
+  position: DF
+- name: Charlotte Grant
+  number: 22
+  position: DF
+- name: Clare Hunt
+  number: 29
+  position: DF
+- name: Matilda McNamara
+  number: 31
+  position: DF
+- name: Tameka Yallop
+  number: 13
+  position: MF
+- name: Katrina Gorry
+  number: 19
+  position: MF
+- name: Kyra Cooney-Cross
+  number: 23
+  position: MF
+- name: Clare Wheeler
+  number: 26
+  position: MF
+- name: Alex Chidiac
+  number: 27
+  position: MF
+- name: Amy Sayer
+  number: 30
+  position: MF
+- name: Cortnee Vine
+  number: 5
+  position: FW
+- name: Mary Fowler
+  number: 11
+  position: FW
+- name: Hayley Raso
+  number: 16
+  position: FW
+- name: Sam Kerr
+  number: 20
+  position: FW
+- name: Larissa Crummer
+  number: 24
+  position: FW
+- name: Remy Siemsen
+  number: 25
+  position: FW
+BRA:
+- name: Camila Rodrigues
+  number: 1
+  position: GK
+- name: "Let\xEDcia Izidoro"
+  number: 12
+  position: GK
+- name: Luciana
+  number: 22
+  position: GK
+- name: "Ant\xF4nia"
+  number: 2
+  position: DF
+- name: Kathellen
+  number: 3
+  position: DF
+- name: Rafaelle
+  number: 4
+  position: DF
+- name: Tamires
+  number: 6
+  position: DF
+- name: Tarciane
+  number: 13
+  position: DF
+- name: Lauren
+  number: 14
+  position: DF
+- name: Yasmim
+  number: 19
+  position: DF
+- name: Fe Palermo
+  number: 20
+  position: DF
+- name: Bruninha
+  number: 24
+  position: DF
+- name: Ingryd
+  number: 5
+  position: MF
+- name: Duda Francelino
+  number: 7
+  position: MF
+- name: "Ana Vit\xF3ria"
+  number: 8
+  position: MF
+- name: Duda Santos
+  number: 10
+  position: MF
+- name: Adriana
+  number: 11
+  position: MF
+- name: Luana
+  number: 15
+  position: MF
+- name: Ary Borges
+  number: 17
+  position: MF
+- name: Kerolin
+  number: 21
+  position: MF
+- name: Gabi Portilho
+  number: 25
+  position: MF
+- name: Aline Gomes
+  number: 26
+  position: MF
+- name: Andressa Alves
+  number: 9
+  position: FW
+- name: Bia Zaneratto
+  number: 16
+  position: FW
+- name: Geyse
+  number: 18
+  position: FW
+- name: Gabi Nunes
+  number: 23
+  position: FW
+CAN:
+- name: Sabrina D'Angelo
+  number: -1
+  position: GK
+- name: Lysianne Proulx
+  number: -1
+  position: GK
+- name: Kailen Sheridan
+  number: -1
+  position: GK
+- name: Gabrielle Carle
+  number: -1
+  position: DF
+- name: Allysha Chapman
+  number: -1
+  position: DF
+- name: Sydney Collins
+  number: -1
+  position: DF
+- name: Vanessa Gilles
+  number: -1
+  position: DF
+- name: Ashley Lawrence
+  number: -1
+  position: DF
+- name: Jayde Riviere
+  number: -1
+  position: DF
+- name: Jade Rose
+  number: -1
+  position: DF
+- name: Bianca St-Georges
+  number: -1
+  position: DF
+- name: Sura Yekka
+  number: -1
+  position: DF
+- name: Marie-Yasmine Alidou
+  number: -1
+  position: MF
+- name: Simi Awujo
+  number: -1
+  position: MF
+- name: Jessie Fleming
+  number: -1
+  position: MF
+- name: Julia Grosso
+  number: -1
+  position: MF
+- name: Sophie Schmidt
+  number: -1
+  position: MF
+- name: Amanda Allen
+  number: -1
+  position: FW
+- name: Jordyn Huitema
+  number: -1
+  position: FW
+- name: "Clo\xE9 Lacasse"
+  number: -1
+  position: FW
+- name: Clarissa Larisey
+  number: -1
+  position: FW
+- name: Adriana Leon
+  number: -1
+  position: FW
+- name: Christine Sinclair
+  number: -1
+  position: FW
+- name: Evelyne Viens
+  number: -1
+  position: FW
+CHN:
+- name: Zhu Yu
+  number: 1
+  position: GK
+- name: Xu Huan
+  number: 12
+  position: GK
+- name: Zhao Lina
+  number: 22
+  position: GK
+- name: Li Mengwen
+  number: 2
+  position: DF
+- name: Wang Xiaoxue
+  number: 3
+  position: DF
+- name: Li Jiayue
+  number: 4
+  position: DF
+- name: Lou Jiahui
+  number: 14
+  position: DF
+- name: Yao Lingwei
+  number: 16
+  position: DF
+- name: Gao Chen
+  number: 23
+  position: DF
+- name: Ma Jun
+  number: 5
+  position: MF
+- name: Zhang Xin
+  number: 6
+  position: MF
+- name: Yao Wei
+  number: 8
+  position: MF
+- name: Wang Yanwen
+  number: 9
+  position: MF
+- name: Zhang Rui
+  number: 10
+  position: MF
+- name: Yang Lina
+  number: 13
+  position: MF
+- name: Wu Chengshu
+  number: 15
+  position: MF
+- name: Liu Yanqiu
+  number: 17
+  position: MF
+- name: Tang Jiali
+  number: 18
+  position: MF
+- name: Xiao Yuyi
+  number: 20
+  position: MF
+- name: Wang Shuang
+  number: 7
+  position: FW
+- name: Wang Shanshan
+  number: 11
+  position: FW
+- name: Zhang Linyan
+  number: 19
+  position: FW
+- name: Li Ying
+  number: 21
+  position: FW
+COL:
+- name: "Catalina P\xE9rez"
+  number: 1
+  position: GK
+- name: "Sandra Sep\xFAlveda"
+  number: 12
+  position: GK
+- name: "Stefany Casta\xF1o"
+  number: 25
+  position: GK
+- name: Daniela Arias
+  number: 3
+  position: DF
+- name: Korina Clavijo
+  number: 13
+  position: DF
+- name: Viviana Acosta
+  number: 14
+  position: DF
+- name: "Mar\xEDa Morales"
+  number: 16
+  position: DF
+- name: "Jorelyn Carabal\xED"
+  number: 19
+  position: DF
+- name: "M\xF3nica Ramos"
+  number: 20
+  position: DF
+- name: Daniela Caracas
+  number: 22
+  position: DF
+- name: Manuela Vanegas
+  number: 2
+  position: MF
+- name: Diana Ospina
+  number: 4
+  position: MF
+- name: Lorena Bedoya
+  number: 5
+  position: MF
+- name: Daniela Montoya
+  number: 6
+  position: MF
+- name: "Angie Casta\xF1eda"
+  number: 8
+  position: MF
+- name: Carolina Arias
+  number: 17
+  position: MF
+- name: Gabriela Huertas
+  number: 18
+  position: MF
+- name: Liana Salazar
+  number: 21
+  position: MF
+- name: "Mayra Ram\xEDrez"
+  number: 9
+  position: FW
+- name: Leicy Santos
+  number: 10
+  position: FW
+- name: Catalina Usme
+  number: 11
+  position: FW
+- name: Tatiana Ariza
+  number: 15
+  position: FW
+- name: Elexa Bahr
+  number: 23
+  position: FW
+CRC:
+- name: "Mar\xEDa Isabel Rodr\xEDguez"
+  number: 1
+  position: GK
+- name: "Mar\xEDa Asunci\xF3n Qui\xF1ones"
+  number: 12
+  position: GK
+- name: Elene Lete
+  number: 23
+  position: GK
+- name: Irene Paredes
+  number: 4
+  position: DF
+- name: "Ivana Andr\xE9s"
+  number: 5
+  position: DF
+- name: Laia Codina
+  number: 6
+  position: DF
+- name: Berta Pujadas
+  number: 14
+  position: DF
+- name: "Jana Fern\xE1ndez"
+  number: 18
+  position: DF
+- name: Olga Carmona
+  number: 19
+  position: DF
+- name: "Paula Tom\xE1s"
+  number: 20
+  position: DF
+- name: Teresa Abelleira
+  number: 3
+  position: MF
+- name: Irene Guerrero
+  number: 7
+  position: MF
+- name: Maite Oroz
+  number: 8
+  position: MF
+- name: "Fiamma Ben\xEDtez"
+  number: 16
+  position: MF
+- name: "Mar\xEDa P\xE9rez"
+  number: 21
+  position: MF
+- name: "Sheila Garc\xEDa"
+  number: 24
+  position: MF
+- name: "Esther Gonz\xE1lez"
+  number: 9
+  position: FW
+- name: Jennifer Hermoso
+  number: 10
+  position: FW
+- name: Alba Redondo
+  number: 11
+  position: FW
+- name: "Ascensi\xF3n Mart\xEDnez"
+  number: 12
+  position: FW
+- name: Ena Navarro
+  number: 15
+  position: FW
+- name: Salma Paralluelo
+  number: 17
+  position: FW
+- name: Athenea del Castillo
+  number: 22
+  position: FW
+DEN:
+- name: "Laura Wors\xF8e"
+  number: 1
+  position: GK
+- name: Kathrine Larsen
+  number: 16
+  position: GK
+- name: "Maja Bay \xD8stergaard"
+  number: 22
+  position: GK
+- name: Sara Thrige
+  number: 2
+  position: DF
+- name: Stine Ballisager Pedersen
+  number: 3
+  position: DF
+- name: Rikke Sevecke
+  number: 4
+  position: DF
+- name: "Simone Boye S\xF8rensen"
+  number: 5
+  position: DF
+- name: Katrine Veje
+  number: 11
+  position: DF
+- name: Luna Gevitz
+  number: 18
+  position: DF
+- name: Karen Holmgaard
+  number: 6
+  position: MF
+- name: Sanne Troelsgaard
+  number: 7
+  position: MF
+- name: Emma Snerle
+  number: 8
+  position: MF
+- name: "Nicoline S\xF8rensen"
+  number: 14
+  position: MF
+- name: "Kathrine K\xFChl"
+  number: 15
+  position: MF
+- name: Janni Thomsen
+  number: 19
+  position: MF
+- name: Sofie Bredgaard
+  number: 20
+  position: MF
+- name: Sofie Svava
+  number: 23
+  position: MF
+- name: Josefine Hasbo
+  number: 24
+  position: MF
+- name: "Frederikke Th\xF8gersen"
+  number: 25
+  position: MF
+- name: Amalie Vangsgaard
+  number: 9
+  position: FW
+- name: Stine Larsen
+  number: 12
+  position: FW
+- name: Rikke Marie Madsen
+  number: 17
+  position: FW
+- name: Mille Gejl
+  number: 21
+  position: FW
+- name: Olivia Holdt
+  number: 26
+  position: FW
+ENG:
+- name: Mary Earps
+  number: -1
+  position: GK
+- name: Ellie Roebuck
+  number: -1
+  position: GK
+- name: Hannah Hampton
+  number: -1
+  position: GK
+- name: Lucy Bronze
+  number: -1
+  position: DF
+- name: Leah Williamson
+  number: -1
+  position: DF
+- name: Jess Carter
+  number: -1
+  position: DF
+- name: Lotte Wubben-Moy
+  number: -1
+  position: DF
+- name: Niamh Charles
+  number: -1
+  position: DF
+- name: Esme Morgan
+  number: -1
+  position: DF
+- name: Maya Le Tissier
+  number: -1
+  position: DF
+- name: Lucy Parker
+  number: -1
+  position: DF
+- name: Jordan Nobbs
+  number: -1
+  position: MF
+- name: Keira Walsh
+  number: -1
+  position: MF
+- name: Georgia Stanway
+  number: -1
+  position: MF
+- name: Ella Toone
+  number: -1
+  position: MF
+- name: Laura Coombs
+  number: -1
+  position: MF
+- name: Rachel Daly
+  number: -1
+  position: FW
+- name: Lauren Hemp
+  number: -1
+  position: FW
+- name: Chloe Kelly
+  number: -1
+  position: FW
+- name: Alessia Russo
+  number: -1
+  position: FW
+- name: Lauren James
+  number: -1
+  position: FW
+- name: Jess Park
+  number: -1
+  position: FW
+- name: Katie Robinson
+  number: -1
+  position: FW
+ESP:
+- name: "Mar\xEDa Isabel Rodr\xEDguez"
+  number: 1
+  position: GK
+- name: "Mar\xEDa Asunci\xF3n Qui\xF1ones"
+  number: 12
+  position: GK
+- name: Elene Lete
+  number: 23
+  position: GK
+- name: Irene Paredes
+  number: 4
+  position: DF
+- name: "Ivana Andr\xE9s"
+  number: 5
+  position: DF
+- name: Laia Codina
+  number: 6
+  position: DF
+- name: Berta Pujadas
+  number: 14
+  position: DF
+- name: "Jana Fern\xE1ndez"
+  number: 18
+  position: DF
+- name: Olga Carmona
+  number: 19
+  position: DF
+- name: "Paula Tom\xE1s"
+  number: 20
+  position: DF
+- name: Teresa Abelleira
+  number: 3
+  position: MF
+- name: Irene Guerrero
+  number: 7
+  position: MF
+- name: Maite Oroz
+  number: 8
+  position: MF
+- name: "Fiamma Ben\xEDtez"
+  number: 16
+  position: MF
+- name: "Mar\xEDa P\xE9rez"
+  number: 21
+  position: MF
+- name: "Sheila Garc\xEDa"
+  number: 24
+  position: MF
+- name: "Esther Gonz\xE1lez"
+  number: 9
+  position: FW
+- name: Jennifer Hermoso
+  number: 10
+  position: FW
+- name: Alba Redondo
+  number: 11
+  position: FW
+- name: "Ascensi\xF3n Mart\xEDnez"
+  number: 12
+  position: FW
+- name: Ena Navarro
+  number: 15
+  position: FW
+- name: Salma Paralluelo
+  number: 17
+  position: FW
+- name: Athenea del Castillo
+  number: 22
+  position: FW
+FRA:
+- name: "Myl\xE8ne Chavas"
+  number: 1
+  position: GK
+- name: Pauline Peyraud-Magnin
+  number: 16
+  position: GK
+- name: Constance Picaud
+  number: 21
+  position: GK
+- name: "Ma\xEBlle Lakrar"
+  number: 2
+  position: DF
+- name: Wendie Renard
+  number: 3
+  position: DF
+- name: Estelle Cascarino
+  number: 4
+  position: DF
+- name: "\xC9lisa De Almeida"
+  number: 5
+  position: DF
+- name: Sakina Karchaoui
+  number: 7
+  position: DF
+- name: Selma Bacha
+  number: 13
+  position: DF
+- name: "\xC8ve P\xE9risset"
+  number: 22
+  position: DF
+- name: Hawa Cissoko
+  number: 23
+  position: DF
+- name: "Magou Doucour\xE9"
+  number: 26
+  position: DF
+- name: Jade Le Guilly
+  number: -1
+  position: DF
+- name: Sandie Toletti
+  number: 6
+  position: MF
+- name: Grace Geyoro
+  number: 8
+  position: MF
+- name: Amel Majri
+  number: 11
+  position: MF
+- name: Laurina Fazer
+  number: 12
+  position: MF
+- name: Kenza Dali
+  number: 15
+  position: MF
+- name: "Oriane Jean-Fran\xE7ois"
+  number: 24
+  position: MF
+- name: "L\xE9a Le Garrec"
+  number: 25
+  position: MF
+- name: "Eug\xE9nie Le Sommer"
+  number: 9
+  position: FW
+- name: "Clara Mat\xE9o"
+  number: 10
+  position: FW
+- name: Ouleymata Sarr
+  number: 14
+  position: FW
+- name: Sandy Baltimore
+  number: 17
+  position: FW
+- name: Viviane Asseyi
+  number: 18
+  position: FW
+- name: Melvine Malard
+  number: 19
+  position: FW
+- name: Delphine Cascarino
+  number: 20
+  position: FW
+GER:
+- name: Stina Johannes
+  number: 12
+  position: GK
+- name: Maria Luisa Grohs
+  number: 21
+  position: GK
+- name: Ann-Katrin Berger
+  number: 30
+  position: GK
+- name: Kathrin Hendrich
+  number: 3
+  position: DF
+- name: Sophia Kleinherne
+  number: 4
+  position: DF
+- name: Felicitas Rauch
+  number: 17
+  position: DF
+- name: Sara Doorsoun
+  number: 23
+  position: DF
+- name: "Sjoeke N\xFCsken"
+  number: 24
+  position: DF
+- name: Paulina Krumbiegel
+  number: 27
+  position: DF
+- name: Sarai Linder
+  number: 28
+  position: DF
+- name: Lena Oberdorf
+  number: 6
+  position: MF
+- name: Sydney Lohmann
+  number: 8
+  position: MF
+- name: "Dzsenifer Marozs\xE1n"
+  number: 10
+  position: MF
+- name: "Sara D\xE4britz"
+  number: 13
+  position: MF
+- name: Melanie Leupolz
+  number: 18
+  position: MF
+- name: Lina Magull
+  number: 20
+  position: MF
+- name: Jule Brand
+  number: 22
+  position: MF
+- name: Chantal Hagel
+  number: 26
+  position: MF
+- name: Janina Minge
+  number: 31
+  position: MF
+- name: "Lea Sch\xFCller"
+  number: 7
+  position: FW
+- name: Svenja Huth
+  number: 9
+  position: FW
+- name: Alexandra Popp
+  number: 11
+  position: FW
+- name: Laura Freigang
+  number: 15
+  position: FW
+- name: "Tabea Wa\xDFmuth"
+  number: 16
+  position: FW
+- name: "Klara B\xFChl"
+  number: 19
+  position: FW
+- name: Nicole Anyomi
+  number: 25
+  position: FW
+HAI:
+- name: Madelina Fleuriot
+  number: 1
+  position: GK
+- name: Nahomie Ambroise
+  number: 12
+  position: GK
+- name: Lara Larco
+  number: 18
+  position: GK
+- name: Chelsea Surpris
+  number: 2
+  position: DF
+- name: Jennyfer Limage
+  number: 3
+  position: DF
+- name: Tabita Joseph
+  number: 4
+  position: DF
+- name: Maudeline Moryl
+  number: 5
+  position: DF
+- name: Melchie Dumornay
+  number: 6
+  position: MF
+- name: "Danielle \xC9tienne"
+  number: 8
+  position: MF
+- name: "Betina Petit Fr\xE8re"
+  number: 13
+  position: MF
+- name: Dayana Pierre-Louis
+  number: 19
+  position: MF
+- name: Milan Pierre-Jerome
+  number: 16
+  position: MF
+- name: Kethna Louis
+  number: 20
+  position: MF
+- name: Batcheba Louis
+  number: 7
+  position: FW
+- name: Sherly Jeudy
+  number: 9
+  position: FW
+- name: "N\xE9rilia Mond\xE9sir"
+  number: 10
+  position: FW
+- name: "Roseline \xC9loissaint"
+  number: 11
+  position: FW
+- name: Rose-Alya Marcellus
+  number: 15
+  position: FW
+- name: "Mikerline Saint-F\xE9lix"
+  number: 17
+  position: FW
+- name: Roselord Borgella
+  number: 22
+  position: FW
+IRL:
+- name: Courtney Brosnan
+  number: -1
+  position: GK
+- name: Grace Moloney
+  number: -1
+  position: GK
+- name: Megan Walsh
+  number: -1
+  position: GK
+- name: Sophie Whitehouse
+  number: -1
+  position: GK
+- name: "\xC1ine O'Gorman"
+  number: -1
+  position: DF
+- name: Louise Quinn
+  number: -1
+  position: DF
+- name: Diane Caldwell
+  number: -1
+  position: DF
+- name: Harriet Scott
+  number: -1
+  position: DF
+- name: Claire O'Riordan
+  number: -1
+  position: DF
+- name: Aoife Mannion
+  number: -1
+  position: DF
+- name: Hayley Nolan
+  number: -1
+  position: DF
+- name: Tara O'Hanlon
+  number: -1
+  position: DF
+- name: Denise O'Sullivan
+  number: -1
+  position: MF
+- name: Katie McCabe
+  number: -1
+  position: MF
+- name: Ruesha Littlejohn
+  number: -1
+  position: MF
+- name: Megan Connolly
+  number: -1
+  position: MF
+- name: Ciara Grant
+  number: -1
+  position: MF
+- name: Jamie Finn
+  number: -1
+  position: MF
+- name: Lucy Quinn
+  number: -1
+  position: MF
+- name: Roma McLaughlin
+  number: -1
+  position: MF
+- name: Sinead Farrelly
+  number: -1
+  position: MF
+- name: Amber Barrett
+  number: -1
+  position: FW
+- name: Heather Payne
+  number: -1
+  position: FW
+- name: Kyra Carusa
+  number: -1
+  position: FW
+- name: Abbie Larkin
+  number: -1
+  position: FW
+- name: Marissa Sheva
+  number: -1
+  position: FW
+- name: Alannah McEvoy
+  number: -1
+  position: FW
+ITA:
+- name: Laura Giuliani
+  number: 1
+  position: GK
+- name: Katja Schroffenegger
+  number: 12
+  position: GK
+- name: Roberta Aprile
+  number: 22
+  position: GK
+- name: Angelica Soffia
+  number: 2
+  position: DF
+- name: Alice Tortelli
+  number: 3
+  position: DF
+- name: Elisa Bartoli
+  number: 13
+  position: DF
+- name: Maria Luisa Filangeri
+  number: 15
+  position: DF
+- name: Lucia Di Guglielmo
+  number: 16
+  position: DF
+- name: Lisa Boattin
+  number: 17
+  position: DF
+- name: Martina Lenzini
+  number: 23
+  position: DF
+- name: Aurora Galli
+  number: 4
+  position: MF
+- name: Manuela Giugliano
+  number: 6
+  position: MF
+- name: Flaminia Simonetti
+  number: 7
+  position: MF
+- name: Martina Rosucci
+  number: 8
+  position: MF
+- name: Arianna Caruso
+  number: 18
+  position: MF
+- name: Giada Greggi
+  number: 21
+  position: MF
+- name: Michela Catena
+  number: 5
+  position: FW
+- name: Valentina Giacinti
+  number: 9
+  position: FW
+- name: Cristiana Girelli
+  number: 10
+  position: FW
+- name: Sofia Cantore
+  number: 11
+  position: FW
+- name: Agnese Bonfantini
+  number: 14
+  position: FW
+- name: Benedetta Glionna
+  number: 19
+  position: FW
+- name: Martina Piemonte
+  number: 20
+  position: FW
+JAM:
+- name: Liya Brooks
+  number: -1
+  position: GK
+- name: Sydney Schneider
+  number: -1
+  position: GK
+- name: Rebecca Spencer
+  number: -1
+  position: GK
+- name: Satara Murray
+  number: -1
+  position: DF
+- name: Vyan Sampson
+  number: -1
+  position: DF
+- name: Allyson Swaby
+  number: -1
+  position: DF
+- name: Chantelle Swaby
+  number: -1
+  position: DF
+- name: Siobhan Wilson
+  number: -1
+  position: DF
+- name: Victoria Williams
+  number: -1
+  position: DF
+- name: Paige Bailey-Gayle
+  number: -1
+  position: MF
+- name: Deneisha Blackwood
+  number: -1
+  position: MF
+- name: Trudi Carter
+  number: -1
+  position: MF
+- name: Rachel Jones
+  number: -1
+  position: MF
+- name: Peyton McNamara
+  number: -1
+  position: MF
+- name: Atlanta Primus
+  number: -1
+  position: MF
+- name: Havana Solaun
+  number: -1
+  position: MF
+- name: Drew Spence
+  number: -1
+  position: MF
+- name: Jody Brown
+  number: -1
+  position: FW
+- name: Shania Hayles
+  number: -1
+  position: FW
+- name: Cheyna Matthews
+  number: -1
+  position: FW
+- name: Kameron Simmonds
+  number: -1
+  position: FW
+- name: Kalyssa Van Zanten
+  number: -1
+  position: FW
+- name: Solai Washington
+  number: -1
+  position: FW
+- name: Tiernny Wiltshire
+  number: -1
+  position: FW
+JPN:
+- name: "Ayaka Yamashita (\u5C71\u4E0B \u674F\u4E5F\u52A0)"
+  number: 1
+  position: GK
+- name: "Momoko Tanaka (\u7530\u4E2D \u6843\u5B50)"
+  number: 18
+  position: GK
+- name: "Chika Hirao (\u5E73\u5C3E \u77E5\u4F73)"
+  number: 21
+  position: GK
+- name: "Risa Shimizu (\u6E05\u6C34 \u68A8\u7D17)"
+  number: 2
+  position: DF
+- name: "Moeka Minami (\u5357 \u840C\u83EF)"
+  number: 3
+  position: DF
+- name: "Saki Kumagai (\u718A\u8C37 \u7D17\u5E0C)"
+  number: 4
+  position: DF
+- name: "Shiori Miyake (\u4E09\u5B85 \u53F2\u7E54)"
+  number: 5
+  position: DF
+- name: "Ruka Norimatsu (\u4E57\u677E\u3000\u7460\u83EF)"
+  number: 12
+  position: DF
+- name: "Saori Takarada (\u5B9D\u7530 \u6C99\u7E54)"
+  number: 19
+  position: DF
+- name: "Kiko Seike (\u6E05\u5BB6 \u8CB4\u5B50)"
+  number: 22
+  position: DF
+- name: "Miyabi Moriya (\u5B88\u5C4B \u90FD\u5F25)"
+  number: 24
+  position: DF
+- name: "Rion Ishikawa (\u77F3\u5DDD \u7483\u97F3)"
+  number: 25
+  position: DF
+- name: "Fuka Nagano (\u9577\u91CE \u98A8\u82B1)"
+  number: 6
+  position: MF
+- name: "Hinata Miyazawa (\u5BAE\u6FA4 \u3072\u306A\u305F)"
+  number: 7
+  position: MF
+- name: "Hikaru Naomoto (\u7336\u672C \u5149)"
+  number: 8
+  position: MF
+- name: "Jun Endo (\u9060\u85E4 \u7D14)"
+  number: 13
+  position: MF
+- name: "Yui Hasegawa (\u9577\u8C37\u5DDD \u552F)"
+  number: 14
+  position: MF
+- name: "Hina Sugita (\u6749\u7530 \u5983\u548C)"
+  number: 15
+  position: MF
+- name: "Honoka Hayashi (\u6797 \u7A42\u4E4B\u9999)"
+  number: 16
+  position: MF
+- name: "Aoba Fujino (\u85E4\u91CE \u3042\u304A\u3070)"
+  number: 20
+  position: MF
+- name: "Riko Ueki (\u690D\u6728 \u7406\u5B50)"
+  number: 9
+  position: FW
+- name: "Mana Iwabuchi (\u5CA9\u6E15 \u771F\u5948)"
+  number: 10
+  position: FW
+- name: "Mina Tanaka (\u7530\u4E2D \u7F8E\u5357)"
+  number: 11
+  position: FW
+- name: "Maika Hamano (\u6D5C\u91CE \u307E\u3044\u304B)"
+  number: 23
+  position: FW
+KOR:
+- name: "Yoon Young-geul (\uC724\uC601\uAE00)"
+  number: 1
+  position: GK
+- name: "Kim Jung-mi (\uAE40\uC815\uBBF8)"
+  number: 18
+  position: GK
+- name: "Kim Kyeong-hee (\uAE40\uACBD\uD76C)"
+  number: 21
+  position: GK
+- name: "Choo Hyo-joo (\uCD94\uD6A8\uC8FC)"
+  number: 2
+  position: DF
+- name: "Hong Hye-ji (\uD64D\uD61C\uC9C0)"
+  number: 3
+  position: DF
+- name: "Shim Seo-yeon (\uC2EC\uC11C\uC5F0)"
+  number: 4
+  position: DF
+- name: "Kim Hye-yeong (\uAE40\uD61C\uC601)"
+  number: 5
+  position: DF
+- name: "Lim Seon-joo (\uC784\uC120\uC8FC)"
+  number: 6
+  position: DF
+- name: "Jang Sel-gi (\uC7A5\uC2AC\uAE30)"
+  number: 16
+  position: DF
+- name: "Kim Hye-ri (\uAE40\uD61C\uB9AC)"
+  number: 20
+  position: DF
+- name: "Kim Jin-hui (\uAE40\uC9C4\uD76C)"
+  number: 26
+  position: DF
+- name: "Cho So-hyun (\uC870\uC18C\uD604)"
+  number: 8
+  position: MF
+- name: "Lee Geum-min (\uC774\uAE08\uBBFC)"
+  number: 9
+  position: MF
+- name: "Ji So-yun (\uC9C0\uC18C\uC5F0)"
+  number: 10
+  position: MF
+- name: "Kim Yun-ji (\uAE40\uC724\uC9C0)"
+  number: 12
+  position: MF
+- name: "Park Hye-jeong (\uBC15\uD61C\uC815)"
+  number: 14
+  position: MF
+- name: "Park Ye-eun (\uBC15\uC608\uC740)"
+  number: 15
+  position: MF
+- name: "Chun Ga-ram (\uCC9C\uAC00\uB78C)"
+  number: 22
+  position: MF
+- name: "Bae Ye-bin (\uBC30\uC608\uBE48)"
+  number: 24
+  position: MF
+- name: "Son Hwa-yeon (\uC190\uD654\uC5F0)"
+  number: 7
+  position: FW
+- name: "Choe Yu-ri (\uCD5C\uC720\uB9AC)"
+  number: 11
+  position: FW
+- name: "Park Eun-sun (\uBC15\uC740\uC120)"
+  number: 13
+  position: FW
+- name: "Jang Yu-bin (\uC7A5\uC720\uBE48)"
+  number: 17
+  position: FW
+- name: "Seo Ji-youn (\uC11C\uC9C0\uC5F0)"
+  number: 19
+  position: FW
+- name: "Jung Seol-bin (\uC815\uC124\uBE48)"
+  number: 23
+  position: FW
+- name: "Lee Eun-young (\uC774\uC740\uC601)"
+  number: 25
+  position: FW
+- name: "Jeon Eun-ha (\uC804\uC740\uD558)"
+  number: 27
+  position: FW
+MAR:
+- name: Khadija Er-Rmichi
+  number: 1
+  position: GK
+- name: Assia Zouhair
+  number: 12
+  position: GK
+- name: "In\xE8s Arouaissa"
+  number: -1
+  position: GK
+- name: Maryame Atiq
+  number: 14
+  position: DF
+- name: Zineb Redouani
+  number: 2
+  position: DF
+- name: Ghizlane Chhiri
+  number: 15
+  position: DF
+- name: Nesryne El Chad
+  number: 5
+  position: DF
+- name: Sabah Seghir
+  number: 13
+  position: DF
+- name: Yasmin Mrabet
+  number: 21
+  position: DF
+- name: Fatima El Ghazouani
+  number: 20
+  position: DF
+- name: Rkia Mazrouai
+  number: 14
+  position: DF
+- name: "Nouha\xEFla Benzina"
+  number: 4
+  position: DF
+- name: "\xC9lodie Nakkach"
+  number: 6
+  position: MF
+- name: Salma Amani
+  number: 8
+  position: MF
+- name: Ghizlane Chebbak
+  number: 7
+  position: MF
+- name: Kawtar Ait Omar
+  number: 15
+  position: MF
+- name: Ibtissam Bouharat
+  number: 15
+  position: MF
+- name: Siham Boukhami
+  number: 4
+  position: MF
+- name: Rosella Ayane
+  number: 23
+  position: FW
+- name: Fatima Tagnaout
+  number: 11
+  position: FW
+- name: Sakina Ouzraoui
+  number: 18
+  position: FW
+- name: Anissa Belkasmi
+  number: 25
+  position: FW
+- name: Sofia Bouftini
+  number: 24
+  position: FW
+- name: Imane Saoud
+  number: 20
+  position: FW
+- name: Yasmine Zouhir
+  number: -1
+  position: FW
+NED:
+- name: Daphne van Domselaar
+  number: 1
+  position: GK
+- name: Barbara Lorsheyd
+  number: 16
+  position: GK
+- name: Jacintha Weimar
+  number: 23
+  position: GK
+- name: Lynn Wilms
+  number: 2
+  position: DF
+- name: Stefanie van der Gragt
+  number: 3
+  position: DF
+- name: Aniek Nouwen
+  number: 4
+  position: DF
+- name: Merel van Dongen
+  number: 5
+  position: DF
+- name: Caitlin Dijkstra
+  number: 15
+  position: DF
+- name: Kerstin Casparij
+  number: 18
+  position: DF
+- name: Dominique Janssen
+  number: 20
+  position: DF
+- name: Jill Roord
+  number: 6
+  position: MF
+- name: Sherida Spitse
+  number: 8
+  position: MF
+- name: "Dani\xEBlle van de Donk"
+  number: 10
+  position: MF
+- name: Wieke Kaptein
+  number: 14
+  position: MF
+- name: Damaris Egurrola
+  number: 21
+  position: MF
+- name: Victoria Pelova
+  number: 24
+  position: MF
+- name: Jill Baijings
+  number: 25
+  position: MF
+- name: Sisca Folkertsma
+  number: 26
+  position: MF
+- name: Lineth Beerensteyn
+  number: 7
+  position: FW
+- name: Fenna Kalma
+  number: 9
+  position: FW
+- name: Lieke Martens
+  number: 11
+  position: FW
+- name: Katja Snoeijs
+  number: 12
+  position: FW
+- name: Renate Jansen
+  number: 13
+  position: FW
+- name: "Rom\xE9e Leuchter"
+  number: 17
+  position: FW
+- name: Tiny Hoekstra
+  number: 19
+  position: FW
+- name: Esmee Brugts
+  number: 22
+  position: FW
+NGA:
+- name: Chiamaka Nnadozie
+  number: -1
+  position: GK
+- name: Yewande Balogun
+  number: -1
+  position: GK
+- name: Inyeme Etim
+  number: -1
+  position: GK
+- name: Osinachi Ohale
+  number: -1
+  position: DF
+- name: Ashleigh Plumptre
+  number: -1
+  position: DF
+- name: Glory Ogbonna
+  number: -1
+  position: DF
+- name: Oluwatosin Demehin
+  number: -1
+  position: DF
+- name: Rofiat Imuran
+  number: -1
+  position: DF
+- name: Michelle Alozie
+  number: -1
+  position: DF
+- name: Onome Ebi
+  number: -1
+  position: DF
+- name: Halimatu Ayinde
+  number: -1
+  position: MF
+- name: Christy Ucheibe
+  number: -1
+  position: MF
+- name: Ngozi Okobi-Okeoghene
+  number: -1
+  position: MF
+- name: Toni Payne
+  number: -1
+  position: MF
+- name: Regina Otu
+  number: -1
+  position: MF
+- name: Deborah Abiodun
+  number: -1
+  position: MF
+- name: Asisat Oshoala
+  number: -1
+  position: FW
+- name: Uchenna Kanu
+  number: -1
+  position: FW
+- name: Ifeoma Onumonu
+  number: -1
+  position: FW
+- name: Rasheedat Ajibade
+  number: -1
+  position: FW
+- name: Desire Oparanozie
+  number: -1
+  position: FW
+- name: Esther Okoronkwo
+  number: -1
+  position: FW
+- name: Gift Monday
+  number: -1
+  position: FW
+NOR:
+- name: Guro Pettersen
+  number: 1
+  position: GK
+- name: Sunniva Skoglund
+  number: 12
+  position: GK
+- name: Aurora Mikalsen
+  number: 23
+  position: GK
+- name: "Anja S\xF8nstevold"
+  number: 2
+  position: DF
+- name: Mathilde Harviken
+  number: 3
+  position: DF
+- name: Tuva Hansen
+  number: 4
+  position: DF
+- name: Maren Mjelde
+  number: 6
+  position: DF
+- name: Marit Bratberg Lund
+  number: 16
+  position: DF
+- name: Malin Brenn
+  number: 24
+  position: DF
+- name: Ingrid Syrstad Engen
+  number: 7
+  position: MF
+- name: "Vilde B\xF8e Risa"
+  number: 8
+  position: MF
+- name: Guro Reiten
+  number: 11
+  position: MF
+- name: Thea Bjelde
+  number: 13
+  position: MF
+- name: Amalie Eikeland
+  number: 15
+  position: MF
+- name: Julie Blakstad
+  number: 17
+  position: MF
+- name: Frida Maanum
+  number: 18
+  position: MF
+- name: Elisabeth Terland
+  number: 19
+  position: MF
+- name: Cesilie Andreassen
+  number: 22
+  position: MF
+- name: "Karina S\xE6vik"
+  number: 9
+  position: FW
+- name: Ada Hegerberg
+  number: 14
+  position: FW
+- name: Emilie Haavi
+  number: 20
+  position: FW
+- name: "Anna J\xF8sendal"
+  number: 21
+  position: FW
+NZL:
+- name: Erin Nayler
+  number: 1
+  position: GK
+- name: Brianna Edwards
+  number: 21
+  position: GK
+- name: Murphy Sheaff
+  number: 23
+  position: GK
+- name: Kate Taylor
+  number: 2
+  position: DF
+- name: Claudia Bunge
+  number: 3
+  position: DF
+- name: CJ Bott
+  number: 4
+  position: DF
+- name: Meikayla Moore
+  number: 5
+  position: DF
+- name: Ali Riley
+  number: 7
+  position: DF
+- name: Michaela Foster
+  number: 13
+  position: DF
+- name: Katie Bowen
+  number: 14
+  position: DF
+- name: Grace Neville
+  number: 16
+  position: DF
+- name: Mackenzie Barry
+  number: 18
+  position: DF
+- name: Elizabeth Anton
+  number: 19
+  position: DF
+- name: Malia Steinmetz
+  number: 6
+  position: MF
+- name: Daisy Cleverley
+  number: 8
+  position: MF
+- name: Olivia Chance
+  number: 11
+  position: MF
+- name: Betsy Hassett
+  number: 12
+  position: MF
+- name: Ava Collins
+  number: 22
+  position: MF
+- name: Gabi Rennie
+  number: 9
+  position: FW
+- name: Grace Jale
+  number: 10
+  position: FW
+- name: Paige Satchell
+  number: 15
+  position: FW
+- name: Hannah Wilkinson
+  number: 17
+  position: FW
+- name: Indiah-Paige Riley
+  number: 20
+  position: FW
+PAN:
+- name: "Sasha F\xE1brega"
+  number: 1
+  position: GK
+- name: Nadia Ducreux
+  number: 12
+  position: GK
+- name: Stephani Vargas
+  number: 22
+  position: GK
+- name: "Hilary Ja\xE9n"
+  number: 2
+  position: DF
+- name: Wendy Natis
+  number: 3
+  position: DF
+- name: Katherine Castillo
+  number: 4
+  position: DF
+- name: "Yomira Pinz\xF3n"
+  number: 5
+  position: DF
+- name: Rosario Vargas
+  number: 15
+  position: DF
+- name: Rebeca Espinosa
+  number: 16
+  position: DF
+- name: "Nicole De Obald\xEDa"
+  number: 21
+  position: DF
+- name: Carina Baltrip-Reyes
+  number: 23
+  position: DF
+- name: "Deysir\xE9 Salazar"
+  number: 6
+  position: MF
+- name: "Emily Cede\xF1o"
+  number: 7
+  position: MF
+- name: "Schiandra Gonz\xE1lez"
+  number: 8
+  position: MF
+- name: Marta Cox
+  number: 10
+  position: MF
+- name: Natalia Mills
+  number: 11
+  position: MF
+- name: Laurie Batista
+  number: 14
+  position: MF
+- name: "Erika Hern\xE1ndez"
+  number: 18
+  position: MF
+- name: Aldrith Quintero
+  number: 20
+  position: MF
+- name: Karla Riley
+  number: 9
+  position: FW
+- name: Riley Tanner
+  number: 13
+  position: FW
+- name: Gabriela Villagrand
+  number: 17
+  position: FW
+- name: "Lineth Cede\xF1o"
+  number: 19
+  position: FW
+PHI:
+- name: Olivia McDaniel
+  number: -1
+  position: GK
+- name: Kiara Fontanilla
+  number: -1
+  position: GK
+- name: Maya Alcantara
+  number: -1
+  position: DF
+- name: Alicia Barker
+  number: -1
+  position: DF
+- name: Reina Bonta
+  number: -1
+  position: DF
+- name: Malea Cesar
+  number: -1
+  position: DF
+- name: Sofia Harrison
+  number: -1
+  position: DF
+- name: Hali Long
+  number: -1
+  position: DF
+- name: Eva Madarang
+  number: -1
+  position: DF
+- name: "Anicka Casta\xF1eda"
+  number: -1
+  position: MF
+- name: Sara Eggesvik
+  number: -1
+  position: MF
+- name: Carleigh Frilles
+  number: -1
+  position: MF
+- name: Isabella Pasion
+  number: -1
+  position: MF
+- name: Jaclyn Sawicki
+  number: -1
+  position: MF
+- name: Natalie Oca
+  number: -1
+  position: MF
+- name: Sabine Ramos
+  number: -1
+  position: MF
+- name: Sarina Bolden
+  number: -1
+  position: FW
+- name: Isabella Flanigan
+  number: -1
+  position: FW
+- name: Chandler McDaniel
+  number: -1
+  position: FW
+- name: Quinley Quezada
+  number: -1
+  position: FW
+POR:
+- name: "In\xEAs Pereira"
+  number: 1
+  position: GK
+- name: "Patr\xEDcia Morais"
+  number: 12
+  position: GK
+- name: Rute Costa
+  number: 22
+  position: GK
+- name: "Joana March\xE3o"
+  number: 5
+  position: DF
+- name: "L\xFAcia Alves"
+  number: 17
+  position: DF
+- name: Carole Costa
+  number: 15
+  position: DF
+- name: Ana Borges
+  number: 9
+  position: DF
+- name: Ana Seica
+  number: 9
+  position: DF
+- name: Diana Gomes
+  number: 19
+  position: DF
+- name: "S\xEDlvia Rebelo"
+  number: 4
+  position: DF
+- name: Catarina Amado
+  number: 2
+  position: DF
+- name: Dolores Silva
+  number: 14
+  position: MF
+- name: "F\xE1tima Pinto"
+  number: 13
+  position: MF
+- name: Andreia Norton
+  number: 8
+  position: MF
+- name: Andreia Jacinto
+  number: 8
+  position: MF
+- name: Tatiana Pinto
+  number: 11
+  position: MF
+- name: Vanessa Marques
+  number: 7
+  position: MF
+- name: Kika Nazareth
+  number: 20
+  position: MF
+- name: Ana Rute
+  number: 20
+  position: MF
+- name: Diana Silva
+  number: 16
+  position: FW
+- name: Ana Capeta
+  number: 20
+  position: FW
+- name: Kelsey Araujo
+  number: 20
+  position: FW
+- name: "J\xE9ssica Silva"
+  number: 10
+  position: FW
+- name: Carolina Mendes
+  number: 18
+  position: FW
+- name: "Telma Encarna\xE7\xE3o"
+  number: 23
+  position: FW
+RSA:
+- name: Andile Dlamini
+  number: 16
+  position: GK
+- name: Kaylin Swart
+  number: 1
+  position: GK
+- name: Regirl Ngobeni
+  number: 21
+  position: GK
+- name: Karabo Dhlamini
+  number: 7
+  position: DF
+- name: Fikile Magama
+  number: 5
+  position: DF
+- name: Lonathemba Mhlongo
+  number: 19
+  position: DF
+- name: Noko Matlou
+  number: 4
+  position: DF
+- name: Bambanani Mbane
+  number: 13
+  position: DF
+- name: Bongeka Gamede
+  number: 3
+  position: DF
+- name: Refiloe Jane
+  number: 15
+  position: MF
+- name: Sibulele Holweni
+  number: -1
+  position: MF
+- name: Linda Motlhalo
+  number: 10
+  position: MF
+- name: Kholosa Biyana
+  number: 19
+  position: MF
+- name: Nomvula Kgoale
+  number: 19
+  position: MF
+- name: Robyn Moodaly
+  number: 20
+  position: MF
+- name: Noxolo Cesane
+  number: 6
+  position: FW
+- name: Gabriela Salgado
+  number: 9
+  position: FW
+- name: S'phumelele Shamase
+  number: -1
+  position: FW
+- name: Jermaine Seoposenwe
+  number: 12
+  position: FW
+- name: Nthabiseng Majiya
+  number: -1
+  position: FW
+- name: Hildah Magaia
+  number: -1
+  position: FW
+- name: Lelona Daweti
+  number: -1
+  position: FW
+- name: Wendy Shongwe
+  number: -1
+  position: FW
+SUI:
+- name: "Ga\xEBlle Thalmann"
+  number: 1
+  position: GK
+- name: Julia Stierli
+  number: 2
+  position: DF
+- name: Lara Marti
+  number: 3
+  position: DF
+- name: Rachel Rinast
+  number: 4
+  position: DF
+- name: Noelle Maritz
+  number: 5
+  position: DF
+- name: "G\xE9raldine Reuteler"
+  number: 6
+  position: DF
+- name: Riola Xhemaili
+  number: 7
+  position: MF
+- name: Sandy Maendly
+  number: 8
+  position: MF
+- name: "Ana-Maria Crnogor\u010Devi\u0107"
+  number: 9
+  position: FW
+- name: Ramona Bachmann
+  number: 10
+  position: FW
+- name: Coumba Sow
+  number: 11
+  position: MF
+- name: Livia Peng
+  number: 12
+  position: GK
+- name: "Lia W\xE4lti"
+  number: 13
+  position: MF
+- name: Rahel Kiwic
+  number: 14
+  position: DF
+- name: "Luana B\xFChler"
+  number: 15
+  position: DF
+- name: Sandrine Mauron
+  number: 16
+  position: MF
+- name: "Svenja F\xF6lmli"
+  number: 17
+  position: FW
+- name: Viola Calligaris
+  number: 18
+  position: DF
+- name: Eseosa Aigbogun
+  number: 19
+  position: FW
+- name: Fabienne Humm
+  number: 20
+  position: FW
+- name: Seraina Friedli
+  number: 21
+  position: GK
+- name: Nadine Riesen
+  number: 22
+  position: DF
+- name: Meriame Terchoun
+  number: 23
+  position: FW
+SWE:
+- name: "Ze\u0107ira Mu\u0161ovi\u0107"
+  number: 1
+  position: GK
+- name: Jennifer Falk
+  number: 12
+  position: GK
+- name: Tove Enblom
+  number: 21
+  position: GK
+- name: Jonna Andersson
+  number: 2
+  position: DF
+- name: Linda Sembrant
+  number: 3
+  position: DF
+- name: "Amanda Nild\xE9n"
+  number: 4
+  position: DF
+- name: Hanna Lundkvist
+  number: 5
+  position: DF
+- name: Magdalena Eriksson (3rd captain)
+  number: 6
+  position: DF
+- name: Emma Kullberg
+  number: 13
+  position: DF
+- name: "Nathalie Bj\xF6rn"
+  number: 14
+  position: DF
+- name: Anna Sandberg
+  number: 24
+  position: DF
+- name: Kosovare Asllani (vice-captain)
+  number: 9
+  position: MF
+- name: Filippa Angeldahl
+  number: 16
+  position: MF
+- name: Caroline Seger
+  number: 17
+  position: MF
+- name: Johanna Rytting Kaneryd
+  number: 19
+  position: MF
+- name: Hanna Bennison
+  number: 20
+  position: MF
+- name: Olivia Schough
+  number: 22
+  position: MF
+- name: Madelen Janogy
+  number: 7
+  position: FW
+- name: Matilda Vinberg
+  number: 8
+  position: FW
+- name: Sofia Jakobsson
+  number: 10
+  position: FW
+- name: Stina Blackstenius
+  number: 11
+  position: FW
+- name: Rebecka Blomqvist
+  number: 15
+  position: FW
+- name: "Fridolina Rolf\xF6"
+  number: 18
+  position: FW
+- name: Julia Zigiotti Olme
+  number: 25
+  position: FW
+USA:
+- name: Alyssa Naeher
+  number: 1
+  position: GK
+- name: Casey Murphy
+  number: 18
+  position: GK
+- name: Adrianna Franch
+  number: 21
+  position: GK
+- name: Sofia Huerta
+  number: 3
+  position: DF
+- name: Becky Sauerbrunn
+  number: 4
+  position: DF
+- name: Kelley O'Hara
+  number: 5
+  position: DF
+- name: Tierna Davidson
+  number: 12
+  position: DF
+- name: Emily Sonnett
+  number: 14
+  position: DF
+- name: Alana Cook
+  number: 15
+  position: DF
+- name: Crystal Dunn
+  number: 19
+  position: DF
+- name: Casey Krueger
+  number: 20
+  position: DF
+- name: Emily Fox
+  number: 23
+  position: DF
+- name: Naomi Girma
+  number: 27
+  position: DF
+- name: Ashley Sanchez
+  number: 2
+  position: MF
+- name: Julie Ertz
+  number: 8
+  position: MF
+- name: Lindsey Horan
+  number: 10
+  position: MF
+- name: Rose Lavelle
+  number: 16
+  position: MF
+- name: Andi Sullivan
+  number: 17
+  position: MF
+- name: Kristie Mewis
+  number: 22
+  position: MF
+- name: Taylor Kornieck
+  number: 26
+  position: MF
+- name: Lynn Williams
+  number: 6
+  position: FW
+- name: Ashley Hatch
+  number: 7
+  position: FW
+- name: Sophia Smith
+  number: 11
+  position: FW
+- name: Alex Morgan
+  number: 13
+  position: FW
+- name: Trinity Rodman
+  number: 25
+  position: FW
+- name: Alyssa Thompson
+  number: 28
+  position: FW
+VIE:
+- name: Lai Thi Tuyet
+  number: 1
+  position: GK
+- name: "Tr\u1EA7n Th\u1ECB Kim Thanh"
+  number: 14
+  position: GK
+- name: "Kh\u1ED5ng Th\u1ECB H\u1EB1ng"
+  number: 20
+  position: GK
+- name: "L\u01B0\u01A1ng Th\u1ECB Thu Th\u01B0\u01A1ng"
+  number: 2
+  position: DF
+- name: "Ch\u01B0\u01A1ng Th\u1ECB Ki\u1EC1u"
+  number: 3
+  position: DF
+- name: "Tr\u1EA7n Th\u1ECB Thu"
+  number: 4
+  position: DF
+- name: "Ho\xE0ng Th\u1ECB Loan"
+  number: 5
+  position: DF
+- name: "L\xEA Th\u1ECB Di\u1EC5m My"
+  number: 13
+  position: DF
+- name: "Ph\u1EA1m Th\u1ECB Lan Anh"
+  number: 15
+  position: DF
+- name: "Nguy\u1EC5n Th\u1ECB M\u1EF9 Anh"
+  number: 17
+  position: DF
+- name: "Tr\u1EA7n Th\u1ECB Thu Th\u1EA3o"
+  number: 25
+  position: DF
+- name: "Ph\u1EA1m Ho\xE0ng Qu\u1EF3nh"
+  number: 6
+  position: MF
+- name: "Nguy\u1EC5n Th\u1ECB Tuy\u1EBFt Dung (Vice-captain)"
+  number: 7
+  position: MF
+- name: "Tr\u1EA7n Th\u1ECB Th\xF9y Trang"
+  number: 8
+  position: MF
+- name: "Tr\u1EA7n Th\u1ECB H\u1EA3i Linh"
+  number: 10
+  position: MF
+- name: "Nguy\u1EC5n Th\u1ECB Tr\xFAc H\u01B0\u01A1ng"
+  number: 11
+  position: MF
+- name: "D\u01B0\u01A1ng Th\u1ECB V\xE2n"
+  number: 16
+  position: MF
+- name: "Nguy\u1EC5n Th\u1ECB V\u1EA1n"
+  number: 18
+  position: MF
+- name: "Ng\xE2n Th\u1ECB V\u1EA1n S\u1EF1"
+  number: 21
+  position: MF
+- name: "Tr\u1EA7n Th\u1ECB Thu Xu\xE2n"
+  number: 22
+  position: MF
+- name: "Nguy\u1EC5n Th\u1ECB B\xEDch Th\xF9y"
+  number: 23
+  position: MF
+- name: "Hu\u1EF3nh Nh\u01B0 (Captain)"
+  number: 9
+  position: FW
+- name: "Ph\u1EA1m H\u1EA3i Y\u1EBFn"
+  number: 12
+  position: FW
+- name: "Nguy\u1EC5n Th\u1ECB Thanh Nh\xE3"
+  number: 19
+  position: FW
+- name: "Ch\xE2u Th\u1ECB Vang"
+  number: 24
+  position: FW
+ZAM:
+- name: Catherine Musonda
+  number: 1
+  position: GK
+- name: Eunice Sakala
+  number: 18
+  position: GK
+- name: Hazel Nali
+  number: 16
+  position: GK
+- name: Agness Musase
+  number: 4
+  position: DF
+- name: Esther Siamfuko
+  number: 17
+  position: DF
+- name: Judith Soko
+  number: 4
+  position: DF
+- name: Vast Phiri
+  number: -1
+  position: DF
+- name: Mary Mulenga
+  number: -1
+  position: DF
+- name: Pauline Zulu
+  number: -1
+  position: DF
+- name: Martha Tembo
+  number: 13
+  position: DF
+- name: Evarine Katongo
+  number: 12
+  position: MF
+- name: Mary Wilombe
+  number: -1
+  position: MF
+- name: Susan Banda
+  number: -1
+  position: MF
+- name: Xiomara Mapepa
+  number: 11
+  position: MF
+- name: Comfort Selemani
+  number: -1
+  position: MF
+- name: Ireen Lungu
+  number: 14
+  position: MF
+- name: Hellen Chanda
+  number: -1
+  position: MF
+- name: Barbra Banda
+  number: -1
+  position: FW
+- name: Ochumba Oseke
+  number: -1
+  position: FW
+- name: Hellen Mubanga
+  number: -1
+  position: MF
+- name: Racheal Nachula
+  number: -1
+  position: FW
+- name: Grace Chanda
+  number: -1
+  position: FW
+- name: Racheal Kundananji
+  number: -1
+  position: FW
+- name: Inonge Kaloustian
+  number: -1
+  position: FW

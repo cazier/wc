@@ -17,7 +17,9 @@
                 "--matches",
                 "storage/matches.yaml",
                 "--teams",
-                "storage/teams.yaml"
+                "storage/teams.yaml",
+                "--players",
+                "storage/players.yaml"
             ]
         }
     ]

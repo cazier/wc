@@ -25,14 +25,29 @@ class Match(BaseModel):
 
     a = ForeignKeyField(Countries, backref="matches")
     b = ForeignKeyField(Countries, backref="matches")
+    stage = IntegerField()
 
-    group = TextField()
     when = DateTimeField()
+    assigned = BooleanField()
+
+
+class Player(BaseModel):
+    country = ForeignKeyField(Countries, backref="country")
+
+    name = TextField()
+    position = TextField()
+    number = IntegerField()
+
+    goals = IntegerField()
+    yellow = IntegerField()
+    red = IntegerField()
+    saves = IntegerField()
 
 
 def main(
     team_yaml: pathlib.Path = typer.Argument(..., metavar="TEAMS"),
     match_yaml: pathlib.Path = typer.Argument(..., metavar="MATCHES"),
+    player_yaml: pathlib.Path = typer.Argument(..., metavar="PLAYERS"),
     database: pathlib.Path = typer.Option(pathlib.Path("python.db"), help="path to the created database file"),
 ) -> None:
     db.init(str(database))
@@ -41,6 +56,7 @@ def main(
     storage = {}
     teams = yaml.safe_load(team_yaml.read_text())
     matches = yaml.safe_load(match_yaml.read_text())
+    players = yaml.safe_load(player_yaml.read_text())
 
     for team in teams:
         output, _ = Countries.get_or_create(name=team["name"], group=team["group"], fifa_code=team["code"])
@@ -56,6 +72,9 @@ def main(
             group=match["group"],
             when=date,
         )
+
+    for player in players:
+        output = Player.get_or_create(name=player["name"], position=player["position"], number=player["number"])
 
 
 if __name__ == "__main__":
