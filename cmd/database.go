@@ -1,8 +1,10 @@
 package cmd
 
 import (
-	"github.com/cazier/wc/db"
 	"github.com/spf13/cobra"
+
+	"github.com/cazier/wc/db"
+	"github.com/cazier/wc/db/load"
 )
 
 var databasePath string
@@ -38,15 +40,15 @@ var importCmd = &cobra.Command{
 		db.Init(databasePath)
 
 		if importTeamPath != "" {
-			db.LoadTeams(importTeamPath)
+			load.Teams(importTeamPath)
 		}
 
 		if importMatchPath != "" {
-			db.LoadMatches(importMatchPath)
+			load.Matches(importMatchPath)
 		}
 
 		if importPlayerPath != "" {
-			db.LoadPlayers(importPlayerPath)
+			load.Players(importPlayerPath)
 		}
 	},
 }

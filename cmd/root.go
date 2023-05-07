@@ -3,6 +3,8 @@ package cmd
 import (
 	"os"
 
+	"github.com/cazier/wc/version"
+
 	"github.com/spf13/cobra"
 )
 
@@ -19,6 +21,16 @@ to quickly create a Cobra application.`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) { },
+}
+
+var versionCmd = &cobra.Command{
+	Use:   "version",
+	Short: "show wc version and exit",
+	Long: `Version prints the version of the wc binary, as well as any versions for the
+associated subpackages.`,
+	Run: func(cmd *cobra.Command, args []string) {
+		version.PrintVersion()
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -40,4 +52,5 @@ func init() {
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	rootCmd.AddCommand(versionCmd)
 }

@@ -1,15 +1,16 @@
-package db
+package load
 
 import (
 	"log"
 
+	"github.com/cazier/wc/db"
+	"github.com/cazier/wc/db/load/utils"
 	"github.com/cazier/wc/db/models"
-	"github.com/cazier/wc/db/utils"
 )
 
 var cache map[string]uint
 
-func LoadTeams(path string) {
+func Teams(path string) {
 	var counter int64
 
 	teams := utils.LoadTeams(path)
@@ -23,14 +24,14 @@ func LoadTeams(path string) {
 		input := models.Country{Name: team.Name, FifaCode: team.Code, Group: team.Group}
 		output := models.Country{}
 
-		Database.FirstOrCreate(&output, input)
+		db.Database.FirstOrCreate(&output, input)
 
 		counter++
 	}
 	log.Printf("Added %d (+2) countries to the database", counter-2)
 }
 
-func LoadMatches(path string) {
+func Matches(path string) {
 	var counter int64
 	cache = cacheCountries()
 
@@ -40,22 +41,22 @@ func LoadMatches(path string) {
 		input := models.Match{AID: cache[match.A], BID: cache[match.B], When: match.Date, Stage: match.Stage}
 		output := models.Match{}
 
-		if Database.FirstOrCreate(&output, input).RowsAffected == 0 {
+		if db.Database.FirstOrCreate(&output, input).RowsAffected == 0 {
 			continue
 		}
 
-		Database.First(&models.Country{}, cache[match.A]).Association("Matches").Append(&output)
-		Database.First(&models.Country{}, cache[match.B]).Association("Matches").Append(&output)
+		db.Database.First(&models.Country{}, cache[match.A]).Association("Matches").Append(&output)
+		db.Database.First(&models.Country{}, cache[match.B]).Association("Matches").Append(&output)
 
 		counter++
 	}
 
 	log.Printf("Added %d matches to the database", counter)
 
-	addMatchDays()
+	db.AddMatchDays()
 }
 
-func LoadPlayers(path string) {
+func Players(path string) {
 	var counter int64
 	cache = cacheCountries()
 
@@ -66,11 +67,11 @@ func LoadPlayers(path string) {
 			input := models.Player{Name: player.Name, Position: player.Postition, Number: player.Number, CountryID: cache[country]}
 			output := models.Player{}
 
-			if Database.FirstOrCreate(&output, input).RowsAffected == 0 {
+			if db.Database.FirstOrCreate(&output, input).RowsAffected == 0 {
 				continue
 			}
 
-			Database.First(&models.Country{}, cache[country]).Association("Players").Append(&output)
+			db.Database.First(&models.Country{}, cache[country]).Association("Players").Append(&output)
 
 			counter++
 		}
@@ -87,7 +88,7 @@ func cacheCountries() map[string]uint {
 
 	cache = make(map[string]uint)
 
-	tx := Database.Find(&countries)
+	tx := db.Database.Find(&countries)
 
 	if tx.Error != nil {
 		log.Fatalf("An error occurred with the database. %s", tx.Error)
@@ -105,23 +106,4 @@ func cacheCountries() map[string]uint {
 
 	return cache
 
-}
-
-func addMatchDays() {
-	var teams []models.Country
-	Database.Find(&teams)
-
-	for _, team := range teams {
-		matches := []models.Match{}
-
-		Database.Where(&models.Match{AID: team.ID}).Or(&models.Match{BID: team.ID}).Find(&matches).Order("when")
-
-		for index, match := range matches {
-			if match.Day == 0 && match.Stage == utils.GROUP {
-				match.Day = uint(index + 1)
-				match.Assigned = true
-				Database.Save(&match)
-			}
-		}
-	}
 }

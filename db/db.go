@@ -51,3 +51,22 @@ func LinkTables() {
 		&models.MatchResult{},
 	)
 }
+
+func AddMatchDays() {
+	var teams []models.Country
+	Database.Find(&teams)
+
+	for _, team := range teams {
+		matches := []models.Match{}
+
+		Database.Where(&models.Match{AID: team.ID}).Or(&models.Match{BID: team.ID}).Find(&matches).Order("when")
+
+		for index, match := range matches {
+			if match.Day == 0 && match.Stage == models.GROUP {
+				match.Day = uint(index + 1)
+				match.Assigned = true
+				Database.Save(&match)
+			}
+		}
+	}
+}

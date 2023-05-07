@@ -6,6 +6,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/cazier/wc/db/models"
 	"gopkg.in/yaml.v2"
 )
 
@@ -24,7 +25,7 @@ type Player struct {
 type Match struct {
 	A     string
 	B     string
-	Stage Stage
+	Stage models.Stage
 	Date  time.Time
 }
 
@@ -63,31 +64,20 @@ func (m *Match) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-type Stage uint
-
-const (
-	GROUP Stage = iota
-	ROUND_OF_SIXTEEN
-	QUARTERFINALS
-	SEMIFINALS
-	THIRD_PLACE
-	FINAL
-)
-
-func UnmarshalText(s string) Stage {
+func UnmarshalText(s string) models.Stage {
 	switch s {
 	case "GROUP":
-		return GROUP
+		return models.GROUP
 	case "ROUND_OF_SIXTEEN":
-		return ROUND_OF_SIXTEEN
+		return models.ROUND_OF_SIXTEEN
 	case "QUARTERFINALS":
-		return QUARTERFINALS
+		return models.QUARTERFINALS
 	case "SEMIFINALS":
-		return SEMIFINALS
+		return models.SEMIFINALS
 	case "THIRD_PLACE":
-		return THIRD_PLACE
+		return models.THIRD_PLACE
 	case "FINAL":
-		return FINAL
+		return models.FINAL
 	}
 	log.Fatalf("Could not parse stage value: %s", s)
 	return 6

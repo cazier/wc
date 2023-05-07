@@ -3,7 +3,6 @@ package models
 import (
 	"time"
 
-	"github.com/cazier/wc/db/utils"
 	"gorm.io/gorm"
 )
 
@@ -15,7 +14,7 @@ type Match struct {
 
 	AID   uint
 	BID   uint
-	Stage utils.Stage
+	Stage Stage
 
 	When     time.Time
 	Assigned bool `gorm:"default:false"`
@@ -35,3 +34,14 @@ type MatchResult struct {
 	GoalsAgainst uint
 	Points       uint
 }
+
+type Stage uint
+
+const (
+	GROUP Stage = iota
+	ROUND_OF_SIXTEEN
+	QUARTERFINALS
+	SEMIFINALS
+	THIRD_PLACE
+	FINAL
+)
