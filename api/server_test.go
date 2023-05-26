@@ -8,6 +8,7 @@ import (
 	"net/http/httptest"
 	"reflect"
 	"strconv"
+	"strings"
 	"testing"
 
 	"github.com/cazier/wc/api/exceptions"
@@ -201,8 +202,13 @@ func TestPlayers(t *testing.T) {
 func TestPlayerName(t *testing.T) {
 	player := loadPlayer()
 	response := m.GET(fmt.Sprintf("/player/name/%s", player.Name))
+	lower := m.GET(fmt.Sprintf("/player/name/%s", strings.ToLower(player.Name)))
+	upper := m.GET(fmt.Sprintf("/player/name/%s", strings.ToUpper(player.Name)))
 
 	testPlayer(t, player, response)
+
+	assert.EqualValues(t, response.json, lower.json)
+	assert.EqualValues(t, response.json, upper.json)
 }
 
 func TestPlayerId(t *testing.T) {
@@ -231,8 +237,13 @@ func TestCountries(t *testing.T) {
 func TestCountryName(t *testing.T) {
 	country := loadCountry()
 	response := m.GET(fmt.Sprintf("/country/name/%s", country.Name))
+	lower := m.GET(fmt.Sprintf("/country/name/%s", strings.ToLower(country.Name)))
+	upper := m.GET(fmt.Sprintf("/country/name/%s", strings.ToUpper(country.Name)))
 
 	testCountry(t, country, response)
+
+	assert.EqualValues(t, response.json, lower.json)
+	assert.EqualValues(t, response.json, upper.json)
 }
 func TestCountryId(t *testing.T) {
 	country := loadCountry()

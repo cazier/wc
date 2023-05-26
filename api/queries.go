@@ -1,6 +1,8 @@
 package api
 
 import (
+	"strings"
+
 	"github.com/cazier/wc/api/exceptions"
 	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/models"
@@ -15,6 +17,10 @@ type QueryOptions struct {
 }
 
 func query[M any](search M, dest []M, c *gin.Context, options *QueryOptions) ([]M, bool) {
+	if options.callback != nil {
+		options.query = options.callback(options.query)
+	}
+
 	bindings, err := bindUri(c, &search)
 	if exceptions.JsonResponse(c, err) {
 		return nil, false
@@ -22,10 +28,6 @@ func query[M any](search M, dest []M, c *gin.Context, options *QueryOptions) ([]
 
 	if bindings {
 		options.query = options.query.Where(&search)
-	}
-
-	if options.callback != nil {
-		options.query = options.callback(options.query)
 	}
 
 	if options.multiple {
@@ -54,25 +56,50 @@ func bindUri(c *gin.Context, obj any) (bool, error) {
 	return true, c.ShouldBindUri(obj)
 }
 
+func adaptNameCase(c *gin.Context) (bool, string) {
+	for index, param := range c.Params {
+		if param.Key == "name" && param.Value != "" {
+			c.Params[index].Value = ""
+			return true, param.Value
+		}
+	}
+	return false, ""
+}
+
 func queryPlayers(c *gin.Context, multiple bool) ([]models.Player, bool) {
 	// TODO special characters in player name?
 	var players []models.Player
 	var search models.Player
 
-	return query(search, players, c, &QueryOptions{query: db.Database.Joins("Country"), multiple: multiple})
+	options := QueryOptions{query: db.Database.Joins("Country"), multiple: multiple}
+
+	if swap, name := adaptNameCase(c); swap {
+		options.callback = func(tx *gorm.DB) *gorm.DB {
+			return tx.Where("LOWER(`players`.`name`) = ?", strings.ToLower(name))
+		}
+	}
+
+	return query(search, players, c, &options)
 }
 
 func queryCountries(c *gin.Context, multiple bool) ([]models.Country, bool) {
 	var countries []models.Country
 	var search models.Country
 
-	tx := db.Database
+	options := QueryOptions{query: db.Database, multiple: multiple}
 
 	if multiple {
-		tx = tx.Where("`countries`.`group` <> ?", "")
+		// Ignore the `Team A` and `Team B` placeholder teams
+		options.query = db.Database.Where("`countries`.`fifa_code` <> ? AND `countries`.`fifa_code` <> ?", "<A>", "<B>")
 	}
 
-	return query(search, countries, c, &QueryOptions{query: tx, multiple: multiple})
+	if swap, name := adaptNameCase(c); swap {
+		options.callback = func(tx *gorm.DB) *gorm.DB {
+			return tx.Where("LOWER(`countries`.`name`) = ?", strings.ToLower(name))
+		}
+	}
+
+	return query(search, countries, c, &options)
 }
 
 func queryMatches(c *gin.Context, multiple bool) ([]models.Match, bool) {
