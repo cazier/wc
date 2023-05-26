@@ -1,0 +1,36 @@
+name: Test Go Webserver
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - review_requested
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: go install github.com/kyoh86/richgo@v0.3.10
+      - run: richgo test ./... -v
+
+  coverage:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: go test ./... -race -covermode=atomic -coverprofile=coverage.out
+      - uses: cazier/actions/coverage@v1
+        id: coverage
+        with:
+          coverage_file: coverage.out
+          secret: ${{ secrets.CODECOV_TOKEN }}
