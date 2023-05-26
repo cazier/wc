@@ -11,6 +11,8 @@ peewee = "^3.16.0"
 pyyaml = "^6.0"
 typer = "^0.7.0"
 rich = "^13.3.5"
+faker = "^18.9.0"
+ipython = "^8.13.2"
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"

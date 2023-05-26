@@ -1,12 +1,16 @@
 package cmd
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/spf13/cobra"
 
 	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/load"
 )
 
+var sqlite bool
 var databasePath string
 
 var importTeamPath string
@@ -26,9 +30,7 @@ var initializeCmd = &cobra.Command{
 	Long: `Create a database with all of its tables. Optionally, you can supply
 a set of import flags to fill the database with values`,
 	Run: func(cmd *cobra.Command, args []string) {
-		db.Init(databasePath)
-		db.LinkTables()
-
+		databaseInit(true)
 		importCmd.Run(cmd, args)
 	},
 }
@@ -37,7 +39,7 @@ var importCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import details from a yaml file into the database",
 	Run: func(cmd *cobra.Command, args []string) {
-		db.Init(databasePath)
+		databaseInit(true)
 
 		if importTeamPath != "" {
 			load.Teams(importTeamPath)
@@ -58,7 +60,7 @@ func init() {
 	databaseCmd.AddCommand(initializeCmd)
 	databaseCmd.AddCommand(importCmd)
 
-	databaseCmd.PersistentFlags().StringVar(&databasePath, "db", ".", "path to a database")
+	databaseCommand(databaseCmd)
 
 	for _, cmd := range []*cobra.Command{initializeCmd, importCmd} {
 		cmd.Flags().StringVar(&importTeamPath, "teams", "", "team yaml file for importing")
@@ -80,4 +82,25 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// databaseCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func databaseCommand(cmd *cobra.Command) {
+	cmd.PersistentFlags().StringVar(&databasePath, "db", ".", "path to a database")
+	cmd.Flags().BoolVar(&sqlite, "sqlite", true, "use a sqlite database instead of mariadb")
+}
+
+func databaseInit(purge bool) {
+	if sqlite && databasePath == "memory" {
+		db.InitSqlite(&db.SqliteDBOptions{Memory: true})
+	} else if sqlite {
+		info, _ := os.Stat(databasePath)
+		if info.IsDir() {
+			databasePath = fmt.Sprintf("%s/%s", databasePath, "wc.db")
+		}
+		db.InitSqlite(&db.SqliteDBOptions{Path: databasePath})
+
+	} else {
+		db.InitMariaDB(&db.MariaDBOptions{})
+	}
+	db.LinkTables(purge)
 }

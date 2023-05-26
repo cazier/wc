@@ -1,28 +1,31 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"gorm.io/gorm"
+)
 
 type Country struct {
-	gorm.Model
+	gorm.Model `json:"-"`
 
-	Name     string `gorm:"unique"`
-	Group    string
-	FifaCode string `gorm:"unique"`
-
-	Matches []Match  `gorm:"foreignKey:ID"`
-	Players []Player `gorm:"foreignKey:ID"`
+	ID       int    `gorm:"primarykey" json:"id" uri:"id"`
+	Name     string `gorm:"unique" json:"name" uri:"name"`
+	Group    string `json:"group" uri:"group"`
+	FifaCode string `gorm:"unique" json:"fifa_code" uri:"code"`
 }
 
 type Player struct {
-	gorm.Model
-	CountryID uint
+	gorm.Model `json:"-"`
 
-	Name     string
-	Position string
-	Number   int `gorm:"default:-1"`
+	ID        int     `gorm:"primarykey" json:"id" uri:"id"`
+	CountryID int     `json:"-"`
+	Country   Country `json:"country"`
 
-	Goals  uint `gorm:"default:0"`
-	Yellow uint `gorm:"default:0"`
-	Red    uint `gorm:"default:0"`
-	Saves  int  `gorm:"default:-1"`
+	Name     string `json:"name" uri:"name"`
+	Position string `json:"position"`
+	Number   int    `gorm:"default:-1" json:"number"`
+
+	Goals  uint `gorm:"default:0" json:"goals" `
+	Yellow uint `gorm:"default:0" json:"yellows"`
+	Red    uint `gorm:"default:0" json:"reds"`
+	Saves  int  `gorm:"default:-1" json:"saves"`
 }

@@ -1,2327 +1,3060 @@
-ARG:
 - name: Vanina Correa
+  country: ARG
   number: 1
   position: GK
 - name: Laurina Oliveros
+  country: ARG
   number: 23
   position: GK
 - name: Agustina Barroso
+  country: ARG
   number: 2
   position: DF
 - name: "Eliana St\xE1bile"
+  country: ARG
   number: 3
   position: DF
 - name: Julieta Cruz
+  country: ARG
   number: 4
   position: DF
 - name: Aldana Cometti
+  country: ARG
   number: 6
   position: DF
 - name: Sophia Braun
+  country: ARG
   number: 13
   position: DF
 - name: Marina Delgado
+  country: ARG
   number: 16
   position: DF
 - name: "Romina N\xFA\xF1ez"
+  country: ARG
   number: 18
   position: DF
 - name: Adriana Sachs
+  country: ARG
   number: 21
   position: DF
 - name: Vanina Preininger
+  country: ARG
   number: 5
   position: MF
 - name: Marianela Szymanowski
+  country: ARG
   number: 8
   position: MF
 - name: "Daiana Falf\xE1n"
+  country: ARG
   number: 10
   position: MF
 - name: Miriam Mayorga
+  country: ARG
   number: 14
   position: MF
 - name: Florencia Bonsegundo
+  country: ARG
   number: 15
   position: MF
 - name: Mariana Larroquette
+  country: ARG
   number: 19
   position: MF
 - name: Ruth Bravo
+  country: ARG
   number: 20
   position: MF
 - name: "Estefan\xEDa Banini"
+  country: ARG
   number: 22
   position: MF
 - name: Amancay Urbani
+  country: ARG
   number: 7
   position: FW
 - name: Soledad Jaimes
+  country: ARG
   number: 9
   position: FW
 - name: "Yamila Rodr\xEDguez"
+  country: ARG
   number: 11
   position: FW
 - name: Erica Lonigro
+  country: ARG
   number: 17
   position: FW
 - name: Catalina Primo
+  country: ARG
   number: 24
   position: FW
-AUS:
 - name: Lydia Williams
+  country: AUS
   number: 1
   position: GK
 - name: Teagan Micah
+  country: AUS
   number: 12
   position: GK
 - name: Mackenzie Arnold
+  country: AUS
   number: 18
   position: GK
 - name: Jada Mathyssen-Whyman
+  country: AUS
   number: 28
   position: GK
 - name: Courtney Nevin
+  country: AUS
   number: 2
   position: DF
 - name: Aivi Luik
+  country: AUS
   number: 3
   position: DF
 - name: Clare Polkinghorne
+  country: AUS
   number: 4
   position: DF
 - name: Ellie Carpenter
+  country: AUS
   number: 21
   position: DF
 - name: Charlotte Grant
+  country: AUS
   number: 22
   position: DF
 - name: Clare Hunt
+  country: AUS
   number: 29
   position: DF
 - name: Matilda McNamara
+  country: AUS
   number: 31
   position: DF
 - name: Tameka Yallop
+  country: AUS
   number: 13
   position: MF
 - name: Katrina Gorry
+  country: AUS
   number: 19
   position: MF
 - name: Kyra Cooney-Cross
+  country: AUS
   number: 23
   position: MF
 - name: Clare Wheeler
+  country: AUS
   number: 26
   position: MF
 - name: Alex Chidiac
+  country: AUS
   number: 27
   position: MF
 - name: Amy Sayer
+  country: AUS
   number: 30
   position: MF
 - name: Cortnee Vine
+  country: AUS
   number: 5
   position: FW
 - name: Mary Fowler
+  country: AUS
   number: 11
   position: FW
 - name: Hayley Raso
+  country: AUS
   number: 16
   position: FW
 - name: Sam Kerr
+  country: AUS
   number: 20
   position: FW
 - name: Larissa Crummer
+  country: AUS
   number: 24
   position: FW
 - name: Remy Siemsen
+  country: AUS
   number: 25
   position: FW
-BRA:
 - name: Camila Rodrigues
+  country: BRA
   number: 1
   position: GK
 - name: "Let\xEDcia Izidoro"
+  country: BRA
   number: 12
   position: GK
 - name: Luciana
+  country: BRA
   number: 22
   position: GK
 - name: "Ant\xF4nia"
+  country: BRA
   number: 2
   position: DF
 - name: Kathellen
+  country: BRA
   number: 3
   position: DF
 - name: Rafaelle
+  country: BRA
   number: 4
   position: DF
 - name: Tamires
+  country: BRA
   number: 6
   position: DF
 - name: Tarciane
+  country: BRA
   number: 13
   position: DF
 - name: Lauren
+  country: BRA
   number: 14
   position: DF
 - name: Yasmim
+  country: BRA
   number: 19
   position: DF
 - name: Fe Palermo
+  country: BRA
   number: 20
   position: DF
 - name: Bruninha
+  country: BRA
   number: 24
   position: DF
 - name: Ingryd
+  country: BRA
   number: 5
   position: MF
 - name: Duda Francelino
+  country: BRA
   number: 7
   position: MF
 - name: "Ana Vit\xF3ria"
+  country: BRA
   number: 8
   position: MF
 - name: Duda Santos
+  country: BRA
   number: 10
   position: MF
 - name: Adriana
+  country: BRA
   number: 11
   position: MF
 - name: Luana
+  country: BRA
   number: 15
   position: MF
 - name: Ary Borges
+  country: BRA
   number: 17
   position: MF
 - name: Kerolin
+  country: BRA
   number: 21
   position: MF
 - name: Gabi Portilho
+  country: BRA
   number: 25
   position: MF
 - name: Aline Gomes
+  country: BRA
   number: 26
   position: MF
 - name: Andressa Alves
+  country: BRA
   number: 9
   position: FW
 - name: Bia Zaneratto
+  country: BRA
   number: 16
   position: FW
 - name: Geyse
+  country: BRA
   number: 18
   position: FW
 - name: Gabi Nunes
+  country: BRA
   number: 23
   position: FW
-CAN:
 - name: Sabrina D'Angelo
+  country: CAN
   number: -1
   position: GK
 - name: Lysianne Proulx
+  country: CAN
   number: -1
   position: GK
 - name: Kailen Sheridan
+  country: CAN
   number: -1
   position: GK
 - name: Gabrielle Carle
+  country: CAN
   number: -1
   position: DF
 - name: Allysha Chapman
+  country: CAN
   number: -1
   position: DF
 - name: Sydney Collins
+  country: CAN
   number: -1
   position: DF
 - name: Vanessa Gilles
+  country: CAN
   number: -1
   position: DF
 - name: Ashley Lawrence
+  country: CAN
   number: -1
   position: DF
 - name: Jayde Riviere
+  country: CAN
   number: -1
   position: DF
 - name: Jade Rose
+  country: CAN
   number: -1
   position: DF
 - name: Bianca St-Georges
+  country: CAN
   number: -1
   position: DF
 - name: Sura Yekka
+  country: CAN
   number: -1
   position: DF
 - name: Marie-Yasmine Alidou
+  country: CAN
   number: -1
   position: MF
 - name: Simi Awujo
+  country: CAN
   number: -1
   position: MF
 - name: Jessie Fleming
+  country: CAN
   number: -1
   position: MF
 - name: Julia Grosso
+  country: CAN
   number: -1
   position: MF
 - name: Sophie Schmidt
+  country: CAN
   number: -1
   position: MF
 - name: Amanda Allen
+  country: CAN
   number: -1
   position: FW
 - name: Jordyn Huitema
+  country: CAN
   number: -1
   position: FW
 - name: "Clo\xE9 Lacasse"
+  country: CAN
   number: -1
   position: FW
 - name: Clarissa Larisey
+  country: CAN
   number: -1
   position: FW
 - name: Adriana Leon
+  country: CAN
   number: -1
   position: FW
 - name: Christine Sinclair
+  country: CAN
   number: -1
   position: FW
 - name: Evelyne Viens
+  country: CAN
   number: -1
   position: FW
-CHN:
 - name: Zhu Yu
+  country: CHN
   number: 1
   position: GK
 - name: Xu Huan
+  country: CHN
   number: 12
   position: GK
 - name: Zhao Lina
+  country: CHN
   number: 22
   position: GK
 - name: Li Mengwen
+  country: CHN
   number: 2
   position: DF
 - name: Wang Xiaoxue
+  country: CHN
   number: 3
   position: DF
 - name: Li Jiayue
+  country: CHN
   number: 4
   position: DF
 - name: Lou Jiahui
+  country: CHN
   number: 14
   position: DF
 - name: Yao Lingwei
+  country: CHN
   number: 16
   position: DF
 - name: Gao Chen
+  country: CHN
   number: 23
   position: DF
 - name: Ma Jun
+  country: CHN
   number: 5
   position: MF
 - name: Zhang Xin
+  country: CHN
   number: 6
   position: MF
 - name: Yao Wei
+  country: CHN
   number: 8
   position: MF
 - name: Wang Yanwen
+  country: CHN
   number: 9
   position: MF
 - name: Zhang Rui
+  country: CHN
   number: 10
   position: MF
 - name: Yang Lina
+  country: CHN
   number: 13
   position: MF
 - name: Wu Chengshu
+  country: CHN
   number: 15
   position: MF
 - name: Liu Yanqiu
+  country: CHN
   number: 17
   position: MF
 - name: Tang Jiali
+  country: CHN
   number: 18
   position: MF
 - name: Xiao Yuyi
+  country: CHN
   number: 20
   position: MF
 - name: Wang Shuang
+  country: CHN
   number: 7
   position: FW
 - name: Wang Shanshan
+  country: CHN
   number: 11
   position: FW
 - name: Zhang Linyan
+  country: CHN
   number: 19
   position: FW
 - name: Li Ying
+  country: CHN
   number: 21
   position: FW
-COL:
 - name: "Catalina P\xE9rez"
+  country: COL
   number: 1
   position: GK
 - name: "Sandra Sep\xFAlveda"
+  country: COL
   number: 12
   position: GK
 - name: "Stefany Casta\xF1o"
+  country: COL
   number: 25
   position: GK
 - name: Daniela Arias
+  country: COL
   number: 3
   position: DF
 - name: Korina Clavijo
+  country: COL
   number: 13
   position: DF
 - name: Viviana Acosta
+  country: COL
   number: 14
   position: DF
 - name: "Mar\xEDa Morales"
+  country: COL
   number: 16
   position: DF
 - name: "Jorelyn Carabal\xED"
+  country: COL
   number: 19
   position: DF
 - name: "M\xF3nica Ramos"
+  country: COL
   number: 20
   position: DF
 - name: Daniela Caracas
+  country: COL
   number: 22
   position: DF
 - name: Manuela Vanegas
+  country: COL
   number: 2
   position: MF
 - name: Diana Ospina
+  country: COL
   number: 4
   position: MF
 - name: Lorena Bedoya
+  country: COL
   number: 5
   position: MF
 - name: Daniela Montoya
+  country: COL
   number: 6
   position: MF
 - name: "Angie Casta\xF1eda"
+  country: COL
   number: 8
   position: MF
 - name: Carolina Arias
+  country: COL
   number: 17
   position: MF
 - name: Gabriela Huertas
+  country: COL
   number: 18
   position: MF
 - name: Liana Salazar
+  country: COL
   number: 21
   position: MF
 - name: "Mayra Ram\xEDrez"
+  country: COL
   number: 9
   position: FW
 - name: Leicy Santos
+  country: COL
   number: 10
   position: FW
 - name: Catalina Usme
+  country: COL
   number: 11
   position: FW
 - name: Tatiana Ariza
+  country: COL
   number: 15
   position: FW
 - name: Elexa Bahr
+  country: COL
   number: 23
   position: FW
-CRC:
 - name: "Mar\xEDa Isabel Rodr\xEDguez"
+  country: CRC
   number: 1
   position: GK
 - name: "Mar\xEDa Asunci\xF3n Qui\xF1ones"
+  country: CRC
   number: 12
   position: GK
 - name: Elene Lete
+  country: CRC
   number: 23
   position: GK
 - name: Irene Paredes
+  country: CRC
   number: 4
   position: DF
 - name: "Ivana Andr\xE9s"
+  country: CRC
   number: 5
   position: DF
 - name: Laia Codina
+  country: CRC
   number: 6
   position: DF
 - name: Berta Pujadas
+  country: CRC
   number: 14
   position: DF
 - name: "Jana Fern\xE1ndez"
+  country: CRC
   number: 18
   position: DF
 - name: Olga Carmona
+  country: CRC
   number: 19
   position: DF
 - name: "Paula Tom\xE1s"
+  country: CRC
   number: 20
   position: DF
 - name: Teresa Abelleira
+  country: CRC
   number: 3
   position: MF
 - name: Irene Guerrero
+  country: CRC
   number: 7
   position: MF
 - name: Maite Oroz
+  country: CRC
   number: 8
   position: MF
 - name: "Fiamma Ben\xEDtez"
+  country: CRC
   number: 16
   position: MF
 - name: "Mar\xEDa P\xE9rez"
+  country: CRC
   number: 21
   position: MF
 - name: "Sheila Garc\xEDa"
+  country: CRC
   number: 24
   position: MF
 - name: "Esther Gonz\xE1lez"
+  country: CRC
   number: 9
   position: FW
 - name: Jennifer Hermoso
+  country: CRC
   number: 10
   position: FW
 - name: Alba Redondo
+  country: CRC
   number: 11
   position: FW
 - name: "Ascensi\xF3n Mart\xEDnez"
+  country: CRC
   number: 12
   position: FW
 - name: Ena Navarro
+  country: CRC
   number: 15
   position: FW
 - name: Salma Paralluelo
+  country: CRC
   number: 17
   position: FW
 - name: Athenea del Castillo
+  country: CRC
   number: 22
   position: FW
-DEN:
 - name: "Laura Wors\xF8e"
+  country: DEN
   number: 1
   position: GK
 - name: Kathrine Larsen
+  country: DEN
   number: 16
   position: GK
 - name: "Maja Bay \xD8stergaard"
+  country: DEN
   number: 22
   position: GK
 - name: Sara Thrige
+  country: DEN
   number: 2
   position: DF
 - name: Stine Ballisager Pedersen
+  country: DEN
   number: 3
   position: DF
 - name: Rikke Sevecke
+  country: DEN
   number: 4
   position: DF
 - name: "Simone Boye S\xF8rensen"
+  country: DEN
   number: 5
   position: DF
 - name: Katrine Veje
+  country: DEN
   number: 11
   position: DF
 - name: Luna Gevitz
+  country: DEN
   number: 18
   position: DF
 - name: Karen Holmgaard
+  country: DEN
   number: 6
   position: MF
 - name: Sanne Troelsgaard
+  country: DEN
   number: 7
   position: MF
 - name: Emma Snerle
+  country: DEN
   number: 8
   position: MF
 - name: "Nicoline S\xF8rensen"
+  country: DEN
   number: 14
   position: MF
 - name: "Kathrine K\xFChl"
+  country: DEN
   number: 15
   position: MF
 - name: Janni Thomsen
+  country: DEN
   number: 19
   position: MF
 - name: Sofie Bredgaard
+  country: DEN
   number: 20
   position: MF
 - name: Sofie Svava
+  country: DEN
   number: 23
   position: MF
 - name: Josefine Hasbo
+  country: DEN
   number: 24
   position: MF
 - name: "Frederikke Th\xF8gersen"
+  country: DEN
   number: 25
   position: MF
 - name: Amalie Vangsgaard
+  country: DEN
   number: 9
   position: FW
 - name: Stine Larsen
+  country: DEN
   number: 12
   position: FW
 - name: Rikke Marie Madsen
+  country: DEN
   number: 17
   position: FW
 - name: Mille Gejl
+  country: DEN
   number: 21
   position: FW
 - name: Olivia Holdt
+  country: DEN
   number: 26
   position: FW
-ENG:
 - name: Mary Earps
+  country: ENG
   number: -1
   position: GK
 - name: Ellie Roebuck
+  country: ENG
   number: -1
   position: GK
 - name: Hannah Hampton
+  country: ENG
   number: -1
   position: GK
 - name: Lucy Bronze
+  country: ENG
   number: -1
   position: DF
 - name: Leah Williamson
+  country: ENG
   number: -1
   position: DF
 - name: Jess Carter
+  country: ENG
   number: -1
   position: DF
 - name: Lotte Wubben-Moy
+  country: ENG
   number: -1
   position: DF
 - name: Niamh Charles
+  country: ENG
   number: -1
   position: DF
 - name: Esme Morgan
+  country: ENG
   number: -1
   position: DF
 - name: Maya Le Tissier
+  country: ENG
   number: -1
   position: DF
 - name: Lucy Parker
+  country: ENG
   number: -1
   position: DF
 - name: Jordan Nobbs
+  country: ENG
   number: -1
   position: MF
 - name: Keira Walsh
+  country: ENG
   number: -1
   position: MF
 - name: Georgia Stanway
+  country: ENG
   number: -1
   position: MF
 - name: Ella Toone
+  country: ENG
   number: -1
   position: MF
 - name: Laura Coombs
+  country: ENG
   number: -1
   position: MF
 - name: Rachel Daly
+  country: ENG
   number: -1
   position: FW
 - name: Lauren Hemp
+  country: ENG
   number: -1
   position: FW
 - name: Chloe Kelly
+  country: ENG
   number: -1
   position: FW
 - name: Alessia Russo
+  country: ENG
   number: -1
   position: FW
 - name: Lauren James
+  country: ENG
   number: -1
   position: FW
 - name: Jess Park
+  country: ENG
   number: -1
   position: FW
 - name: Katie Robinson
+  country: ENG
   number: -1
   position: FW
-ESP:
 - name: "Mar\xEDa Isabel Rodr\xEDguez"
+  country: ESP
   number: 1
   position: GK
 - name: "Mar\xEDa Asunci\xF3n Qui\xF1ones"
+  country: ESP
   number: 12
   position: GK
 - name: Elene Lete
+  country: ESP
   number: 23
   position: GK
 - name: Irene Paredes
+  country: ESP
   number: 4
   position: DF
 - name: "Ivana Andr\xE9s"
+  country: ESP
   number: 5
   position: DF
 - name: Laia Codina
+  country: ESP
   number: 6
   position: DF
 - name: Berta Pujadas
+  country: ESP
   number: 14
   position: DF
 - name: "Jana Fern\xE1ndez"
+  country: ESP
   number: 18
   position: DF
 - name: Olga Carmona
+  country: ESP
   number: 19
   position: DF
 - name: "Paula Tom\xE1s"
+  country: ESP
   number: 20
   position: DF
 - name: Teresa Abelleira
+  country: ESP
   number: 3
   position: MF
 - name: Irene Guerrero
+  country: ESP
   number: 7
   position: MF
 - name: Maite Oroz
+  country: ESP
   number: 8
   position: MF
 - name: "Fiamma Ben\xEDtez"
+  country: ESP
   number: 16
   position: MF
 - name: "Mar\xEDa P\xE9rez"
+  country: ESP
   number: 21
   position: MF
 - name: "Sheila Garc\xEDa"
+  country: ESP
   number: 24
   position: MF
 - name: "Esther Gonz\xE1lez"
+  country: ESP
   number: 9
   position: FW
 - name: Jennifer Hermoso
+  country: ESP
   number: 10
   position: FW
 - name: Alba Redondo
+  country: ESP
   number: 11
   position: FW
 - name: "Ascensi\xF3n Mart\xEDnez"
+  country: ESP
   number: 12
   position: FW
 - name: Ena Navarro
+  country: ESP
   number: 15
   position: FW
 - name: Salma Paralluelo
+  country: ESP
   number: 17
   position: FW
 - name: Athenea del Castillo
+  country: ESP
   number: 22
   position: FW
-FRA:
 - name: "Myl\xE8ne Chavas"
+  country: FRA
   number: 1
   position: GK
 - name: Pauline Peyraud-Magnin
+  country: FRA
   number: 16
   position: GK
 - name: Constance Picaud
+  country: FRA
   number: 21
   position: GK
 - name: "Ma\xEBlle Lakrar"
+  country: FRA
   number: 2
   position: DF
 - name: Wendie Renard
+  country: FRA
   number: 3
   position: DF
 - name: Estelle Cascarino
+  country: FRA
   number: 4
   position: DF
 - name: "\xC9lisa De Almeida"
+  country: FRA
   number: 5
   position: DF
 - name: Sakina Karchaoui
+  country: FRA
   number: 7
   position: DF
 - name: Selma Bacha
+  country: FRA
   number: 13
   position: DF
 - name: "\xC8ve P\xE9risset"
+  country: FRA
   number: 22
   position: DF
 - name: Hawa Cissoko
+  country: FRA
   number: 23
   position: DF
 - name: "Magou Doucour\xE9"
+  country: FRA
   number: 26
   position: DF
 - name: Jade Le Guilly
+  country: FRA
   number: -1
   position: DF
 - name: Sandie Toletti
+  country: FRA
   number: 6
   position: MF
 - name: Grace Geyoro
+  country: FRA
   number: 8
   position: MF
 - name: Amel Majri
+  country: FRA
   number: 11
   position: MF
 - name: Laurina Fazer
+  country: FRA
   number: 12
   position: MF
 - name: Kenza Dali
+  country: FRA
   number: 15
   position: MF
 - name: "Oriane Jean-Fran\xE7ois"
+  country: FRA
   number: 24
   position: MF
 - name: "L\xE9a Le Garrec"
+  country: FRA
   number: 25
   position: MF
 - name: "Eug\xE9nie Le Sommer"
+  country: FRA
   number: 9
   position: FW
 - name: "Clara Mat\xE9o"
+  country: FRA
   number: 10
   position: FW
 - name: Ouleymata Sarr
+  country: FRA
   number: 14
   position: FW
 - name: Sandy Baltimore
+  country: FRA
   number: 17
   position: FW
 - name: Viviane Asseyi
+  country: FRA
   number: 18
   position: FW
 - name: Melvine Malard
+  country: FRA
   number: 19
   position: FW
 - name: Delphine Cascarino
+  country: FRA
   number: 20
   position: FW
-GER:
 - name: Stina Johannes
+  country: GER
   number: 12
   position: GK
 - name: Maria Luisa Grohs
+  country: GER
   number: 21
   position: GK
 - name: Ann-Katrin Berger
+  country: GER
   number: 30
   position: GK
 - name: Kathrin Hendrich
+  country: GER
   number: 3
   position: DF
 - name: Sophia Kleinherne
+  country: GER
   number: 4
   position: DF
 - name: Felicitas Rauch
+  country: GER
   number: 17
   position: DF
 - name: Sara Doorsoun
+  country: GER
   number: 23
   position: DF
 - name: "Sjoeke N\xFCsken"
+  country: GER
   number: 24
   position: DF
 - name: Paulina Krumbiegel
+  country: GER
   number: 27
   position: DF
 - name: Sarai Linder
+  country: GER
   number: 28
   position: DF
 - name: Lena Oberdorf
+  country: GER
   number: 6
   position: MF
 - name: Sydney Lohmann
+  country: GER
   number: 8
   position: MF
 - name: "Dzsenifer Marozs\xE1n"
+  country: GER
   number: 10
   position: MF
 - name: "Sara D\xE4britz"
+  country: GER
   number: 13
   position: MF
 - name: Melanie Leupolz
+  country: GER
   number: 18
   position: MF
 - name: Lina Magull
+  country: GER
   number: 20
   position: MF
 - name: Jule Brand
+  country: GER
   number: 22
   position: MF
 - name: Chantal Hagel
+  country: GER
   number: 26
   position: MF
 - name: Janina Minge
+  country: GER
   number: 31
   position: MF
 - name: "Lea Sch\xFCller"
+  country: GER
   number: 7
   position: FW
 - name: Svenja Huth
+  country: GER
   number: 9
   position: FW
 - name: Alexandra Popp
+  country: GER
   number: 11
   position: FW
 - name: Laura Freigang
+  country: GER
   number: 15
   position: FW
 - name: "Tabea Wa\xDFmuth"
+  country: GER
   number: 16
   position: FW
 - name: "Klara B\xFChl"
+  country: GER
   number: 19
   position: FW
 - name: Nicole Anyomi
+  country: GER
   number: 25
   position: FW
-HAI:
 - name: Madelina Fleuriot
+  country: HAI
   number: 1
   position: GK
 - name: Nahomie Ambroise
+  country: HAI
   number: 12
   position: GK
 - name: Lara Larco
+  country: HAI
   number: 18
   position: GK
 - name: Chelsea Surpris
+  country: HAI
   number: 2
   position: DF
 - name: Jennyfer Limage
+  country: HAI
   number: 3
   position: DF
 - name: Tabita Joseph
+  country: HAI
   number: 4
   position: DF
 - name: Maudeline Moryl
+  country: HAI
   number: 5
   position: DF
 - name: Melchie Dumornay
+  country: HAI
   number: 6
   position: MF
 - name: "Danielle \xC9tienne"
+  country: HAI
   number: 8
   position: MF
 - name: "Betina Petit Fr\xE8re"
+  country: HAI
   number: 13
   position: MF
 - name: Dayana Pierre-Louis
+  country: HAI
   number: 19
   position: MF
 - name: Milan Pierre-Jerome
+  country: HAI
   number: 16
   position: MF
 - name: Kethna Louis
+  country: HAI
   number: 20
   position: MF
 - name: Batcheba Louis
+  country: HAI
   number: 7
   position: FW
 - name: Sherly Jeudy
+  country: HAI
   number: 9
   position: FW
 - name: "N\xE9rilia Mond\xE9sir"
+  country: HAI
   number: 10
   position: FW
 - name: "Roseline \xC9loissaint"
+  country: HAI
   number: 11
   position: FW
 - name: Rose-Alya Marcellus
+  country: HAI
   number: 15
   position: FW
 - name: "Mikerline Saint-F\xE9lix"
+  country: HAI
   number: 17
   position: FW
 - name: Roselord Borgella
+  country: HAI
   number: 22
   position: FW
-IRL:
 - name: Courtney Brosnan
+  country: IRL
   number: -1
   position: GK
 - name: Grace Moloney
+  country: IRL
   number: -1
   position: GK
 - name: Megan Walsh
+  country: IRL
   number: -1
   position: GK
 - name: Sophie Whitehouse
+  country: IRL
   number: -1
   position: GK
 - name: "\xC1ine O'Gorman"
+  country: IRL
   number: -1
   position: DF
 - name: Louise Quinn
+  country: IRL
   number: -1
   position: DF
 - name: Diane Caldwell
+  country: IRL
   number: -1
   position: DF
 - name: Harriet Scott
+  country: IRL
   number: -1
   position: DF
 - name: Claire O'Riordan
+  country: IRL
   number: -1
   position: DF
 - name: Aoife Mannion
+  country: IRL
   number: -1
   position: DF
 - name: Hayley Nolan
+  country: IRL
   number: -1
   position: DF
 - name: Tara O'Hanlon
+  country: IRL
   number: -1
   position: DF
 - name: Denise O'Sullivan
+  country: IRL
   number: -1
   position: MF
 - name: Katie McCabe
+  country: IRL
   number: -1
   position: MF
 - name: Ruesha Littlejohn
+  country: IRL
   number: -1
   position: MF
 - name: Megan Connolly
+  country: IRL
   number: -1
   position: MF
 - name: Ciara Grant
+  country: IRL
   number: -1
   position: MF
 - name: Jamie Finn
+  country: IRL
   number: -1
   position: MF
 - name: Lucy Quinn
+  country: IRL
   number: -1
   position: MF
 - name: Roma McLaughlin
+  country: IRL
   number: -1
   position: MF
 - name: Sinead Farrelly
+  country: IRL
   number: -1
   position: MF
 - name: Amber Barrett
+  country: IRL
   number: -1
   position: FW
 - name: Heather Payne
+  country: IRL
   number: -1
   position: FW
 - name: Kyra Carusa
+  country: IRL
   number: -1
   position: FW
 - name: Abbie Larkin
+  country: IRL
   number: -1
   position: FW
 - name: Marissa Sheva
+  country: IRL
   number: -1
   position: FW
 - name: Alannah McEvoy
+  country: IRL
   number: -1
   position: FW
-ITA:
 - name: Laura Giuliani
+  country: ITA
   number: 1
   position: GK
 - name: Katja Schroffenegger
+  country: ITA
   number: 12
   position: GK
 - name: Roberta Aprile
+  country: ITA
   number: 22
   position: GK
 - name: Angelica Soffia
+  country: ITA
   number: 2
   position: DF
 - name: Alice Tortelli
+  country: ITA
   number: 3
   position: DF
 - name: Elisa Bartoli
+  country: ITA
   number: 13
   position: DF
 - name: Maria Luisa Filangeri
+  country: ITA
   number: 15
   position: DF
 - name: Lucia Di Guglielmo
+  country: ITA
   number: 16
   position: DF
 - name: Lisa Boattin
+  country: ITA
   number: 17
   position: DF
 - name: Martina Lenzini
+  country: ITA
   number: 23
   position: DF
 - name: Aurora Galli
+  country: ITA
   number: 4
   position: MF
 - name: Manuela Giugliano
+  country: ITA
   number: 6
   position: MF
 - name: Flaminia Simonetti
+  country: ITA
   number: 7
   position: MF
 - name: Martina Rosucci
+  country: ITA
   number: 8
   position: MF
 - name: Arianna Caruso
+  country: ITA
   number: 18
   position: MF
 - name: Giada Greggi
+  country: ITA
   number: 21
   position: MF
 - name: Michela Catena
+  country: ITA
   number: 5
   position: FW
 - name: Valentina Giacinti
+  country: ITA
   number: 9
   position: FW
 - name: Cristiana Girelli
+  country: ITA
   number: 10
   position: FW
 - name: Sofia Cantore
+  country: ITA
   number: 11
   position: FW
 - name: Agnese Bonfantini
+  country: ITA
   number: 14
   position: FW
 - name: Benedetta Glionna
+  country: ITA
   number: 19
   position: FW
 - name: Martina Piemonte
+  country: ITA
   number: 20
   position: FW
-JAM:
 - name: Liya Brooks
+  country: JAM
   number: -1
   position: GK
 - name: Sydney Schneider
+  country: JAM
   number: -1
   position: GK
 - name: Rebecca Spencer
+  country: JAM
   number: -1
   position: GK
 - name: Satara Murray
+  country: JAM
   number: -1
   position: DF
 - name: Vyan Sampson
+  country: JAM
   number: -1
   position: DF
 - name: Allyson Swaby
+  country: JAM
   number: -1
   position: DF
 - name: Chantelle Swaby
+  country: JAM
   number: -1
   position: DF
 - name: Siobhan Wilson
+  country: JAM
   number: -1
   position: DF
 - name: Victoria Williams
+  country: JAM
   number: -1
   position: DF
 - name: Paige Bailey-Gayle
+  country: JAM
   number: -1
   position: MF
 - name: Deneisha Blackwood
+  country: JAM
   number: -1
   position: MF
 - name: Trudi Carter
+  country: JAM
   number: -1
   position: MF
 - name: Rachel Jones
+  country: JAM
   number: -1
   position: MF
 - name: Peyton McNamara
+  country: JAM
   number: -1
   position: MF
 - name: Atlanta Primus
+  country: JAM
   number: -1
   position: MF
 - name: Havana Solaun
+  country: JAM
   number: -1
   position: MF
 - name: Drew Spence
+  country: JAM
   number: -1
   position: MF
 - name: Jody Brown
+  country: JAM
   number: -1
   position: FW
 - name: Shania Hayles
+  country: JAM
   number: -1
   position: FW
 - name: Cheyna Matthews
+  country: JAM
   number: -1
   position: FW
 - name: Kameron Simmonds
+  country: JAM
   number: -1
   position: FW
 - name: Kalyssa Van Zanten
+  country: JAM
   number: -1
   position: FW
 - name: Solai Washington
+  country: JAM
   number: -1
   position: FW
 - name: Tiernny Wiltshire
+  country: JAM
   number: -1
   position: FW
-JPN:
 - name: "Ayaka Yamashita (\u5C71\u4E0B \u674F\u4E5F\u52A0)"
+  country: JPN
   number: 1
   position: GK
 - name: "Momoko Tanaka (\u7530\u4E2D \u6843\u5B50)"
+  country: JPN
   number: 18
   position: GK
 - name: "Chika Hirao (\u5E73\u5C3E \u77E5\u4F73)"
+  country: JPN
   number: 21
   position: GK
 - name: "Risa Shimizu (\u6E05\u6C34 \u68A8\u7D17)"
+  country: JPN
   number: 2
   position: DF
 - name: "Moeka Minami (\u5357 \u840C\u83EF)"
+  country: JPN
   number: 3
   position: DF
 - name: "Saki Kumagai (\u718A\u8C37 \u7D17\u5E0C)"
+  country: JPN
   number: 4
   position: DF
 - name: "Shiori Miyake (\u4E09\u5B85 \u53F2\u7E54)"
+  country: JPN
   number: 5
   position: DF
 - name: "Ruka Norimatsu (\u4E57\u677E\u3000\u7460\u83EF)"
+  country: JPN
   number: 12
   position: DF
 - name: "Saori Takarada (\u5B9D\u7530 \u6C99\u7E54)"
+  country: JPN
   number: 19
   position: DF
 - name: "Kiko Seike (\u6E05\u5BB6 \u8CB4\u5B50)"
+  country: JPN
   number: 22
   position: DF
 - name: "Miyabi Moriya (\u5B88\u5C4B \u90FD\u5F25)"
+  country: JPN
   number: 24
   position: DF
 - name: "Rion Ishikawa (\u77F3\u5DDD \u7483\u97F3)"
+  country: JPN
   number: 25
   position: DF
 - name: "Fuka Nagano (\u9577\u91CE \u98A8\u82B1)"
+  country: JPN
   number: 6
   position: MF
 - name: "Hinata Miyazawa (\u5BAE\u6FA4 \u3072\u306A\u305F)"
+  country: JPN
   number: 7
   position: MF
 - name: "Hikaru Naomoto (\u7336\u672C \u5149)"
+  country: JPN
   number: 8
   position: MF
 - name: "Jun Endo (\u9060\u85E4 \u7D14)"
+  country: JPN
   number: 13
   position: MF
 - name: "Yui Hasegawa (\u9577\u8C37\u5DDD \u552F)"
+  country: JPN
   number: 14
   position: MF
 - name: "Hina Sugita (\u6749\u7530 \u5983\u548C)"
+  country: JPN
   number: 15
   position: MF
 - name: "Honoka Hayashi (\u6797 \u7A42\u4E4B\u9999)"
+  country: JPN
   number: 16
   position: MF
 - name: "Aoba Fujino (\u85E4\u91CE \u3042\u304A\u3070)"
+  country: JPN
   number: 20
   position: MF
 - name: "Riko Ueki (\u690D\u6728 \u7406\u5B50)"
+  country: JPN
   number: 9
   position: FW
 - name: "Mana Iwabuchi (\u5CA9\u6E15 \u771F\u5948)"
+  country: JPN
   number: 10
   position: FW
 - name: "Mina Tanaka (\u7530\u4E2D \u7F8E\u5357)"
+  country: JPN
   number: 11
   position: FW
 - name: "Maika Hamano (\u6D5C\u91CE \u307E\u3044\u304B)"
+  country: JPN
   number: 23
   position: FW
-KOR:
 - name: "Yoon Young-geul (\uC724\uC601\uAE00)"
+  country: KOR
   number: 1
   position: GK
 - name: "Kim Jung-mi (\uAE40\uC815\uBBF8)"
+  country: KOR
   number: 18
   position: GK
 - name: "Kim Kyeong-hee (\uAE40\uACBD\uD76C)"
+  country: KOR
   number: 21
   position: GK
 - name: "Choo Hyo-joo (\uCD94\uD6A8\uC8FC)"
+  country: KOR
   number: 2
   position: DF
 - name: "Hong Hye-ji (\uD64D\uD61C\uC9C0)"
+  country: KOR
   number: 3
   position: DF
 - name: "Shim Seo-yeon (\uC2EC\uC11C\uC5F0)"
+  country: KOR
   number: 4
   position: DF
 - name: "Kim Hye-yeong (\uAE40\uD61C\uC601)"
+  country: KOR
   number: 5
   position: DF
 - name: "Lim Seon-joo (\uC784\uC120\uC8FC)"
+  country: KOR
   number: 6
   position: DF
 - name: "Jang Sel-gi (\uC7A5\uC2AC\uAE30)"
+  country: KOR
   number: 16
   position: DF
 - name: "Kim Hye-ri (\uAE40\uD61C\uB9AC)"
+  country: KOR
   number: 20
   position: DF
 - name: "Kim Jin-hui (\uAE40\uC9C4\uD76C)"
+  country: KOR
   number: 26
   position: DF
 - name: "Cho So-hyun (\uC870\uC18C\uD604)"
+  country: KOR
   number: 8
   position: MF
 - name: "Lee Geum-min (\uC774\uAE08\uBBFC)"
+  country: KOR
   number: 9
   position: MF
 - name: "Ji So-yun (\uC9C0\uC18C\uC5F0)"
+  country: KOR
   number: 10
   position: MF
 - name: "Kim Yun-ji (\uAE40\uC724\uC9C0)"
+  country: KOR
   number: 12
   position: MF
 - name: "Park Hye-jeong (\uBC15\uD61C\uC815)"
+  country: KOR
   number: 14
   position: MF
 - name: "Park Ye-eun (\uBC15\uC608\uC740)"
+  country: KOR
   number: 15
   position: MF
 - name: "Chun Ga-ram (\uCC9C\uAC00\uB78C)"
+  country: KOR
   number: 22
   position: MF
 - name: "Bae Ye-bin (\uBC30\uC608\uBE48)"
+  country: KOR
   number: 24
   position: MF
 - name: "Son Hwa-yeon (\uC190\uD654\uC5F0)"
+  country: KOR
   number: 7
   position: FW
 - name: "Choe Yu-ri (\uCD5C\uC720\uB9AC)"
+  country: KOR
   number: 11
   position: FW
 - name: "Park Eun-sun (\uBC15\uC740\uC120)"
+  country: KOR
   number: 13
   position: FW
 - name: "Jang Yu-bin (\uC7A5\uC720\uBE48)"
+  country: KOR
   number: 17
   position: FW
 - name: "Seo Ji-youn (\uC11C\uC9C0\uC5F0)"
+  country: KOR
   number: 19
   position: FW
 - name: "Jung Seol-bin (\uC815\uC124\uBE48)"
+  country: KOR
   number: 23
   position: FW
 - name: "Lee Eun-young (\uC774\uC740\uC601)"
+  country: KOR
   number: 25
   position: FW
 - name: "Jeon Eun-ha (\uC804\uC740\uD558)"
+  country: KOR
   number: 27
   position: FW
-MAR:
 - name: Khadija Er-Rmichi
+  country: MAR
   number: 1
   position: GK
 - name: Assia Zouhair
+  country: MAR
   number: 12
   position: GK
 - name: "In\xE8s Arouaissa"
+  country: MAR
   number: -1
   position: GK
 - name: Maryame Atiq
+  country: MAR
   number: 14
   position: DF
 - name: Zineb Redouani
+  country: MAR
   number: 2
   position: DF
 - name: Ghizlane Chhiri
+  country: MAR
   number: 15
   position: DF
 - name: Nesryne El Chad
+  country: MAR
   number: 5
   position: DF
 - name: Sabah Seghir
+  country: MAR
   number: 13
   position: DF
 - name: Yasmin Mrabet
+  country: MAR
   number: 21
   position: DF
 - name: Fatima El Ghazouani
+  country: MAR
   number: 20
   position: DF
 - name: Rkia Mazrouai
+  country: MAR
   number: 14
   position: DF
 - name: "Nouha\xEFla Benzina"
+  country: MAR
   number: 4
   position: DF
 - name: "\xC9lodie Nakkach"
+  country: MAR
   number: 6
   position: MF
 - name: Salma Amani
+  country: MAR
   number: 8
   position: MF
 - name: Ghizlane Chebbak
+  country: MAR
   number: 7
   position: MF
 - name: Kawtar Ait Omar
+  country: MAR
   number: 15
   position: MF
 - name: Ibtissam Bouharat
+  country: MAR
   number: 15
   position: MF
 - name: Siham Boukhami
+  country: MAR
   number: 4
   position: MF
 - name: Rosella Ayane
+  country: MAR
   number: 23
   position: FW
 - name: Fatima Tagnaout
+  country: MAR
   number: 11
   position: FW
 - name: Sakina Ouzraoui
+  country: MAR
   number: 18
   position: FW
 - name: Anissa Belkasmi
+  country: MAR
   number: 25
   position: FW
 - name: Sofia Bouftini
+  country: MAR
   number: 24
   position: FW
 - name: Imane Saoud
+  country: MAR
   number: 20
   position: FW
 - name: Yasmine Zouhir
+  country: MAR
   number: -1
   position: FW
-NED:
 - name: Daphne van Domselaar
+  country: NED
   number: 1
   position: GK
 - name: Barbara Lorsheyd
+  country: NED
   number: 16
   position: GK
 - name: Jacintha Weimar
+  country: NED
   number: 23
   position: GK
 - name: Lynn Wilms
+  country: NED
   number: 2
   position: DF
 - name: Stefanie van der Gragt
+  country: NED
   number: 3
   position: DF
 - name: Aniek Nouwen
+  country: NED
   number: 4
   position: DF
 - name: Merel van Dongen
+  country: NED
   number: 5
   position: DF
 - name: Caitlin Dijkstra
+  country: NED
   number: 15
   position: DF
 - name: Kerstin Casparij
+  country: NED
   number: 18
   position: DF
 - name: Dominique Janssen
+  country: NED
   number: 20
   position: DF
 - name: Jill Roord
+  country: NED
   number: 6
   position: MF
 - name: Sherida Spitse
+  country: NED
   number: 8
   position: MF
 - name: "Dani\xEBlle van de Donk"
+  country: NED
   number: 10
   position: MF
 - name: Wieke Kaptein
+  country: NED
   number: 14
   position: MF
 - name: Damaris Egurrola
+  country: NED
   number: 21
   position: MF
 - name: Victoria Pelova
+  country: NED
   number: 24
   position: MF
 - name: Jill Baijings
+  country: NED
   number: 25
   position: MF
 - name: Sisca Folkertsma
+  country: NED
   number: 26
   position: MF
 - name: Lineth Beerensteyn
+  country: NED
   number: 7
   position: FW
 - name: Fenna Kalma
+  country: NED
   number: 9
   position: FW
 - name: Lieke Martens
+  country: NED
   number: 11
   position: FW
 - name: Katja Snoeijs
+  country: NED
   number: 12
   position: FW
 - name: Renate Jansen
+  country: NED
   number: 13
   position: FW
 - name: "Rom\xE9e Leuchter"
+  country: NED
   number: 17
   position: FW
 - name: Tiny Hoekstra
+  country: NED
   number: 19
   position: FW
 - name: Esmee Brugts
+  country: NED
   number: 22
   position: FW
-NGA:
 - name: Chiamaka Nnadozie
+  country: NGA
   number: -1
   position: GK
 - name: Yewande Balogun
+  country: NGA
   number: -1
   position: GK
 - name: Inyeme Etim
+  country: NGA
   number: -1
   position: GK
 - name: Osinachi Ohale
+  country: NGA
   number: -1
   position: DF
 - name: Ashleigh Plumptre
+  country: NGA
   number: -1
   position: DF
 - name: Glory Ogbonna
+  country: NGA
   number: -1
   position: DF
 - name: Oluwatosin Demehin
+  country: NGA
   number: -1
   position: DF
 - name: Rofiat Imuran
+  country: NGA
   number: -1
   position: DF
 - name: Michelle Alozie
+  country: NGA
   number: -1
   position: DF
 - name: Onome Ebi
+  country: NGA
   number: -1
   position: DF
 - name: Halimatu Ayinde
+  country: NGA
   number: -1
   position: MF
 - name: Christy Ucheibe
+  country: NGA
   number: -1
   position: MF
 - name: Ngozi Okobi-Okeoghene
+  country: NGA
   number: -1
   position: MF
 - name: Toni Payne
+  country: NGA
   number: -1
   position: MF
 - name: Regina Otu
+  country: NGA
   number: -1
   position: MF
 - name: Deborah Abiodun
+  country: NGA
   number: -1
   position: MF
 - name: Asisat Oshoala
+  country: NGA
   number: -1
   position: FW
 - name: Uchenna Kanu
+  country: NGA
   number: -1
   position: FW
 - name: Ifeoma Onumonu
+  country: NGA
   number: -1
   position: FW
 - name: Rasheedat Ajibade
+  country: NGA
   number: -1
   position: FW
 - name: Desire Oparanozie
+  country: NGA
   number: -1
   position: FW
 - name: Esther Okoronkwo
+  country: NGA
   number: -1
   position: FW
 - name: Gift Monday
+  country: NGA
   number: -1
   position: FW
-NOR:
 - name: Guro Pettersen
+  country: NOR
   number: 1
   position: GK
 - name: Sunniva Skoglund
+  country: NOR
   number: 12
   position: GK
 - name: Aurora Mikalsen
+  country: NOR
   number: 23
   position: GK
 - name: "Anja S\xF8nstevold"
+  country: NOR
   number: 2
   position: DF
 - name: Mathilde Harviken
+  country: NOR
   number: 3
   position: DF
 - name: Tuva Hansen
+  country: NOR
   number: 4
   position: DF
 - name: Maren Mjelde
+  country: NOR
   number: 6
   position: DF
 - name: Marit Bratberg Lund
+  country: NOR
   number: 16
   position: DF
 - name: Malin Brenn
+  country: NOR
   number: 24
   position: DF
 - name: Ingrid Syrstad Engen
+  country: NOR
   number: 7
   position: MF
 - name: "Vilde B\xF8e Risa"
+  country: NOR
   number: 8
   position: MF
 - name: Guro Reiten
+  country: NOR
   number: 11
   position: MF
 - name: Thea Bjelde
+  country: NOR
   number: 13
   position: MF
 - name: Amalie Eikeland
+  country: NOR
   number: 15
   position: MF
 - name: Julie Blakstad
+  country: NOR
   number: 17
   position: MF
 - name: Frida Maanum
+  country: NOR
   number: 18
   position: MF
 - name: Elisabeth Terland
+  country: NOR
   number: 19
   position: MF
 - name: Cesilie Andreassen
+  country: NOR
   number: 22
   position: MF
 - name: "Karina S\xE6vik"
+  country: NOR
   number: 9
   position: FW
 - name: Ada Hegerberg
+  country: NOR
   number: 14
   position: FW
 - name: Emilie Haavi
+  country: NOR
   number: 20
   position: FW
 - name: "Anna J\xF8sendal"
+  country: NOR
   number: 21
   position: FW
-NZL:
 - name: Erin Nayler
+  country: NZL
   number: 1
   position: GK
 - name: Brianna Edwards
+  country: NZL
   number: 21
   position: GK
 - name: Murphy Sheaff
+  country: NZL
   number: 23
   position: GK
 - name: Kate Taylor
+  country: NZL
   number: 2
   position: DF
 - name: Claudia Bunge
+  country: NZL
   number: 3
   position: DF
 - name: CJ Bott
+  country: NZL
   number: 4
   position: DF
 - name: Meikayla Moore
+  country: NZL
   number: 5
   position: DF
 - name: Ali Riley
+  country: NZL
   number: 7
   position: DF
 - name: Michaela Foster
+  country: NZL
   number: 13
   position: DF
 - name: Katie Bowen
+  country: NZL
   number: 14
   position: DF
 - name: Grace Neville
+  country: NZL
   number: 16
   position: DF
 - name: Mackenzie Barry
+  country: NZL
   number: 18
   position: DF
 - name: Elizabeth Anton
+  country: NZL
   number: 19
   position: DF
 - name: Malia Steinmetz
+  country: NZL
   number: 6
   position: MF
 - name: Daisy Cleverley
+  country: NZL
   number: 8
   position: MF
 - name: Olivia Chance
+  country: NZL
   number: 11
   position: MF
 - name: Betsy Hassett
+  country: NZL
   number: 12
   position: MF
 - name: Ava Collins
+  country: NZL
   number: 22
   position: MF
 - name: Gabi Rennie
+  country: NZL
   number: 9
   position: FW
 - name: Grace Jale
+  country: NZL
   number: 10
   position: FW
 - name: Paige Satchell
+  country: NZL
   number: 15
   position: FW
 - name: Hannah Wilkinson
+  country: NZL
   number: 17
   position: FW
 - name: Indiah-Paige Riley
+  country: NZL
   number: 20
   position: FW
-PAN:
 - name: "Sasha F\xE1brega"
+  country: PAN
   number: 1
   position: GK
 - name: Nadia Ducreux
+  country: PAN
   number: 12
   position: GK
 - name: Stephani Vargas
+  country: PAN
   number: 22
   position: GK
 - name: "Hilary Ja\xE9n"
+  country: PAN
   number: 2
   position: DF
 - name: Wendy Natis
+  country: PAN
   number: 3
   position: DF
 - name: Katherine Castillo
+  country: PAN
   number: 4
   position: DF
 - name: "Yomira Pinz\xF3n"
+  country: PAN
   number: 5
   position: DF
 - name: Rosario Vargas
+  country: PAN
   number: 15
   position: DF
 - name: Rebeca Espinosa
+  country: PAN
   number: 16
   position: DF
 - name: "Nicole De Obald\xEDa"
+  country: PAN
   number: 21
   position: DF
 - name: Carina Baltrip-Reyes
+  country: PAN
   number: 23
   position: DF
 - name: "Deysir\xE9 Salazar"
+  country: PAN
   number: 6
   position: MF
 - name: "Emily Cede\xF1o"
+  country: PAN
   number: 7
   position: MF
 - name: "Schiandra Gonz\xE1lez"
+  country: PAN
   number: 8
   position: MF
 - name: Marta Cox
+  country: PAN
   number: 10
   position: MF
 - name: Natalia Mills
+  country: PAN
   number: 11
   position: MF
 - name: Laurie Batista
+  country: PAN
   number: 14
   position: MF
 - name: "Erika Hern\xE1ndez"
+  country: PAN
   number: 18
   position: MF
 - name: Aldrith Quintero
+  country: PAN
   number: 20
   position: MF
 - name: Karla Riley
+  country: PAN
   number: 9
   position: FW
 - name: Riley Tanner
+  country: PAN
   number: 13
   position: FW
 - name: Gabriela Villagrand
+  country: PAN
   number: 17
   position: FW
 - name: "Lineth Cede\xF1o"
+  country: PAN
   number: 19
   position: FW
-PHI:
 - name: Olivia McDaniel
+  country: PHI
   number: -1
   position: GK
 - name: Kiara Fontanilla
+  country: PHI
   number: -1
   position: GK
 - name: Maya Alcantara
+  country: PHI
   number: -1
   position: DF
 - name: Alicia Barker
+  country: PHI
   number: -1
   position: DF
 - name: Reina Bonta
+  country: PHI
   number: -1
   position: DF
 - name: Malea Cesar
+  country: PHI
   number: -1
   position: DF
 - name: Sofia Harrison
+  country: PHI
   number: -1
   position: DF
 - name: Hali Long
+  country: PHI
   number: -1
   position: DF
 - name: Eva Madarang
+  country: PHI
   number: -1
   position: DF
 - name: "Anicka Casta\xF1eda"
+  country: PHI
   number: -1
   position: MF
 - name: Sara Eggesvik
+  country: PHI
   number: -1
   position: MF
 - name: Carleigh Frilles
+  country: PHI
   number: -1
   position: MF
 - name: Isabella Pasion
+  country: PHI
   number: -1
   position: MF
 - name: Jaclyn Sawicki
+  country: PHI
   number: -1
   position: MF
 - name: Natalie Oca
+  country: PHI
   number: -1
   position: MF
 - name: Sabine Ramos
+  country: PHI
   number: -1
   position: MF
 - name: Sarina Bolden
+  country: PHI
   number: -1
   position: FW
 - name: Isabella Flanigan
+  country: PHI
   number: -1
   position: FW
 - name: Chandler McDaniel
+  country: PHI
   number: -1
   position: FW
 - name: Quinley Quezada
+  country: PHI
   number: -1
   position: FW
-POR:
 - name: "In\xEAs Pereira"
+  country: POR
   number: 1
   position: GK
 - name: "Patr\xEDcia Morais"
+  country: POR
   number: 12
   position: GK
 - name: Rute Costa
+  country: POR
   number: 22
   position: GK
 - name: "Joana March\xE3o"
+  country: POR
   number: 5
   position: DF
 - name: "L\xFAcia Alves"
+  country: POR
   number: 17
   position: DF
 - name: Carole Costa
+  country: POR
   number: 15
   position: DF
 - name: Ana Borges
+  country: POR
   number: 9
   position: DF
 - name: Ana Seica
+  country: POR
   number: 9
   position: DF
 - name: Diana Gomes
+  country: POR
   number: 19
   position: DF
 - name: "S\xEDlvia Rebelo"
+  country: POR
   number: 4
   position: DF
 - name: Catarina Amado
+  country: POR
   number: 2
   position: DF
 - name: Dolores Silva
+  country: POR
   number: 14
   position: MF
 - name: "F\xE1tima Pinto"
+  country: POR
   number: 13
   position: MF
 - name: Andreia Norton
+  country: POR
   number: 8
   position: MF
 - name: Andreia Jacinto
+  country: POR
   number: 8
   position: MF
 - name: Tatiana Pinto
+  country: POR
   number: 11
   position: MF
 - name: Vanessa Marques
+  country: POR
   number: 7
   position: MF
 - name: Kika Nazareth
+  country: POR
   number: 20
   position: MF
 - name: Ana Rute
+  country: POR
   number: 20
   position: MF
 - name: Diana Silva
+  country: POR
   number: 16
   position: FW
 - name: Ana Capeta
+  country: POR
   number: 20
   position: FW
 - name: Kelsey Araujo
+  country: POR
   number: 20
   position: FW
 - name: "J\xE9ssica Silva"
+  country: POR
   number: 10
   position: FW
 - name: Carolina Mendes
+  country: POR
   number: 18
   position: FW
 - name: "Telma Encarna\xE7\xE3o"
+  country: POR
   number: 23
   position: FW
-RSA:
 - name: Andile Dlamini
+  country: RSA
   number: 16
   position: GK
 - name: Kaylin Swart
+  country: RSA
   number: 1
   position: GK
 - name: Regirl Ngobeni
+  country: RSA
   number: 21
   position: GK
 - name: Karabo Dhlamini
+  country: RSA
   number: 7
   position: DF
 - name: Fikile Magama
+  country: RSA
   number: 5
   position: DF
 - name: Lonathemba Mhlongo
+  country: RSA
   number: 19
   position: DF
 - name: Noko Matlou
+  country: RSA
   number: 4
   position: DF
 - name: Bambanani Mbane
+  country: RSA
   number: 13
   position: DF
 - name: Bongeka Gamede
+  country: RSA
   number: 3
   position: DF
 - name: Refiloe Jane
+  country: RSA
   number: 15
   position: MF
 - name: Sibulele Holweni
+  country: RSA
   number: -1
   position: MF
 - name: Linda Motlhalo
+  country: RSA
   number: 10
   position: MF
 - name: Kholosa Biyana
+  country: RSA
   number: 19
   position: MF
 - name: Nomvula Kgoale
+  country: RSA
   number: 19
   position: MF
 - name: Robyn Moodaly
+  country: RSA
   number: 20
   position: MF
 - name: Noxolo Cesane
+  country: RSA
   number: 6
   position: FW
 - name: Gabriela Salgado
+  country: RSA
   number: 9
   position: FW
 - name: S'phumelele Shamase
+  country: RSA
   number: -1
   position: FW
 - name: Jermaine Seoposenwe
+  country: RSA
   number: 12
   position: FW
 - name: Nthabiseng Majiya
+  country: RSA
   number: -1
   position: FW
 - name: Hildah Magaia
+  country: RSA
   number: -1
   position: FW
 - name: Lelona Daweti
+  country: RSA
   number: -1
   position: FW
 - name: Wendy Shongwe
+  country: RSA
   number: -1
   position: FW
-SUI:
 - name: "Ga\xEBlle Thalmann"
+  country: SUI
   number: 1
   position: GK
 - name: Julia Stierli
+  country: SUI
   number: 2
   position: DF
 - name: Lara Marti
+  country: SUI
   number: 3
   position: DF
 - name: Rachel Rinast
+  country: SUI
   number: 4
   position: DF
 - name: Noelle Maritz
+  country: SUI
   number: 5
   position: DF
 - name: "G\xE9raldine Reuteler"
+  country: SUI
   number: 6
   position: DF
 - name: Riola Xhemaili
+  country: SUI
   number: 7
   position: MF
 - name: Sandy Maendly
+  country: SUI
   number: 8
   position: MF
 - name: "Ana-Maria Crnogor\u010Devi\u0107"
+  country: SUI
   number: 9
   position: FW
 - name: Ramona Bachmann
+  country: SUI
   number: 10
   position: FW
 - name: Coumba Sow
+  country: SUI
   number: 11
   position: MF
 - name: Livia Peng
+  country: SUI
   number: 12
   position: GK
 - name: "Lia W\xE4lti"
+  country: SUI
   number: 13
   position: MF
 - name: Rahel Kiwic
+  country: SUI
   number: 14
   position: DF
 - name: "Luana B\xFChler"
+  country: SUI
   number: 15
   position: DF
 - name: Sandrine Mauron
+  country: SUI
   number: 16
   position: MF
 - name: "Svenja F\xF6lmli"
+  country: SUI
   number: 17
   position: FW
 - name: Viola Calligaris
+  country: SUI
   number: 18
   position: DF
 - name: Eseosa Aigbogun
+  country: SUI
   number: 19
   position: FW
 - name: Fabienne Humm
+  country: SUI
   number: 20
   position: FW
 - name: Seraina Friedli
+  country: SUI
   number: 21
   position: GK
 - name: Nadine Riesen
+  country: SUI
   number: 22
   position: DF
 - name: Meriame Terchoun
+  country: SUI
   number: 23
   position: FW
-SWE:
 - name: "Ze\u0107ira Mu\u0161ovi\u0107"
+  country: SWE
   number: 1
   position: GK
 - name: Jennifer Falk
+  country: SWE
   number: 12
   position: GK
 - name: Tove Enblom
+  country: SWE
   number: 21
   position: GK
 - name: Jonna Andersson
+  country: SWE
   number: 2
   position: DF
 - name: Linda Sembrant
+  country: SWE
   number: 3
   position: DF
 - name: "Amanda Nild\xE9n"
+  country: SWE
   number: 4
   position: DF
 - name: Hanna Lundkvist
+  country: SWE
   number: 5
   position: DF
 - name: Magdalena Eriksson (3rd captain)
+  country: SWE
   number: 6
   position: DF
 - name: Emma Kullberg
+  country: SWE
   number: 13
   position: DF
 - name: "Nathalie Bj\xF6rn"
+  country: SWE
   number: 14
   position: DF
 - name: Anna Sandberg
+  country: SWE
   number: 24
   position: DF
 - name: Kosovare Asllani (vice-captain)
+  country: SWE
   number: 9
   position: MF
 - name: Filippa Angeldahl
+  country: SWE
   number: 16
   position: MF
 - name: Caroline Seger
+  country: SWE
   number: 17
   position: MF
 - name: Johanna Rytting Kaneryd
+  country: SWE
   number: 19
   position: MF
 - name: Hanna Bennison
+  country: SWE
   number: 20
   position: MF
 - name: Olivia Schough
+  country: SWE
   number: 22
   position: MF
 - name: Madelen Janogy
+  country: SWE
   number: 7
   position: FW
 - name: Matilda Vinberg
+  country: SWE
   number: 8
   position: FW
 - name: Sofia Jakobsson
+  country: SWE
   number: 10
   position: FW
 - name: Stina Blackstenius
+  country: SWE
   number: 11
   position: FW
 - name: Rebecka Blomqvist
+  country: SWE
   number: 15
   position: FW
 - name: "Fridolina Rolf\xF6"
+  country: SWE
   number: 18
   position: FW
 - name: Julia Zigiotti Olme
+  country: SWE
   number: 25
   position: FW
-USA:
 - name: Alyssa Naeher
+  country: USA
   number: 1
   position: GK
 - name: Casey Murphy
+  country: USA
   number: 18
   position: GK
 - name: Adrianna Franch
+  country: USA
   number: 21
   position: GK
 - name: Sofia Huerta
+  country: USA
   number: 3
   position: DF
 - name: Becky Sauerbrunn
+  country: USA
   number: 4
   position: DF
 - name: Kelley O'Hara
+  country: USA
   number: 5
   position: DF
 - name: Tierna Davidson
+  country: USA
   number: 12
   position: DF
 - name: Emily Sonnett
+  country: USA
   number: 14
   position: DF
 - name: Alana Cook
+  country: USA
   number: 15
   position: DF
 - name: Crystal Dunn
+  country: USA
   number: 19
   position: DF
 - name: Casey Krueger
+  country: USA
   number: 20
   position: DF
 - name: Emily Fox
+  country: USA
   number: 23
   position: DF
 - name: Naomi Girma
+  country: USA
   number: 27
   position: DF
 - name: Ashley Sanchez
+  country: USA
   number: 2
   position: MF
 - name: Julie Ertz
+  country: USA
   number: 8
   position: MF
 - name: Lindsey Horan
+  country: USA
   number: 10
   position: MF
 - name: Rose Lavelle
+  country: USA
   number: 16
   position: MF
 - name: Andi Sullivan
+  country: USA
   number: 17
   position: MF
 - name: Kristie Mewis
+  country: USA
   number: 22
   position: MF
 - name: Taylor Kornieck
+  country: USA
   number: 26
   position: MF
 - name: Lynn Williams
+  country: USA
   number: 6
   position: FW
 - name: Ashley Hatch
+  country: USA
   number: 7
   position: FW
 - name: Sophia Smith
+  country: USA
   number: 11
   position: FW
 - name: Alex Morgan
+  country: USA
   number: 13
   position: FW
 - name: Trinity Rodman
+  country: USA
   number: 25
   position: FW
 - name: Alyssa Thompson
+  country: USA
   number: 28
   position: FW
-VIE:
 - name: Lai Thi Tuyet
+  country: VIE
   number: 1
   position: GK
 - name: "Tr\u1EA7n Th\u1ECB Kim Thanh"
+  country: VIE
   number: 14
   position: GK
 - name: "Kh\u1ED5ng Th\u1ECB H\u1EB1ng"
+  country: VIE
   number: 20
   position: GK
 - name: "L\u01B0\u01A1ng Th\u1ECB Thu Th\u01B0\u01A1ng"
+  country: VIE
   number: 2
   position: DF
 - name: "Ch\u01B0\u01A1ng Th\u1ECB Ki\u1EC1u"
+  country: VIE
   number: 3
   position: DF
 - name: "Tr\u1EA7n Th\u1ECB Thu"
+  country: VIE
   number: 4
   position: DF
 - name: "Ho\xE0ng Th\u1ECB Loan"
+  country: VIE
   number: 5
   position: DF
 - name: "L\xEA Th\u1ECB Di\u1EC5m My"
+  country: VIE
   number: 13
   position: DF
 - name: "Ph\u1EA1m Th\u1ECB Lan Anh"
+  country: VIE
   number: 15
   position: DF
 - name: "Nguy\u1EC5n Th\u1ECB M\u1EF9 Anh"
+  country: VIE
   number: 17
   position: DF
 - name: "Tr\u1EA7n Th\u1ECB Thu Th\u1EA3o"
+  country: VIE
   number: 25
   position: DF
 - name: "Ph\u1EA1m Ho\xE0ng Qu\u1EF3nh"
+  country: VIE
   number: 6
   position: MF
 - name: "Nguy\u1EC5n Th\u1ECB Tuy\u1EBFt Dung (Vice-captain)"
+  country: VIE
   number: 7
   position: MF
 - name: "Tr\u1EA7n Th\u1ECB Th\xF9y Trang"
+  country: VIE
   number: 8
   position: MF
 - name: "Tr\u1EA7n Th\u1ECB H\u1EA3i Linh"
+  country: VIE
   number: 10
   position: MF
 - name: "Nguy\u1EC5n Th\u1ECB Tr\xFAc H\u01B0\u01A1ng"
+  country: VIE
   number: 11
   position: MF
 - name: "D\u01B0\u01A1ng Th\u1ECB V\xE2n"
+  country: VIE
   number: 16
   position: MF
 - name: "Nguy\u1EC5n Th\u1ECB V\u1EA1n"
+  country: VIE
   number: 18
   position: MF
 - name: "Ng\xE2n Th\u1ECB V\u1EA1n S\u1EF1"
+  country: VIE
   number: 21
   position: MF
 - name: "Tr\u1EA7n Th\u1ECB Thu Xu\xE2n"
+  country: VIE
   number: 22
   position: MF
 - name: "Nguy\u1EC5n Th\u1ECB B\xEDch Th\xF9y"
+  country: VIE
   number: 23
   position: MF
 - name: "Hu\u1EF3nh Nh\u01B0 (Captain)"
+  country: VIE
   number: 9
   position: FW
 - name: "Ph\u1EA1m H\u1EA3i Y\u1EBFn"
+  country: VIE
   number: 12
   position: FW
 - name: "Nguy\u1EC5n Th\u1ECB Thanh Nh\xE3"
+  country: VIE
   number: 19
   position: FW
 - name: "Ch\xE2u Th\u1ECB Vang"
+  country: VIE
   number: 24
   position: FW
-ZAM:
 - name: Catherine Musonda
+  country: ZAM
   number: 1
   position: GK
 - name: Eunice Sakala
+  country: ZAM
   number: 18
   position: GK
 - name: Hazel Nali
+  country: ZAM
   number: 16
   position: GK
 - name: Agness Musase
+  country: ZAM
   number: 4
   position: DF
 - name: Esther Siamfuko
+  country: ZAM
   number: 17
   position: DF
 - name: Judith Soko
+  country: ZAM
   number: 4
   position: DF
 - name: Vast Phiri
+  country: ZAM
   number: -1
   position: DF
 - name: Mary Mulenga
+  country: ZAM
   number: -1
   position: DF
 - name: Pauline Zulu
+  country: ZAM
   number: -1
   position: DF
 - name: Martha Tembo
+  country: ZAM
   number: 13
   position: DF
 - name: Evarine Katongo
+  country: ZAM
   number: 12
   position: MF
 - name: Mary Wilombe
+  country: ZAM
   number: -1
   position: MF
 - name: Susan Banda
+  country: ZAM
   number: -1
   position: MF
 - name: Xiomara Mapepa
+  country: ZAM
   number: 11
   position: MF
 - name: Comfort Selemani
+  country: ZAM
   number: -1
   position: MF
 - name: Ireen Lungu
+  country: ZAM
   number: 14
   position: MF
 - name: Hellen Chanda
+  country: ZAM
   number: -1
   position: MF
 - name: Barbra Banda
+  country: ZAM
   number: -1
   position: FW
 - name: Ochumba Oseke
+  country: ZAM
   number: -1
   position: FW
 - name: Hellen Mubanga
+  country: ZAM
   number: -1
   position: MF
 - name: Racheal Nachula
+  country: ZAM
   number: -1
   position: FW
 - name: Grace Chanda
+  country: ZAM
   number: -1
   position: FW
 - name: Racheal Kundananji
+  country: ZAM
   number: -1
   position: FW
 - name: Inonge Kaloustian
+  country: ZAM
   number: -1
   position: FW

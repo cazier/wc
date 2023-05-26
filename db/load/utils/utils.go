@@ -17,9 +17,10 @@ type Team struct {
 }
 
 type Player struct {
-	Name      string
-	Number    int
-	Postition string
+	Name     string
+	Country  string
+	Number   int
+	Position string
 }
 
 type Match struct {
@@ -114,8 +115,8 @@ func LoadMatches(path string) []Match {
 	return match
 }
 
-func LoadPlayers(path string) map[string][]Player {
-	players := map[string][]Player{}
+func LoadPlayers(path string) []Player {
+	players := []Player{}
 	load(path, &players)
 
 	return players

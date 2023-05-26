@@ -11,11 +11,13 @@ var apiCmd = &cobra.Command{
 	Short: "Start the Rest API",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
+		databaseInit(false)
 		api.Init()
 	},
 }
 
 func init() {
+	databaseCommand(apiCmd)
 	rootCmd.AddCommand(apiCmd)
 
 	// Here you will define your flags and configuration settings.

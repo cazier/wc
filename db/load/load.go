@@ -8,7 +8,7 @@ import (
 	"github.com/cazier/wc/db/models"
 )
 
-var cache map[string]uint
+var cache map[string]models.Country
 
 func Teams(path string) {
 	var counter int64
@@ -38,15 +38,17 @@ func Matches(path string) {
 	matches := utils.LoadMatches(path)
 
 	for _, match := range matches {
-		input := models.Match{AID: cache[match.A], BID: cache[match.B], When: match.Date, Stage: match.Stage}
+		input := models.Match{
+			AID:   cache[match.A].ID,
+			BID:   cache[match.B].ID,
+			When:  match.Date,
+			Stage: match.Stage,
+		}
 		output := models.Match{}
 
 		if db.Database.FirstOrCreate(&output, input).RowsAffected == 0 {
 			continue
 		}
-
-		db.Database.First(&models.Country{}, cache[match.A]).Association("Matches").Append(&output)
-		db.Database.First(&models.Country{}, cache[match.B]).Association("Matches").Append(&output)
 
 		counter++
 	}
@@ -62,16 +64,25 @@ func Players(path string) {
 
 	playerMap := utils.LoadPlayers(path)
 
-	for country, players := range playerMap {
+	countryMap := make(map[string][]utils.Player)
+
+	for _, player := range playerMap {
+		countryMap[player.Country] = append(countryMap[player.Country], player)
+	}
+
+	for country, players := range countryMap {
 		for _, player := range players {
-			input := models.Player{Name: player.Name, Position: player.Postition, Number: player.Number, CountryID: cache[country]}
+			input := models.Player{
+				Name:      player.Name,
+				Position:  player.Position,
+				Number:    player.Number,
+				CountryID: cache[country].ID,
+			}
 			output := models.Player{}
 
 			if db.Database.FirstOrCreate(&output, input).RowsAffected == 0 {
 				continue
 			}
-
-			db.Database.First(&models.Country{}, cache[country]).Association("Players").Append(&output)
 
 			counter++
 		}
@@ -79,14 +90,14 @@ func Players(path string) {
 	log.Printf("Added %d players to the database", counter)
 }
 
-func cacheCountries() map[string]uint {
+func cacheCountries() map[string]models.Country {
 	var countries []models.Country
 
 	if cache != nil {
 		return cache
 	}
 
-	cache = make(map[string]uint)
+	cache = make(map[string]models.Country)
 
 	tx := db.Database.Find(&countries)
 
@@ -99,7 +110,8 @@ func cacheCountries() map[string]uint {
 	}
 
 	for _, item := range countries {
-		cache[item.Name] = item.ID
+		cache[item.FifaCode] = item
+		cache[item.Name] = item
 	}
 
 	log.Printf("Loaded %d countries into a cache map", len(cache))

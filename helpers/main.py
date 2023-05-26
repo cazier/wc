@@ -3,17 +3,19 @@ import datetime
 
 import yaml
 import typer
+import IPython
 from peewee import Model, TextField, BooleanField, IntegerField, DateTimeField, SqliteDatabase, ForeignKeyField
 
-db = SqliteDatabase(None)
+app = typer.Typer()
+conn = SqliteDatabase(None)
 
 
 class BaseModel(Model):
     class Meta:
-        database = db
+        database = conn
 
 
-class Countries(BaseModel):
+class Country(BaseModel):
     name = TextField()
     group = TextField()
     fifa_code = TextField()
@@ -21,18 +23,18 @@ class Countries(BaseModel):
 
 class Match(BaseModel):
     day = IntegerField()
-    played = BooleanField()
+    played = BooleanField(default=False)
 
-    a = ForeignKeyField(Countries, backref="matches")
-    b = ForeignKeyField(Countries, backref="matches")
-    stage = IntegerField()
+    a = ForeignKeyField(Country, backref="matches")
+    b = ForeignKeyField(Country, backref="matches")
+    stage = TextField()
 
     when = DateTimeField()
-    assigned = BooleanField()
+    assigned = BooleanField(default=False)
 
 
 class Player(BaseModel):
-    country = ForeignKeyField(Countries, backref="country")
+    country = ForeignKeyField(Country, backref="country")
 
     name = TextField()
     position = TextField()
@@ -44,38 +46,48 @@ class Player(BaseModel):
     saves = IntegerField()
 
 
-def main(
+@app.command()
+def init(
     team_yaml: pathlib.Path = typer.Argument(..., metavar="TEAMS"),
     match_yaml: pathlib.Path = typer.Argument(..., metavar="MATCHES"),
     player_yaml: pathlib.Path = typer.Argument(..., metavar="PLAYERS"),
     database: pathlib.Path = typer.Option(pathlib.Path("python.db"), help="path to the created database file"),
 ) -> None:
-    db.init(str(database))
-    db.create_tables([Countries, Match])
+    conn.init(str(database))
+    conn.create_tables([Country, Match, Player])
 
-    storage = {}
-    teams = yaml.safe_load(team_yaml.read_text())
+    storage: dict[str, Country] = {}
+    teams = yaml.safe_load(team_yaml.read_text()) + [
+        {"name": "Team A", "group": "", "code": "<A>"},
+        {"name": "Team B", "group": "", "code": "<B>"},
+    ]
     matches = yaml.safe_load(match_yaml.read_text())
-    players = yaml.safe_load(player_yaml.read_text())
+    # players = yaml.safe_load(player_yaml.read_text())
 
     for team in teams:
-        output, _ = Countries.get_or_create(name=team["name"], group=team["group"], fifa_code=team["code"])
+        output, _ = Country.get_or_create(name=team["name"], group=team["group"], fifa_code=team["code"])
         storage[team["name"]] = output
+        storage[team["code"]] = output
 
     for match in matches:
         date = datetime.datetime.strptime(match["date"], "%d-%b-%y")
+        # date.hour, date.minute = map(int, match['time'].split(':'))
         output = Match.get_or_create(
             day=0,
             played=False,
             a=storage[match["a"]],
             b=storage[match["b"]],
-            group=match["group"],
+            stage=match["stage"],
             when=date,
         )
 
-    for player in players:
-        output = Player.get_or_create(name=player["name"], position=player["position"], number=player["number"])
+
+@app.command()
+def db(database: pathlib.Path = typer.Option(pathlib.Path("python.db"), help="path to the created database file")):
+    conn.init(str(database))
+
+    IPython.embed()
 
 
 if __name__ == "__main__":
-    typer.run(main)
+    app()
