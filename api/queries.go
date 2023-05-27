@@ -106,7 +106,7 @@ func queryMatches(c *gin.Context, multiple bool) ([]models.Match, bool) {
 	var matches []models.Match
 	var search models.Match
 
-	tx := db.Database.Joins("ACountry").Joins("BCountry")
+	tx := db.Database.Joins("ACountry").Joins("BCountry").Order("`matches`.`when`")
 
 	if group, found := c.Params.Get("group"); found {
 		tx = tx.Where("`ACountry`.`group` = ? OR `BCountry`.`group` = ?", group, group)

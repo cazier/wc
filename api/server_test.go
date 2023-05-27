@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	"github.com/cazier/wc/api/exceptions"
 	"github.com/cazier/wc/db"
@@ -290,15 +291,23 @@ func TestCountryMatches(t *testing.T) {
 	country.ID = int(m.GET(fmt.Sprintf("/country/name/%s", country.Name)).json["data"].(map[string]any)["id"].(float64))
 
 	response := m.GET(fmt.Sprintf("/country/id/%d/matches", country.ID))
-	for index, match := range m.GET(fmt.Sprintf("/country/name/%s/matches", country.Name)).json["data"].([]any) {
-		assert.Equal(t, match, response.json["data"].([]any)[index])
-	}
+	assert.Equal(
+		t,
+		m.GET(fmt.Sprintf("/country/name/%s/matches", country.Name)).json["data"].([]any),
+		response.json["data"].([]any),
+	)
 
 	for _, match := range utils.LoadMatches("../test/matches.yaml") {
 		if match.A == country.Name || match.B == country.Name {
 			count++
 		}
 	}
+
+	dates := make([]time.Time, count)
+	for index, match := range response.json["data"].([]any) {
+		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
+	}
+	assert.IsIncreasing(t, dates)
 
 	assert.Len(t, response.json["data"], count)
 	for _, match := range response.json["data"].([]any) {
@@ -316,15 +325,23 @@ func TestPlayerMatches(t *testing.T) {
 	player.Country.Name = request["country"].(map[string]any)["name"].(string)
 
 	response := m.GET(fmt.Sprintf("/player/id/%d/matches", player.ID))
-	for index, match := range m.GET(fmt.Sprintf("/player/name/%s/matches", player.Name)).json["data"].([]any) {
-		assert.Equal(t, match, response.json["data"].([]any)[index])
-	}
+	assert.Equal(
+		t,
+		m.GET(fmt.Sprintf("/player/name/%s/matches", player.Name)).json["data"].([]any),
+		response.json["data"].([]any),
+	)
 
 	for _, match := range utils.LoadMatches("../test/matches.yaml") {
 		if match.A == player.Country.Name || match.B == player.Country.Name {
 			count++
 		}
 	}
+
+	dates := make([]time.Time, count)
+	for index, match := range response.json["data"].([]any) {
+		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
+	}
+	assert.IsIncreasing(t, dates)
 
 	assert.Len(t, response.json["data"], count)
 	for _, match := range response.json["data"].([]any) {
@@ -345,6 +362,12 @@ func TestMatches(t *testing.T) {
 		json:   map[string]any{"data": response.json["data"].([]any)[rand.Intn(len(data))]},
 		status: response.status,
 	}
+
+	dates := make([]time.Time, len(data))
+	for index, match := range response.json["data"].([]any) {
+		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
+	}
+	assert.IsIncreasing(t, dates)
 
 	testMatch(t, response)
 }

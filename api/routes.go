@@ -66,7 +66,8 @@ func getPlayerMatches(c *gin.Context) {
 	// TODO clean this up
 	db.Database.Joins("ACountry").Joins("BCountry").
 		Joins("JOIN players ON players.country_id = a_id OR players.country_id = b_id").
-		Where("players.name = ? OR players.id = ?", search.Name, search.ID).
+		Where("`players`.`name` = ? OR `players`.`id` = ?", search.Name, search.ID).
+		Order("`matches`.`when`").
 		Find(&matches)
 
 	if len(matches) == 0 {
@@ -97,6 +98,7 @@ func getCountryMatches(c *gin.Context) {
 	db.Database.Joins("ACountry").Joins("BCountry").
 		Where("ACountry.Name = ? OR BCountry.Name = ?", search.Name, search.Name).
 		Or("ACountry.ID = ? OR BCountry.ID = ?", search.ID, search.ID).
+		Order("`matches`.`when`").
 		Find(&matches)
 
 	if len(matches) == 0 {
