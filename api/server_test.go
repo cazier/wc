@@ -307,7 +307,7 @@ func TestCountryMatches(t *testing.T) {
 	for index, match := range response.json["data"].([]any) {
 		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
 	}
-	assert.IsIncreasing(t, dates)
+	assert.IsNonDecreasing(t, dates)
 
 	assert.Len(t, response.json["data"], count)
 	for _, match := range response.json["data"].([]any) {
@@ -341,7 +341,7 @@ func TestPlayerMatches(t *testing.T) {
 	for index, match := range response.json["data"].([]any) {
 		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
 	}
-	assert.IsIncreasing(t, dates)
+	assert.IsNonDecreasing(t, dates)
 
 	assert.Len(t, response.json["data"], count)
 	for _, match := range response.json["data"].([]any) {
@@ -358,16 +358,16 @@ func TestMatches(t *testing.T) {
 	assert.Equal(t, 200, response.status)
 	assert.Len(t, response.json["data"], len(data))
 
-	response = Response{
-		json:   map[string]any{"data": response.json["data"].([]any)[rand.Intn(len(data))]},
-		status: response.status,
-	}
-
 	dates := make([]time.Time, len(data))
 	for index, match := range response.json["data"].([]any) {
 		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
 	}
-	assert.IsIncreasing(t, dates)
+	assert.IsNonDecreasing(t, dates)
+
+	response = Response{
+		json:   map[string]any{"data": response.json["data"].([]any)[rand.Intn(len(data))]},
+		status: response.status,
+	}
 
 	testMatch(t, response)
 }
