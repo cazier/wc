@@ -1,6 +1,8 @@
 package api
 
 import (
+	"database/sql"
+
 	"github.com/cazier/wc/api/exceptions"
 	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/models"
@@ -63,10 +65,13 @@ func getPlayerMatches(c *gin.Context) {
 		}
 	}
 
-	// TODO clean this up
 	db.Database.Joins("ACountry").Joins("BCountry").
-		Joins("JOIN players ON players.country_id = a_id OR players.country_id = b_id").
-		Where("`players`.`name` = ? OR `players`.`id` = ?", search.Name, search.ID).
+		Joins("JOIN players ON `players`.`country_id` = a_id OR `players`.`country_id` = b_id").
+		Where(
+			"`players`.`name` LIKE @name OR `players`.`id` = @id",
+			sql.Named("name", search.Name),
+			sql.Named("id", search.ID),
+		).
 		Order("`matches`.`when`").
 		Find(&matches)
 
@@ -96,8 +101,8 @@ func getCountryMatches(c *gin.Context) {
 
 	// TODO clean this up
 	db.Database.Joins("ACountry").Joins("BCountry").
-		Where("ACountry.Name = ? OR BCountry.Name = ?", search.Name, search.Name).
-		Or("ACountry.ID = ? OR BCountry.ID = ?", search.ID, search.ID).
+		Where("`ACountry`.`Name` LIKE @name OR `BCountry`.`Name` LIKE @name", sql.Named("name", search.Name)).
+		Or("`ACountry`.`ID` = @id OR `BCountry`.`ID` = @id", sql.Named("id", search.ID)).
 		Order("`matches`.`when`").
 		Find(&matches)
 
@@ -140,7 +145,11 @@ func getCountryPlayers(c *gin.Context) {
 
 	// TODO clean this up
 	db.Database.Model(&models.Player{}).Joins("Country").
-		Where("Country.Name = ? OR Country.ID = ?", search.Name, search.ID).Find(&players)
+		Where(
+			"Country.Name = @name OR Country.ID = @id",
+			sql.Named("name", search.Name),
+			sql.Named("id", search.ID),
+		).Find(&players)
 
 	if len(players) == 0 {
 		exceptions.JsonResponse(c, &exceptions.NoResultsFoundError{})

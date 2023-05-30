@@ -386,10 +386,18 @@ func TestMatchDay(t *testing.T) {
 	testMatch(t, response)
 }
 func TestMatchGroup(t *testing.T) {
-	response := m.GET(fmt.Sprintf("/match/group/%s", []string{"A", "B", "C", "D", "E", "F", "G", "H"}[rand.Intn(8)]))
+	group := []string{"A", "B", "C", "D", "E", "F", "G", "H"}[rand.Intn(8)]
+
+	response := m.GET(fmt.Sprintf("/match/group/%s", group))
 	// TODO Remove hardcoded values
 	assert.Len(t, response.json["data"].([]any), 6)
 	testMatch(t, response)
+
+	lower := m.GET(fmt.Sprintf("/match/group/%s", strings.ToLower(group)))
+	upper := m.GET(fmt.Sprintf("/match/group/%s", strings.ToUpper(group)))
+
+	assert.EqualValues(t, response.json, lower.json)
+	assert.EqualValues(t, response.json, upper.json)
 }
 
 func TestNameBad(t *testing.T) {
