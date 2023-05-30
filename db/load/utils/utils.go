@@ -1,7 +1,9 @@
 package utils
 
 import (
+	"errors"
 	"fmt"
+	"io/fs"
 	"log"
 	"os"
 	"time"
@@ -39,22 +41,20 @@ func (m *Match) UnmarshalYAML(unmarshal func(interface{}) error) error {
 		Time  string
 	}
 
-	err := unmarshal(&base)
+	var tt time.Time
+	var dd time.Time
+	var err error
 
-	if err != nil {
-		panic(err)
+	unmarshal(&base)
+
+	if dd, err = time.Parse("02-Jan-06", base.Date); err != nil {
+		log.Printf("error: %s", err.Error())
+		panic(fmt.Errorf("could not parse the date from the yaml file: `%s`", base.Date))
 	}
 
-	dd, err := time.Parse("02-Jan-06", base.Date)
-
-	if err != nil {
-		panic(err)
-	}
-
-	tt, err := time.Parse("15:04", base.Time)
-
-	if err != nil {
-		panic(err)
+	if tt, err = time.Parse("15:04", base.Time); err != nil {
+		log.Printf("error: %s", err.Error())
+		panic(fmt.Errorf("could not parse the time from the yaml file: `%s`", base.Time))
 	}
 
 	m.A = base.A
@@ -80,24 +80,20 @@ func UnmarshalText(s string) models.Stage {
 	case "FINAL":
 		return models.FINAL
 	}
-	log.Fatalf("Could not parse stage value: %s", s)
-	return 6
-}
-
-type HasName interface {
-	Name() string
+	panic(fmt.Errorf("could not parse stage value: %s", s))
 }
 
 func load(path string, i interface{}) {
 	data, err := os.ReadFile(path)
-	if err != nil {
-		panic(fmt.Errorf("could not read the yaml file %s because: %w", path, err))
+	if errors.Is(err, fs.ErrNotExist) {
+		panic(fmt.Errorf("could not read the yaml file %s because the file doesn't exist", path))
 	}
 
 	err = yaml.Unmarshal(data, i)
 
 	if err != nil {
-		panic(fmt.Errorf("could not parse the yaml file %s because: %w", path, err))
+		log.Printf("error: %s", err.Error())
+		panic(fmt.Errorf("could not parse the yaml file: %s", path))
 	}
 }
 
