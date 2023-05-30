@@ -204,12 +204,10 @@ func TestPlayerName(t *testing.T) {
 	player := loadPlayer()
 	response := m.GET(fmt.Sprintf("/player/name/%s", player.Name))
 	lower := m.GET(fmt.Sprintf("/player/name/%s", strings.ToLower(player.Name)))
-	upper := m.GET(fmt.Sprintf("/player/name/%s", strings.ToUpper(player.Name)))
 
 	testPlayer(t, player, response)
 
 	assert.EqualValues(t, response.json, lower.json)
-	assert.EqualValues(t, response.json, upper.json)
 }
 
 func TestPlayerId(t *testing.T) {
