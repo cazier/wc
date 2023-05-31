@@ -12,19 +12,19 @@ import (
 	"gopkg.in/yaml.v2"
 )
 
-var Temp string
+var TempDir string
 
 func TestMain(m *testing.M) {
-	Temp, _ = os.MkdirTemp("", "go_test")
+	TempDir, _ = os.MkdirTemp("", "go_test")
 
 	status := m.Run()
 
-	os.RemoveAll(Temp)
+	os.RemoveAll(TempDir)
 	os.Exit(status)
 }
 
 func Test_load(t *testing.T) {
-	path := filepath.Join(Temp, "loadfile")
+	path := filepath.Join(TempDir, "loadfile")
 
 	assert.PanicsWithError(
 		t, fmt.Sprintf("could not read the yaml file %s because the file doesn't exist", path), func() {
@@ -52,9 +52,9 @@ func TestLoadTeams(t *testing.T) {
   code: C_D
   group: D
 `
-	os.WriteFile(filepath.Join(Temp, "teams.yaml"), []byte(testData), os.ModePerm)
+	os.WriteFile(filepath.Join(TempDir, "teams.yaml"), []byte(testData), os.ModePerm)
 
-	data := LoadTeams(filepath.Join(Temp, "teams.yaml"))
+	data := LoadTeams(filepath.Join(TempDir, "teams.yaml"))
 	letters := []string{"A", "B", "C", "D"}
 
 	for index, team := range data {
@@ -97,9 +97,9 @@ func TestLoadMatches(t *testing.T) {
   stage: FINAL
   time: '6:00'
 `
-	os.WriteFile(filepath.Join(Temp, "matches.yaml"), []byte(testData), os.ModePerm)
+	os.WriteFile(filepath.Join(TempDir, "matches.yaml"), []byte(testData), os.ModePerm)
 
-	data := LoadMatches(filepath.Join(Temp, "matches.yaml"))
+	data := LoadMatches(filepath.Join(TempDir, "matches.yaml"))
 	letters := []string{"A", "B", "C", "D", "E", "F"}
 
 	for index, match := range data {
@@ -137,9 +137,9 @@ func TestLoadPlayers(t *testing.T) {
   number: 1
   position: GK
 `
-	os.WriteFile(filepath.Join(Temp, "players.yaml"), []byte(testData), os.ModePerm)
+	os.WriteFile(filepath.Join(TempDir, "players.yaml"), []byte(testData), os.ModePerm)
 
-	data := LoadPlayers(filepath.Join(Temp, "players.yaml"))
+	data := LoadPlayers(filepath.Join(TempDir, "players.yaml"))
 
 	assert.IsType(t, []Player{}, data)
 	assert.EqualValues(t, []Player{{Name: "First Middle Last", Country: "ABC", Number: 1, Position: "GK"}}, data)
