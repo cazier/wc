@@ -97,7 +97,7 @@ func databaseInit(purge bool) {
 		if info.IsDir() {
 			databasePath = fmt.Sprintf("%s/%s", databasePath, "wc.db")
 		}
-		db.InitSqlite(&db.SqliteDBOptions{Path: databasePath})
+		db.InitSqlite(&db.SqliteDBOptions{Path: databasePath, LogLevel: 4, LogPath: "stdout"})
 
 	} else {
 		db.InitMariaDB(&db.MariaDBOptions{})

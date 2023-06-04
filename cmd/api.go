@@ -1,14 +1,14 @@
 package cmd
 
 import (
-	"github.com/cazier/wc/api"
+	"github.com/cazier/wc/web/api"
 	"github.com/spf13/cobra"
 )
 
 // apiCmd represents the api command
 var apiCmd = &cobra.Command{
 	Use:   "api",
-	Short: "Start the Rest API",
+	Short: "Start the web backend",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		databaseInit(false)

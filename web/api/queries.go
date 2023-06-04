@@ -3,9 +3,9 @@ package api
 import (
 	"database/sql"
 
-	"github.com/cazier/wc/api/exceptions"
 	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/models"
+	"github.com/cazier/wc/web/api/exceptions"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
