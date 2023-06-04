@@ -9,7 +9,7 @@ import (
 
 	"github.com/cazier/wc/db/models"
 	"github.com/stretchr/testify/assert"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 var TempDir string

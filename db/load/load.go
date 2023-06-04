@@ -1,6 +1,7 @@
 package load
 
 import (
+	"errors"
 	"log"
 
 	"github.com/cazier/wc/db"
@@ -33,7 +34,7 @@ func Teams(path string) {
 
 func Matches(path string) {
 	var counter int64
-	cache = cacheCountries()
+	cache, _ = cacheCountries()
 
 	matches := utils.LoadMatches(path)
 
@@ -60,7 +61,7 @@ func Matches(path string) {
 
 func Players(path string) {
 	var counter int64
-	cache = cacheCountries()
+	cache, _ = cacheCountries()
 
 	playerMap := utils.LoadPlayers(path)
 
@@ -90,24 +91,24 @@ func Players(path string) {
 	log.Printf("Added %d players to the database", counter)
 }
 
-func cacheCountries() map[string]models.Country {
+func cacheCountries() (map[string]models.Country, error) {
 	var countries []models.Country
 
 	if cache != nil {
-		return cache
+		return cache, nil
 	}
-
-	cache = make(map[string]models.Country)
 
 	tx := db.Database.Find(&countries)
 
 	if tx.Error != nil {
-		log.Fatalf("An error occurred with the database. %s", tx.Error)
+		return nil, tx.Error
 	}
 
 	if tx.RowsAffected == 0 {
-		log.Fatal("Cannot import match data when there are no countries in the table.")
+		return nil, errors.New("cannot import match data when there are no countries in the table")
 	}
+
+	cache = make(map[string]models.Country)
 
 	for _, item := range countries {
 		cache[item.FifaCode] = item
@@ -116,6 +117,6 @@ func cacheCountries() map[string]models.Country {
 
 	log.Printf("Loaded %d countries into a cache map", len(cache))
 
-	return cache
+	return cache, nil
 
 }

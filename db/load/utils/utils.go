@@ -9,7 +9,7 @@ import (
 	"time"
 
 	"github.com/cazier/wc/db/models"
-	"gopkg.in/yaml.v2"
+	"gopkg.in/yaml.v3"
 )
 
 type Team struct {
