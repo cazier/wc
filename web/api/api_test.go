@@ -66,11 +66,11 @@ func (m *Mock) request(method, endpoint string) Response {
 }
 
 func (m *Mock) GET(endpoint string) Response {
-	return m.request("GET", endpoint)
+	return m.request("GET", fmt.Sprintf("%s%s", group.BasePath(), endpoint))
 }
 
 func (m *Mock) POST(endpoint string) Response {
-	return m.request("POST", endpoint)
+	return m.request("POST", fmt.Sprintf("%s%s", group.BasePath(), endpoint))
 }
 
 func assertException(t *testing.T, response Response, status int, exception error, messages ...string) {

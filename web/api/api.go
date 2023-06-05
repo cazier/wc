@@ -4,50 +4,54 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+var group *gin.RouterGroup
+
 func Init(g *gin.Engine) {
-	players(g)
-	countries(g)
-	matches(g)
-	utilities(g)
+	group = g.Group("/api")
+
+	players()
+	countries()
+	matches()
+	utilities()
 }
 
-func players(g *gin.Engine) {
-	g.GET("/player", getPlayers)
+func players() {
+	group.GET("/player", getPlayers)
 
-	g.GET("/player/id/:id", getPlayer)
-	g.GET("/player/name/:name", getPlayer)
+	group.GET("/player/id/:id", getPlayer)
+	group.GET("/player/name/:name", getPlayer)
 	// TODO: Positions? Numbers? Goals? Cards?
 
-	g.GET("/country/id/:id/players", getCountryPlayers)
-	g.GET("/country/name/:name/players", getCountryPlayers)
+	group.GET("/country/id/:id/players", getCountryPlayers)
+	group.GET("/country/name/:name/players", getCountryPlayers)
 }
 
-func countries(g *gin.Engine) {
-	g.GET("/country", getCountries)
+func countries() {
+	group.GET("/country", getCountries)
 
-	g.GET("/country/id/:id", getCountry)
-	g.GET("/country/code/:code", getCountry)
-	g.GET("/country/name/:name", getCountry)
+	group.GET("/country/id/:id", getCountry)
+	group.GET("/country/code/:code", getCountry)
+	group.GET("/country/name/:name", getCountry)
 
-	g.GET("/country/group/:group", getCountries)
+	group.GET("/country/group/:group", getCountries)
 }
 
-func matches(g *gin.Engine) {
-	g.GET("/player/id/:id/matches", getPlayerMatches)
-	g.GET("/player/name/:name/matches", getPlayerMatches)
+func matches() {
+	group.GET("/player/id/:id/matches", getPlayerMatches)
+	group.GET("/player/name/:name/matches", getPlayerMatches)
 
-	g.GET("/country/id/:id/matches", getCountryMatches)
-	g.GET("/country/name/:name/matches", getCountryMatches)
+	group.GET("/country/id/:id/matches", getCountryMatches)
+	group.GET("/country/name/:name/matches", getCountryMatches)
 
-	g.GET("/match", getMatches)
-	g.GET("/match/id/:id", getMatch)
-	// g.GET("/match/between/:country_a/:country_b", getMatch)
+	group.GET("/match", getMatches)
+	group.GET("/match/id/:id", getMatch)
+	// group.GET("/match/between/:country_a/:country_b", getMatch)
 
-	g.GET("/match/day/:day", getMatches)
-	g.GET("/match/group/:group", getMatches)
-	g.GET("/match/stage/:stage", getMatches)
+	group.GET("/match/day/:day", getMatches)
+	group.GET("/match/group/:group", getMatches)
+	group.GET("/match/stage/:stage", getMatches)
 }
 
-func utilities(g *gin.Engine) {
-	g.GET("/version", getVersion)
+func utilities() {
+	group.GET("/version", getVersion)
 }
