@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	"github.com/cazier/wc/web/api"
+	web "github.com/cazier/wc/web"
 	"github.com/spf13/cobra"
 )
 
@@ -12,7 +12,7 @@ var apiCmd = &cobra.Command{
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
 		databaseInit(false)
-		api.Init()
+		web.Init()
 	},
 }
 

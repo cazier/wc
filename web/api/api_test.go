@@ -16,7 +16,7 @@ import (
 	"github.com/cazier/wc/db/load"
 	"github.com/cazier/wc/db/load/utils"
 	"github.com/cazier/wc/db/models"
-	helpers "github.com/cazier/wc/testing"
+	test "github.com/cazier/wc/testing"
 	"github.com/cazier/wc/version"
 	"github.com/cazier/wc/web/api/exceptions"
 	"github.com/gin-gonic/gin"
@@ -30,15 +30,16 @@ func init() {
 	db.InitSqlite(&db.SqliteDBOptions{Memory: true, LogLevel: 3})
 	db.LinkTables(false)
 
-	load.Teams(helpers.Path("teams.yaml"))
-	load.Matches(helpers.Path("matches.yaml"))
-	load.Players(helpers.Path("players.yaml"))
+	load.Teams(test.Path("teams.yaml"))
+	load.Matches(test.Path("matches.yaml"))
+	load.Players(test.Path("players.yaml"))
 
 	m = Mock{
 		engine:   gin.New(),
 		response: *httptest.NewRecorder(),
 	}
-	setupRoutes(m.engine)
+
+	Init(m.engine)
 }
 
 type Mock struct {
@@ -85,27 +86,27 @@ func nilMap(m any) map[string]any {
 }
 
 func loadPlayer() models.Player {
-	var test models.Player
-	players := utils.LoadPlayers(helpers.Path("players.yaml"))
+	var dest models.Player
+	players := utils.LoadPlayers(test.Path("players.yaml"))
 	player := players[rand.Intn(len(players))]
 
 	storage, _ := json.Marshal(player)
-	json.Unmarshal(storage, &test)
+	json.Unmarshal(storage, &dest)
 
-	return test
+	return dest
 }
 
 func loadCountry() models.Country {
-	var test models.Country
-	countries := utils.LoadTeams(helpers.Path("teams.yaml"))
+	var dest models.Country
+	countries := utils.LoadTeams(test.Path("teams.yaml"))
 	country := countries[rand.Intn(len(countries))]
 
 	storage, _ := json.Marshal(country)
-	json.Unmarshal(storage, &test)
+	json.Unmarshal(storage, &dest)
 	// TODO: Use FifaCode everywhere
-	test.FifaCode = country.Code
+	dest.FifaCode = country.Code
 
-	return test
+	return dest
 }
 
 func TestVersion(t *testing.T) {
@@ -188,7 +189,7 @@ func testMatch(t *testing.T, response Response) {
 func TestPlayers(t *testing.T) {
 	response := m.GET("/player")
 
-	data := utils.LoadPlayers(helpers.Path("players.yaml"))
+	data := utils.LoadPlayers(test.Path("players.yaml"))
 
 	assert.Equal(t, 200, response.status)
 	assert.Len(t, response.json["data"], len(data))
@@ -221,7 +222,7 @@ func TestPlayerId(t *testing.T) {
 func TestCountries(t *testing.T) {
 	response := m.GET("/country")
 
-	data := utils.LoadTeams(helpers.Path("teams.yaml"))
+	data := utils.LoadTeams(test.Path("teams.yaml"))
 
 	assert.Equal(t, 200, response.status)
 	assert.Len(t, response.json["data"], len(data))
@@ -265,7 +266,7 @@ func TestCountryPlayers(t *testing.T) {
 	country := loadCountry()
 	response := m.GET(fmt.Sprintf("/country/name/%s/players", country.Name))
 
-	for _, player := range utils.LoadPlayers(helpers.Path("players.yaml")) {
+	for _, player := range utils.LoadPlayers(test.Path("players.yaml")) {
 		if player.Country == country.FifaCode {
 			count++
 		}
@@ -296,7 +297,7 @@ func TestCountryMatches(t *testing.T) {
 		response.json["data"].([]any),
 	)
 
-	for _, match := range utils.LoadMatches(helpers.Path("matches.yaml")) {
+	for _, match := range utils.LoadMatches(test.Path("matches.yaml")) {
 		if match.A == country.Name || match.B == country.Name {
 			count++
 		}
@@ -330,7 +331,7 @@ func TestPlayerMatches(t *testing.T) {
 		response.json["data"].([]any),
 	)
 
-	for _, match := range utils.LoadMatches(helpers.Path("matches.yaml")) {
+	for _, match := range utils.LoadMatches(test.Path("matches.yaml")) {
 		if match.A == player.Country.Name || match.B == player.Country.Name {
 			count++
 		}
@@ -352,7 +353,7 @@ func TestPlayerMatches(t *testing.T) {
 func TestMatches(t *testing.T) {
 	response := m.GET("/match")
 
-	data := utils.LoadMatches(helpers.Path("matches.yaml"))
+	data := utils.LoadMatches(test.Path("matches.yaml"))
 
 	assert.Equal(t, 200, response.status)
 	assert.Len(t, response.json["data"], len(data))
@@ -372,7 +373,7 @@ func TestMatches(t *testing.T) {
 }
 
 func TestMatchId(t *testing.T) {
-	id := rand.Intn(len(utils.LoadMatches(helpers.Path("matches.yaml"))))
+	id := rand.Intn(len(utils.LoadMatches(test.Path("matches.yaml"))))
 	response := m.GET(fmt.Sprintf("/match/id/%d", id))
 
 	testMatch(t, response)

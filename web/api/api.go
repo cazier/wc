@@ -4,25 +4,11 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-var Api *gin.Engine
-
-func Init() {
-	gin.ForceConsoleColor()
-
-	Api = gin.Default()
-	setupRoutes(Api)
-	Api.Run("0.0.0.0:1213")
-}
-
-func setupRoutes(g *gin.Engine) {
-	utilities(g)
-	matches(g)
+func Init(g *gin.Engine) {
 	players(g)
 	countries(g)
-}
-
-func utilities(g *gin.Engine) {
-	g.GET("/version", getVersion)
+	matches(g)
+	utilities(g)
 }
 
 func players(g *gin.Engine) {
@@ -60,4 +46,8 @@ func matches(g *gin.Engine) {
 	g.GET("/match/day/:day", getMatches)
 	g.GET("/match/group/:group", getMatches)
 	g.GET("/match/stage/:stage", getMatches)
+}
+
+func utilities(g *gin.Engine) {
+	g.GET("/version", getVersion)
 }
