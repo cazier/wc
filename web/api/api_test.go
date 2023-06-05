@@ -18,7 +18,7 @@ import (
 	"github.com/cazier/wc/db/models"
 	test "github.com/cazier/wc/testing"
 	"github.com/cazier/wc/version"
-	"github.com/cazier/wc/web/api/exceptions"
+	"github.com/cazier/wc/web/exceptions"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
