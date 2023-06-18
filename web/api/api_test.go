@@ -23,8 +23,7 @@ import (
 var m test.Mock
 
 func init() {
-	m = test.NewMock(&test.MockOptions{Callback: Init})
-	m.BasePath = group.BasePath()
+	m = test.NewMock(&test.MockOptions{Callback: Init, BasePathGroup: group})
 
 	load.Teams(test.Path("teams.yaml"))
 	load.Matches(test.Path("matches.yaml"))
