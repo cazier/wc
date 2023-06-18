@@ -81,6 +81,7 @@ func LinkTables(purge bool) {
 			&models.Country{},
 			&models.Player{},
 			&models.Match{},
+			&models.User{},
 			// &models.MatchResult{},
 		)
 	}
@@ -88,6 +89,7 @@ func LinkTables(purge bool) {
 		&models.Country{},
 		&models.Player{},
 		&models.Match{},
+		&models.User{},
 		// &models.MatchResult{},
 	)
 }
