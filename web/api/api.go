@@ -2,11 +2,22 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
+
+var db *gorm.DB
+var g *gin.Engine
 
 var group *gin.RouterGroup
 
-func Init(g *gin.Engine) {
+func Init(database *gorm.DB, engine *gin.Engine) {
+	db = database
+	g = engine
+
+	addRoutes()
+}
+
+func addRoutes() {
 	group = g.Group("/api")
 
 	players()

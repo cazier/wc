@@ -3,7 +3,6 @@ package api
 import (
 	"database/sql"
 
-	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/models"
 	"github.com/cazier/wc/web/exceptions"
 	"github.com/gin-gonic/gin"
@@ -71,7 +70,7 @@ func queryPlayers(c *gin.Context, multiple bool) ([]models.Player, bool) {
 	var players []models.Player
 	var search models.Player
 
-	options := QueryOptions{query: db.Database.Joins("Country"), multiple: multiple}
+	options := QueryOptions{query: db.Joins("Country"), multiple: multiple}
 
 	if swap, name := adaptNameCase(c); swap {
 		options.callback = func(tx *gorm.DB) *gorm.DB {
@@ -86,11 +85,11 @@ func queryCountries(c *gin.Context, multiple bool) ([]models.Country, bool) {
 	var countries []models.Country
 	var search models.Country
 
-	options := QueryOptions{query: db.Database, multiple: multiple}
+	options := QueryOptions{query: db, multiple: multiple}
 
 	if multiple {
 		// Ignore the `Team A` and `Team B` placeholder teams
-		options.query = db.Database.Where("`countries`.`fifa_code` <> \"<A>\" AND `countries`.`fifa_code` <> \"<B>\"")
+		options.query = db.Where("`countries`.`fifa_code` <> \"<A>\" AND `countries`.`fifa_code` <> \"<B>\"")
 	}
 
 	if swap, name := adaptNameCase(c); swap {
@@ -106,7 +105,7 @@ func queryMatches(c *gin.Context, multiple bool) ([]models.Match, bool) {
 	var matches []models.Match
 	var search models.Match
 
-	tx := db.Database.Joins("ACountry").Joins("BCountry").Order("`matches`.`when`")
+	tx := db.Joins("ACountry").Joins("BCountry").Order("`matches`.`when`")
 
 	if group, found := c.Params.Get("group"); found {
 		tx = tx.Where("`ACountry`.`group` LIKE @group OR `BCountry`.`group` LIKE @group", sql.Named("group", group))

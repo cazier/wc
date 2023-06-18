@@ -3,7 +3,6 @@ package api
 import (
 	"database/sql"
 
-	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/models"
 	"github.com/cazier/wc/version"
 	"github.com/cazier/wc/web/exceptions"
@@ -65,7 +64,7 @@ func getPlayerMatches(c *gin.Context) {
 		}
 	}
 
-	db.Database.Joins("ACountry").Joins("BCountry").
+	db.Joins("ACountry").Joins("BCountry").
 		Joins("JOIN players ON `players`.`country_id` = a_id OR `players`.`country_id` = b_id").
 		Where(
 			"`players`.`name` LIKE @name OR `players`.`id` = @id",
@@ -100,7 +99,7 @@ func getCountryMatches(c *gin.Context) {
 	}
 
 	// TODO clean this up
-	db.Database.Joins("ACountry").Joins("BCountry").
+	db.Joins("ACountry").Joins("BCountry").
 		Where("`ACountry`.`Name` LIKE @name OR `BCountry`.`Name` LIKE @name", sql.Named("name", search.Name)).
 		Or("`ACountry`.`ID` = @id OR `BCountry`.`ID` = @id", sql.Named("id", search.ID)).
 		Order("`matches`.`when`").
@@ -144,7 +143,7 @@ func getCountryPlayers(c *gin.Context) {
 	}
 
 	// TODO clean this up
-	db.Database.Model(&models.Player{}).Joins("Country").
+	db.Model(&models.Player{}).Joins("Country").
 		Where(
 			"Country.Name = @name OR Country.ID = @id",
 			sql.Named("name", search.Name),

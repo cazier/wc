@@ -10,9 +10,9 @@ var Engine *gin.Engine
 
 func Init() {
 	gin.ForceConsoleColor()
-
 	Engine = gin.Default()
-	Engine.Run("0.0.0.0:1213")
 
-	api.Init(Engine)
+	api.Init(nil, Engine)
+
+	Engine.Run("0.0.0.0:1213")
 }

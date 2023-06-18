@@ -12,7 +12,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/cazier/wc/db"
+	database "github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/load"
 	"github.com/cazier/wc/db/load/utils"
 	"github.com/cazier/wc/db/models"
@@ -27,8 +27,10 @@ var m Mock
 
 func init() {
 	gin.SetMode(gin.ReleaseMode)
-	db.InitSqlite(&db.SqliteDBOptions{Memory: true, LogLevel: 3})
-	db.LinkTables(false)
+	database.InitSqlite(&database.SqliteDBOptions{Memory: true, LogLevel: 3})
+
+	db := database.Database
+	database.LinkTables(false)
 
 	load.Teams(test.Path("teams.yaml"))
 	load.Matches(test.Path("matches.yaml"))
@@ -39,7 +41,7 @@ func init() {
 		response: *httptest.NewRecorder(),
 	}
 
-	Init(m.engine)
+	Init(db, m.engine)
 }
 
 type Mock struct {
