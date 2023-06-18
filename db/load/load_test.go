@@ -14,8 +14,7 @@ import (
 )
 
 func init() {
-	db.InitSqlite(&db.SqliteDBOptions{Memory: true, LogLevel: 3})
-	db.LinkTables(false)
+	db.InitSqlite(&db.SqliteDBOptions{Memory: true, LogLevel: 3, Purge: db.No})
 }
 
 var TempDir string
@@ -196,6 +195,7 @@ func TestCache(t *testing.T) {
 	cache = nil
 
 	sql, _ := db.Database.DB()
+	//TODO: Make test db not dependent on other test
 	sql.Close()
 
 	_, err := cacheCountries()

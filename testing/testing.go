@@ -9,7 +9,9 @@ import (
 	"path"
 	"runtime"
 
+	database "github.com/cazier/wc/db"
 	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 var here string
@@ -29,6 +31,34 @@ type Mock struct {
 	Engine   *gin.Engine
 	Response httptest.ResponseRecorder
 	BasePath string
+}
+
+type MockOptions struct {
+	BasePath      string
+	BasePathGroup *gin.RouterGroup
+	Callback      func(db *gorm.DB, g *gin.Engine)
+}
+
+func NewMock(options *MockOptions) Mock {
+	gin.SetMode(gin.ReleaseMode)
+
+	database.InitSqlite(&database.SqliteDBOptions{Memory: true, LogLevel: 3, Purge: database.No})
+
+	engine := gin.New()
+	db := database.Database
+
+	options.Callback(db, engine)
+
+	m := Mock{
+		Engine:   engine,
+		Response: *httptest.NewRecorder(),
+	}
+
+	if options.BasePathGroup != nil {
+		m.BasePath = options.BasePathGroup.BasePath()
+	}
+
+	return m
 }
 
 type Response struct {
@@ -53,6 +83,6 @@ func (m *Mock) GET(endpoint string) Response {
 	return m.request("GET", fmt.Sprintf("%s%s", m.BasePath, endpoint))
 }
 
-func (m *Mock) POST(endpoint string) Response {
+func (m *Mock) POST(endpoint string, form gin.H) Response {
 	return m.request("POST", fmt.Sprintf("%s%s", m.BasePath, endpoint))
 }

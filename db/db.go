@@ -16,7 +16,7 @@ import (
 
 var Database *gorm.DB
 
-func open(database gorm.Dialector, logLevel int, logPath string) {
+func open(database gorm.Dialector, logLevel int, logPath string, purge Purge) {
 	var err error
 	var writer *log.Logger
 
@@ -47,6 +47,10 @@ func open(database gorm.Dialector, logLevel int, logPath string) {
 	if err != nil {
 		log.Fatalf("Could not connect to the database. %s", err)
 	}
+
+	if purge != 0 {
+		LinkTables(purge == 1)
+	}
 }
 
 func InitMariaDB(options *MariaDBOptions) {
@@ -64,14 +68,14 @@ func InitMariaDB(options *MariaDBOptions) {
 		),
 	)
 
-	open(dialect, options.LogLevel, options.LogPath)
+	open(dialect, options.LogLevel, options.LogPath, options.Purge)
 }
 
 func InitSqlite(options *SqliteDBOptions) {
 	options.validate()
 
 	dialect := sqlite.Open(fmt.Sprintf("%s?%s", options.Path, options.Other))
-	open(dialect, options.LogLevel, options.LogPath)
+	open(dialect, options.LogLevel, options.LogPath, options.Purge)
 }
 
 // Create tables in the database for the specific data models

@@ -90,17 +90,22 @@ func databaseCommand(cmd *cobra.Command) {
 }
 
 func databaseInit(purge bool) {
+	var purgeOption db.Purge
+	if purge {
+		purgeOption = db.Yes
+	} else {
+		purgeOption = db.No
+	}
 	if sqlite && databasePath == "memory" {
-		db.InitSqlite(&db.SqliteDBOptions{Memory: true})
+		db.InitSqlite(&db.SqliteDBOptions{Memory: true, Purge: purgeOption})
 	} else if sqlite {
 		info, _ := os.Stat(databasePath)
 		if info.IsDir() {
 			databasePath = fmt.Sprintf("%s/%s", databasePath, "wc.db")
 		}
-		db.InitSqlite(&db.SqliteDBOptions{Path: databasePath, LogLevel: 4, LogPath: "stdout"})
+		db.InitSqlite(&db.SqliteDBOptions{Path: databasePath, LogLevel: 4, LogPath: "stdout", Purge: purgeOption})
 
 	} else {
-		db.InitMariaDB(&db.MariaDBOptions{})
+		db.InitMariaDB(&db.MariaDBOptions{Purge: purgeOption})
 	}
-	db.LinkTables(purge)
 }

@@ -5,46 +5,30 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
-	"net/http/httptest"
 	"reflect"
 	"strconv"
 	"strings"
 	"testing"
 	"time"
 
-	database "github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/load"
 	"github.com/cazier/wc/db/load/utils"
 	"github.com/cazier/wc/db/models"
 	test "github.com/cazier/wc/testing"
 	"github.com/cazier/wc/version"
 	"github.com/cazier/wc/web/exceptions"
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
 
 var m test.Mock
 
 func init() {
-	gin.SetMode(gin.ReleaseMode)
-	database.InitSqlite(&database.SqliteDBOptions{Memory: true, LogLevel: 3})
-
-	engine := gin.New()
-
-	db := database.Database
-	database.LinkTables(false)
+	m = test.NewMock(&test.MockOptions{Callback: Init})
+	m.BasePath = group.BasePath()
 
 	load.Teams(test.Path("teams.yaml"))
 	load.Matches(test.Path("matches.yaml"))
 	load.Players(test.Path("players.yaml"))
-
-	Init(db, engine)
-
-	m = test.Mock{
-		Engine:   engine,
-		Response: *httptest.NewRecorder(),
-		BasePath: group.BasePath(),
-	}
 }
 
 func assertException(t *testing.T, response test.Response, status int, exception error, messages ...string) {

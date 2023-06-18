@@ -1,5 +1,13 @@
 package db
 
+type Purge uint
+
+const (
+	Nil Purge = iota
+	Yes
+	No
+)
+
 type MariaDBOptions struct {
 	Username string
 	Password string
@@ -10,6 +18,8 @@ type MariaDBOptions struct {
 
 	LogLevel int
 	LogPath  string
+
+	Purge Purge
 }
 
 // This sucks
@@ -47,6 +57,8 @@ type SqliteDBOptions struct {
 
 	LogLevel int
 	LogPath  string
+
+	Purge Purge
 }
 
 func (o *SqliteDBOptions) validate() {
