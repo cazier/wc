@@ -4,12 +4,19 @@ import (
 	"errors"
 	"log"
 
-	"github.com/cazier/wc/db"
+	database "github.com/cazier/wc/db"
+
 	"github.com/cazier/wc/db/load/utils"
 	"github.com/cazier/wc/db/models"
+	"gorm.io/gorm"
 )
 
+var db *gorm.DB
 var cache map[string]models.Country
+
+func Init(database *gorm.DB) {
+	db = database
+}
 
 func Teams(path string) {
 	var counter int64
@@ -25,7 +32,7 @@ func Teams(path string) {
 		input := models.Country{Name: team.Name, FifaCode: team.Code, Group: team.Group}
 		output := models.Country{}
 
-		db.Database.FirstOrCreate(&output, input)
+		db.FirstOrCreate(&output, input)
 
 		counter++
 	}
@@ -47,7 +54,7 @@ func Matches(path string) {
 		}
 		output := models.Match{}
 
-		if db.Database.FirstOrCreate(&output, input).RowsAffected == 0 {
+		if db.FirstOrCreate(&output, input).RowsAffected == 0 {
 			continue
 		}
 
@@ -56,7 +63,7 @@ func Matches(path string) {
 
 	log.Printf("Added %d matches to the database", counter)
 
-	db.AddMatchDays()
+	database.AddMatchDays(db)
 }
 
 func Players(path string) {
@@ -81,7 +88,7 @@ func Players(path string) {
 			}
 			output := models.Player{}
 
-			if db.Database.FirstOrCreate(&output, input).RowsAffected == 0 {
+			if db.FirstOrCreate(&output, input).RowsAffected == 0 {
 				continue
 			}
 
@@ -98,7 +105,7 @@ func cacheCountries() (map[string]models.Country, error) {
 		return cache, nil
 	}
 
-	tx := db.Database.Find(&countries)
+	tx := db.Find(&countries)
 
 	if tx.Error != nil {
 		return nil, tx.Error

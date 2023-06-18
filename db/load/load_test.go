@@ -6,15 +6,29 @@ import (
 	"path/filepath"
 	"testing"
 
-	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/models"
+	test "github.com/cazier/wc/testing"
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
 	"gorm.io/gorm"
 )
 
 func init() {
-	db.InitSqlite(&db.SqliteDBOptions{Memory: true, LogLevel: 3, Purge: db.No})
+	load_setup()
+}
+
+func load_setup() {
+	test.NewMock(
+		&test.MockOptions{
+			Callback: func(db *gorm.DB, g *gin.Engine) { Init(db) },
+			Models: []any{
+				&models.Country{},
+				&models.Player{},
+				&models.Match{},
+			},
+		},
+	)
 }
 
 var TempDir string
@@ -55,7 +69,7 @@ func TestEmpty(t *testing.T) {
 		num := int64(1)
 		assert.NotZero(t, num)
 
-		db.Database.Model(&model).Count(&num)
+		db.Model(&model).Count(&num)
 		assert.Zero(t, num)
 	}
 }
@@ -77,8 +91,8 @@ func TestTeams(t *testing.T) {
 	var num int64
 	var rows []models.Country
 
-	db.Database.Model(&rows).Count(&num)
-	db.Database.Find(&rows)
+	db.Model(&rows).Count(&num)
+	db.Find(&rows)
 
 	assert.Len(rows, len(testData)+2)
 	assert.Equal("<A>", rows[0].FifaCode)
@@ -125,8 +139,8 @@ func TestMatches(t *testing.T) {
 	var num int64
 	var rows []models.Match
 
-	db.Database.Model(&rows).Count(&num)
-	db.Database.Joins("ACountry").Joins("BCountry").Find(&rows)
+	db.Model(&rows).Count(&num)
+	db.Joins("ACountry").Joins("BCountry").Find(&rows)
 
 	assert.Len(rows, int(num))
 
@@ -136,7 +150,7 @@ func TestMatches(t *testing.T) {
 	}
 
 	Matches(path)
-	db.Database.Model(&rows).Count(&num)
+	db.Model(&rows).Count(&num)
 	assert.Len(rows, int(num))
 }
 
@@ -171,8 +185,8 @@ func TestPlayers(t *testing.T) {
 	var num int64
 	var rows []models.Player
 
-	db.Database.Model(&rows).Count(&num)
-	db.Database.Joins("Country").Find(&rows)
+	db.Model(&rows).Count(&num)
+	db.Joins("Country").Find(&rows)
 
 	assert.Len(rows, int(num))
 
@@ -184,7 +198,7 @@ func TestPlayers(t *testing.T) {
 	}
 
 	Players(path)
-	db.Database.Model(&rows).Count(&num)
+	db.Model(&rows).Count(&num)
 	assert.Len(rows, int(num))
 }
 
@@ -194,15 +208,13 @@ func TestCache(t *testing.T) {
 	// Depending on the test order, this may have been filled by the TestTeam function
 	cache = nil
 
-	sql, _ := db.Database.DB()
-	//TODO: Make test db not dependent on other test
+	sql, _ := db.DB()
 	sql.Close()
 
 	_, err := cacheCountries()
 	assert.ErrorContains(err, "sql: database is closed")
 
-	db.Database, _ = gorm.Open(db.Database.Dialector)
-	db.LinkTables(true)
+	load_setup()
 
 	_, err = cacheCountries()
 	assert.ErrorContains(err, "cannot import match data when there are no countries in the table")

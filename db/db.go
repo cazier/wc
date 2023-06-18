@@ -98,14 +98,14 @@ func LinkTables(purge bool) {
 	)
 }
 
-func AddMatchDays() {
+func AddMatchDays(db *gorm.DB) {
 	var teams []models.Country
-	Database.Find(&teams)
+	db.Find(&teams)
 
 	for _, team := range teams {
 		matches := []models.Match{}
 
-		Database.Where(&models.Match{AID: team.ID}).Or(&models.Match{BID: team.ID}).Find(&matches).Order("when")
+		db.Where(&models.Match{AID: team.ID}).Or(&models.Match{BID: team.ID}).Find(&matches).Order("when")
 
 		for index, match := range matches {
 			if match.Day == 0 && match.Stage == models.GROUP {
@@ -114,7 +114,7 @@ func AddMatchDays() {
 				match.Day = -1
 			}
 			match.Assigned = true
-			Database.Save(&match)
+			db.Save(&match)
 		}
 	}
 }

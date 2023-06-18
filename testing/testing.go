@@ -3,15 +3,17 @@ package testing
 import (
 	"encoding/json"
 	"fmt"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"os"
 	"path"
 	"runtime"
 
-	database "github.com/cazier/wc/db"
 	"github.com/gin-gonic/gin"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 )
 
 var here string
@@ -29,33 +31,34 @@ func Path(name string) string {
 
 type Mock struct {
 	Engine   *gin.Engine
+	Database *gorm.DB
 	Response httptest.ResponseRecorder
 	BasePath string
 }
 
 type MockOptions struct {
-	BasePath      string
-	BasePathGroup *gin.RouterGroup
-	Callback      func(db *gorm.DB, g *gin.Engine)
+	Callback func(db *gorm.DB, g *gin.Engine)
+	Models   []any
+	BasePath string
 }
 
 func NewMock(options *MockOptions) Mock {
 	gin.SetMode(gin.ReleaseMode)
-
-	database.InitSqlite(&database.SqliteDBOptions{Memory: true, LogLevel: 3, Purge: database.No})
-
 	engine := gin.New()
-	db := database.Database
 
-	options.Callback(db, engine)
+	dialect := sqlite.Open(":memory:")
+	db, _ := gorm.Open(dialect, &gorm.Config{Logger: logger.New(log.New(os.Stdout, "\n", log.LstdFlags), logger.Config{Colorful: true, LogLevel: logger.LogLevel(logger.Info)})})
+	// db, _ := gorm.Open(dialect)
+	db.AutoMigrate(options.Models...)
+
+	if options.Callback != nil {
+		options.Callback(db, engine)
+	}
 
 	m := Mock{
 		Engine:   engine,
 		Response: *httptest.NewRecorder(),
-	}
-
-	if options.BasePathGroup != nil {
-		m.BasePath = options.BasePathGroup.BasePath()
+		Database: db,
 	}
 
 	return m
