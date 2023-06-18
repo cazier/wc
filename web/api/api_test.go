@@ -23,11 +23,13 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-var m Mock
+var m test.Mock
 
 func init() {
 	gin.SetMode(gin.ReleaseMode)
 	database.InitSqlite(&database.SqliteDBOptions{Memory: true, LogLevel: 3})
+
+	engine := gin.New()
 
 	db := database.Database
 	database.LinkTables(false)
@@ -36,48 +38,18 @@ func init() {
 	load.Matches(test.Path("matches.yaml"))
 	load.Players(test.Path("players.yaml"))
 
-	m = Mock{
-		engine:   gin.New(),
-		response: *httptest.NewRecorder(),
+	Init(db, engine)
+
+	m = test.Mock{
+		Engine:   engine,
+		Response: *httptest.NewRecorder(),
+		BasePath: group.BasePath(),
 	}
-
-	Init(db, m.engine)
 }
 
-type Mock struct {
-	engine   *gin.Engine
-	response httptest.ResponseRecorder
-}
-
-type Response struct {
-	status int
-	body   string
-	json   map[string]any
-}
-
-func (m *Mock) request(method, endpoint string) Response {
-	var response map[string]any
-	m.response = *httptest.NewRecorder()
-
-	req, _ := http.NewRequest(method, endpoint, nil)
-	m.engine.ServeHTTP(&m.response, req)
-
-	json.Unmarshal(m.response.Body.Bytes(), &response)
-
-	return Response{body: m.response.Body.String(), json: response, status: m.response.Code}
-}
-
-func (m *Mock) GET(endpoint string) Response {
-	return m.request("GET", fmt.Sprintf("%s%s", group.BasePath(), endpoint))
-}
-
-func (m *Mock) POST(endpoint string) Response {
-	return m.request("POST", fmt.Sprintf("%s%s", group.BasePath(), endpoint))
-}
-
-func assertException(t *testing.T, response Response, status int, exception error, messages ...string) {
-	assert.Equal(t, status, response.status, messages)
-	assert.Equal(t, map[string]any{"error": exceptions.Message(exception)}, response.json, messages)
+func assertException(t *testing.T, response test.Response, status int, exception error, messages ...string) {
+	assert.Equal(t, status, response.Status, messages)
+	assert.Equal(t, map[string]any{"error": exceptions.Message(exception)}, response.Json, messages)
 }
 
 func nilMap(m any) map[string]any {
@@ -114,16 +86,16 @@ func loadCountry() models.Country {
 func TestVersion(t *testing.T) {
 	response := m.GET("/version")
 
-	assert.Equal(t, 200, response.status)
-	assert.Equal(t, map[string]any{"version": version.Version}, response.json)
+	assert.Equal(t, 200, response.Status)
+	assert.Equal(t, map[string]any{"version": version.Version}, response.Json)
 }
 
-func testPlayer(t *testing.T, player models.Player, response Response) {
+func testPlayer(t *testing.T, player models.Player, response test.Response) {
 	assert := assert.New(t)
-	data := response.json["data"].(map[string]any)
+	data := response.Json["data"].(map[string]any)
 	nilPlayer := models.Player{}
 
-	assert.Equal(http.StatusOK, response.status)
+	assert.Equal(http.StatusOK, response.Status)
 
 	if player.ID != 0 {
 		assert.EqualValues(player.ID, data["id"])
@@ -139,12 +111,12 @@ func testPlayer(t *testing.T, player models.Player, response Response) {
 	}
 }
 
-func testCountry(t *testing.T, country models.Country, response Response) {
+func testCountry(t *testing.T, country models.Country, response test.Response) {
 	assert := assert.New(t)
-	data := response.json["data"].(map[string]any)
+	data := response.Json["data"].(map[string]any)
 	nilCountry := models.Country{}
 
-	assert.Equal(http.StatusOK, response.status)
+	assert.Equal(http.StatusOK, response.Status)
 
 	if country.ID != 0 {
 		assert.EqualValues(country.ID, data["id"])
@@ -160,7 +132,7 @@ func testCountry(t *testing.T, country models.Country, response Response) {
 	}
 }
 
-func testMatch(t *testing.T, response Response) {
+func testMatch(t *testing.T, response test.Response) {
 	assert := assert.New(t)
 	test := func(val map[string]any) {
 		nilMatch := models.Match{}
@@ -173,9 +145,9 @@ func testMatch(t *testing.T, response Response) {
 		assert.NotZero(val["country_a"].(map[string]any)["id"])
 		assert.NotZero(val["country_b"].(map[string]any)["id"])
 	}
-	assert.Equal(http.StatusOK, response.status)
+	assert.Equal(http.StatusOK, response.Status)
 
-	data := response.json["data"]
+	data := response.Json["data"]
 	switch reflect.TypeOf(data).Kind() {
 	case reflect.Map:
 		test(data.(map[string]any))
@@ -193,12 +165,12 @@ func TestPlayers(t *testing.T) {
 
 	data := utils.LoadPlayers(test.Path("players.yaml"))
 
-	assert.Equal(t, 200, response.status)
-	assert.Len(t, response.json["data"], len(data))
+	assert.Equal(t, 200, response.Status)
+	assert.Len(t, response.Json["data"], len(data))
 
-	response = Response{
-		json:   map[string]any{"data": response.json["data"].([]any)[rand.Intn(len(data))]},
-		status: response.status,
+	response = test.Response{
+		Json:   map[string]any{"data": response.Json["data"].([]any)[rand.Intn(len(data))]},
+		Status: response.Status,
 	}
 
 	testPlayer(t, models.Player{}, response)
@@ -211,12 +183,12 @@ func TestPlayerName(t *testing.T) {
 
 	testPlayer(t, player, response)
 
-	assert.EqualValues(t, response.json, lower.json)
+	assert.EqualValues(t, response.Json, lower.Json)
 }
 
 func TestPlayerId(t *testing.T) {
 	player := loadPlayer()
-	player.ID = int(m.GET(fmt.Sprintf("/player/name/%s", player.Name)).json["data"].(map[string]any)["id"].(float64))
+	player.ID = int(m.GET(fmt.Sprintf("/player/name/%s", player.Name)).Json["data"].(map[string]any)["id"].(float64))
 	response := m.GET(fmt.Sprintf("/player/id/%d", player.ID))
 
 	testPlayer(t, player, response)
@@ -226,12 +198,12 @@ func TestCountries(t *testing.T) {
 
 	data := utils.LoadTeams(test.Path("teams.yaml"))
 
-	assert.Equal(t, 200, response.status)
-	assert.Len(t, response.json["data"], len(data))
+	assert.Equal(t, 200, response.Status)
+	assert.Len(t, response.Json["data"], len(data))
 
-	response = Response{
-		json:   map[string]any{"data": response.json["data"].([]any)[rand.Intn(len(data))]},
-		status: response.status,
+	response = test.Response{
+		Json:   map[string]any{"data": response.Json["data"].([]any)[rand.Intn(len(data))]},
+		Status: response.Status,
 	}
 
 	testCountry(t, models.Country{}, response)
@@ -245,12 +217,12 @@ func TestCountryName(t *testing.T) {
 
 	testCountry(t, country, response)
 
-	assert.EqualValues(t, response.json, lower.json)
-	assert.EqualValues(t, response.json, upper.json)
+	assert.EqualValues(t, response.Json, lower.Json)
+	assert.EqualValues(t, response.Json, upper.Json)
 }
 func TestCountryId(t *testing.T) {
 	country := loadCountry()
-	country.ID = int(m.GET(fmt.Sprintf("/country/name/%s", country.Name)).json["data"].(map[string]any)["id"].(float64))
+	country.ID = int(m.GET(fmt.Sprintf("/country/name/%s", country.Name)).Json["data"].(map[string]any)["id"].(float64))
 	response := m.GET(fmt.Sprintf("/country/id/%d", country.ID))
 
 	testCountry(t, country, response)
@@ -274,15 +246,15 @@ func TestCountryPlayers(t *testing.T) {
 		}
 	}
 
-	assert.Len(t, response.json["data"], count)
-	for _, player := range response.json["data"].([]any) {
+	assert.Len(t, response.Json["data"], count)
+	for _, player := range response.Json["data"].([]any) {
 		assert.NotContains(t, player.(map[string]any), "country")
 	}
-	id := int(m.GET(fmt.Sprintf("/country/name/%s", country.Name)).json["data"].(map[string]any)["id"].(float64))
+	id := int(m.GET(fmt.Sprintf("/country/name/%s", country.Name)).Json["data"].(map[string]any)["id"].(float64))
 	response = m.GET(fmt.Sprintf("/country/id/%d/players", id))
 
-	assert.Len(t, response.json["data"], count)
-	for _, player := range response.json["data"].([]any) {
+	assert.Len(t, response.Json["data"], count)
+	for _, player := range response.Json["data"].([]any) {
 		assert.NotContains(t, player.(map[string]any), "country")
 	}
 }
@@ -290,13 +262,13 @@ func TestCountryPlayers(t *testing.T) {
 func TestCountryMatches(t *testing.T) {
 	var count int
 	country := loadCountry()
-	country.ID = int(m.GET(fmt.Sprintf("/country/name/%s", country.Name)).json["data"].(map[string]any)["id"].(float64))
+	country.ID = int(m.GET(fmt.Sprintf("/country/name/%s", country.Name)).Json["data"].(map[string]any)["id"].(float64))
 
 	response := m.GET(fmt.Sprintf("/country/id/%d/matches", country.ID))
 	assert.Equal(
 		t,
-		m.GET(fmt.Sprintf("/country/name/%s/matches", country.Name)).json["data"].([]any),
-		response.json["data"].([]any),
+		m.GET(fmt.Sprintf("/country/name/%s/matches", country.Name)).Json["data"].([]any),
+		response.Json["data"].([]any),
 	)
 
 	for _, match := range utils.LoadMatches(test.Path("matches.yaml")) {
@@ -306,13 +278,13 @@ func TestCountryMatches(t *testing.T) {
 	}
 
 	dates := make([]time.Time, count)
-	for index, match := range response.json["data"].([]any) {
+	for index, match := range response.Json["data"].([]any) {
 		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
 	}
 	assert.IsNonDecreasing(t, dates)
 
-	assert.Len(t, response.json["data"], count)
-	for _, match := range response.json["data"].([]any) {
+	assert.Len(t, response.Json["data"], count)
+	for _, match := range response.Json["data"].([]any) {
 		assert.NotZero(t, match.(map[string]any)["country_a"].(map[string]any)["id"])
 		assert.NotZero(t, match.(map[string]any)["country_b"].(map[string]any)["id"])
 	}
@@ -321,7 +293,7 @@ func TestCountryMatches(t *testing.T) {
 func TestPlayerMatches(t *testing.T) {
 	var count int
 	player := loadPlayer()
-	request := m.GET(fmt.Sprintf("/player/name/%s", player.Name)).json["data"].(map[string]any)
+	request := m.GET(fmt.Sprintf("/player/name/%s", player.Name)).Json["data"].(map[string]any)
 
 	player.ID = int(request["id"].(float64))
 	player.Country.Name = request["country"].(map[string]any)["name"].(string)
@@ -329,8 +301,8 @@ func TestPlayerMatches(t *testing.T) {
 	response := m.GET(fmt.Sprintf("/player/id/%d/matches", player.ID))
 	assert.Equal(
 		t,
-		m.GET(fmt.Sprintf("/player/name/%s/matches", player.Name)).json["data"].([]any),
-		response.json["data"].([]any),
+		m.GET(fmt.Sprintf("/player/name/%s/matches", player.Name)).Json["data"].([]any),
+		response.Json["data"].([]any),
 	)
 
 	for _, match := range utils.LoadMatches(test.Path("matches.yaml")) {
@@ -340,13 +312,13 @@ func TestPlayerMatches(t *testing.T) {
 	}
 
 	dates := make([]time.Time, count)
-	for index, match := range response.json["data"].([]any) {
+	for index, match := range response.Json["data"].([]any) {
 		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
 	}
 	assert.IsNonDecreasing(t, dates)
 
-	assert.Len(t, response.json["data"], count)
-	for _, match := range response.json["data"].([]any) {
+	assert.Len(t, response.Json["data"], count)
+	for _, match := range response.Json["data"].([]any) {
 		assert.NotZero(t, match.(map[string]any)["country_a"].(map[string]any)["id"])
 		assert.NotZero(t, match.(map[string]any)["country_b"].(map[string]any)["id"])
 	}
@@ -357,18 +329,18 @@ func TestMatches(t *testing.T) {
 
 	data := utils.LoadMatches(test.Path("matches.yaml"))
 
-	assert.Equal(t, 200, response.status)
-	assert.Len(t, response.json["data"], len(data))
+	assert.Equal(t, 200, response.Status)
+	assert.Len(t, response.Json["data"], len(data))
 
 	dates := make([]time.Time, len(data))
-	for index, match := range response.json["data"].([]any) {
+	for index, match := range response.Json["data"].([]any) {
 		dates[index], _ = time.Parse(time.RFC3339, match.(map[string]any)["when"].(string))
 	}
 	assert.IsNonDecreasing(t, dates)
 
-	response = Response{
-		json:   map[string]any{"data": response.json["data"].([]any)[rand.Intn(len(data))]},
-		status: response.status,
+	response = test.Response{
+		Json:   map[string]any{"data": response.Json["data"].([]any)[rand.Intn(len(data))]},
+		Status: response.Status,
 	}
 
 	testMatch(t, response)
@@ -384,7 +356,7 @@ func TestMatchId(t *testing.T) {
 func TestMatchDay(t *testing.T) {
 	// TODO Remove hardcoded values
 	response := m.GET(fmt.Sprintf("/match/day/%d", rand.Intn(2)+1))
-	assert.Len(t, response.json["data"].([]any), 16)
+	assert.Len(t, response.Json["data"].([]any), 16)
 	testMatch(t, response)
 }
 func TestMatchGroup(t *testing.T) {
@@ -392,14 +364,14 @@ func TestMatchGroup(t *testing.T) {
 
 	response := m.GET(fmt.Sprintf("/match/group/%s", group))
 	// TODO Remove hardcoded values
-	assert.Len(t, response.json["data"].([]any), 6)
+	assert.Len(t, response.Json["data"].([]any), 6)
 	testMatch(t, response)
 
 	lower := m.GET(fmt.Sprintf("/match/group/%s", strings.ToLower(group)))
 	upper := m.GET(fmt.Sprintf("/match/group/%s", strings.ToUpper(group)))
 
-	assert.EqualValues(t, response.json, lower.json)
-	assert.EqualValues(t, response.json, upper.json)
+	assert.EqualValues(t, response.Json, lower.Json)
+	assert.EqualValues(t, response.Json, upper.Json)
 }
 
 func TestNameBad(t *testing.T) {
