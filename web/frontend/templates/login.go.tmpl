@@ -1,0 +1,56 @@
+{{template "head"}}
+
+<body>
+    {{template "navbar"}}
+    <section class="section">
+    </section>
+    <section class="section">
+        <div class="container">
+            <h2 class="title">Login</h2>
+            <div class="columns is-centered">
+                <div class="column is-one-third">
+                    <form id="login" action="/login" method="POST">
+                        <div class="field">
+                            <label class="label">Email</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" type="text" name="email" id="email"
+                                    placeholder="infantino@fifa.com" value="infantino@fifa.com">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">Password</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" type="password" name="password" id="password"
+                                    placeholder="corruption" value="corruption">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="control">
+                                <label class="checkbox">
+                                    <input type="checkbox">
+                                    Remember me
+                            </div>
+                            </label>
+                        </div>
+                        <div class="field">
+                            <p class="control">
+                                <button type="submit" class="button is-success">
+                                    Login
+                                </button>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+<script src="/assets/main.js"></script>
+
+</html>

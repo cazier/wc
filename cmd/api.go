@@ -11,8 +11,8 @@ var apiCmd = &cobra.Command{
 	Short: "Start the web backend",
 	Long:  ``,
 	Run: func(cmd *cobra.Command, args []string) {
-		databaseInit(false)
-		web.Init()
+		db := databaseInit(false)
+		web.Init(db)
 	},
 }
 

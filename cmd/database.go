@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"gorm.io/gorm"
 
 	"github.com/cazier/wc/db"
 	"github.com/cazier/wc/db/load"
@@ -39,7 +40,8 @@ var importCmd = &cobra.Command{
 	Use:   "import",
 	Short: "Import details from a yaml file into the database",
 	Run: func(cmd *cobra.Command, args []string) {
-		databaseInit(true)
+		db := databaseInit(true)
+		load.Init(db)
 
 		if importTeamPath != "" {
 			load.Teams(importTeamPath)
@@ -89,7 +91,7 @@ func databaseCommand(cmd *cobra.Command) {
 	cmd.Flags().BoolVar(&sqlite, "sqlite", true, "use a sqlite database instead of mariadb")
 }
 
-func databaseInit(purge bool) {
+func databaseInit(purge bool) *gorm.DB {
 	var purgeOption db.Purge
 	if purge {
 		purgeOption = db.Yes
@@ -108,4 +110,6 @@ func databaseInit(purge bool) {
 	} else {
 		db.InitMariaDB(&db.MariaDBOptions{Purge: purgeOption})
 	}
+
+	return db.Database
 }
