@@ -82,7 +82,7 @@ func loadCountry() models.Country {
 func TestVersion(t *testing.T) {
 	response := m.GET("/version")
 
-	assert.Equal(t, 200, response.Status)
+	assert.Equal(t, http.StatusOK, response.Status)
 	assert.Equal(t, map[string]any{"version": version.Version}, response.Json)
 }
 
@@ -161,7 +161,7 @@ func TestPlayers(t *testing.T) {
 
 	data := utils.LoadPlayers(test.Path("players.yaml"))
 
-	assert.Equal(t, 200, response.Status)
+	assert.Equal(t, http.StatusOK, response.Status)
 	assert.Len(t, response.Json["data"], len(data))
 
 	response = test.Response{
@@ -194,7 +194,7 @@ func TestCountries(t *testing.T) {
 
 	data := utils.LoadTeams(test.Path("teams.yaml"))
 
-	assert.Equal(t, 200, response.Status)
+	assert.Equal(t, http.StatusOK, response.Status)
 	assert.Len(t, response.Json["data"], len(data))
 
 	response = test.Response{
@@ -325,7 +325,7 @@ func TestMatches(t *testing.T) {
 
 	data := utils.LoadMatches(test.Path("matches.yaml"))
 
-	assert.Equal(t, 200, response.Status)
+	assert.Equal(t, http.StatusOK, response.Status)
 	assert.Len(t, response.Json["data"], len(data))
 
 	dates := make([]time.Time, len(data))

@@ -6,9 +6,11 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"net/url"
 	"os"
 	"path"
 	"runtime"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"gorm.io/driver/sqlite"
@@ -34,6 +36,9 @@ type Mock struct {
 	Database *gorm.DB
 	Response httptest.ResponseRecorder
 	BasePath string
+	models   []any
+	options  *MockOptions
+	ctx      *gin.Context
 }
 
 type MockOptions struct {
@@ -43,49 +48,116 @@ type MockOptions struct {
 }
 
 func NewMock(options *MockOptions) Mock {
-	gin.SetMode(gin.ReleaseMode)
+	gin.SetMode(gin.TestMode)
 	engine := gin.New()
 
-	dialect := sqlite.Open(":memory:")
-	db, _ := gorm.Open(dialect, &gorm.Config{Logger: logger.New(log.New(os.Stdout, "\n", log.LstdFlags), logger.Config{Colorful: true, LogLevel: logger.LogLevel(logger.Info)})})
-	// db, _ := gorm.Open(dialect)
-	db.AutoMigrate(options.Models...)
-
-	if options.Callback != nil {
-		options.Callback(db, engine)
-	}
-
 	m := Mock{
-		Engine:   engine,
-		Response: *httptest.NewRecorder(),
-		Database: db,
+		Engine: engine,
+		models: make([]any, len(options.Models)),
+		options: &MockOptions{
+			Callback: options.Callback,
+		},
+	}
+	copy(m.models, options.Models)
+	m.Database = m.OpenDB()
+
+	if m.options.Callback != nil {
+		m.options.Callback(m.Database, m.Engine)
 	}
 
 	return m
 }
 
-type Response struct {
-	Status int
-	Body   string
-	Json   map[string]any
+func (m Mock) OpenDB() *gorm.DB {
+	dialect := sqlite.Open(":memory:")
+	db, _ := gorm.Open(
+		dialect,
+		&gorm.Config{
+			Logger: logger.New(
+				log.New(os.Stdout, "\n", log.LstdFlags),
+				logger.Config{
+					Colorful: true,
+					LogLevel: logger.LogLevel(logger.Info),
+				},
+			),
+		},
+	)
+	// db, _ := gorm.Open(dialect)
+	db.AutoMigrate(m.models...)
+
+	return db
 }
 
-func (m *Mock) request(method, endpoint string) Response {
+func (m Mock) CloseDB() {
+	sql, _ := m.Database.DB()
+
+	sql.Close()
+}
+
+type Response struct {
+	Status  int
+	Body    string
+	Context *gin.Context
+	Json    map[string]any
+}
+
+type RequestOptions struct {
+	Cookies []map[string]string
+	Form    map[string]any
+}
+
+func (m *Mock) request(method, endpoint string, options ...RequestOptions) Response {
+
 	var response map[string]any
 	m.Response = *httptest.NewRecorder()
+	m.ctx = gin.CreateTestContextOnly(&m.Response, m.Engine)
 
-	req, _ := http.NewRequest(method, endpoint, nil)
-	m.Engine.ServeHTTP(&m.Response, req)
+	m.ctx.Request, _ = http.NewRequest(method, fmt.Sprintf("%s%s", m.BasePath, endpoint), nil)
+	option := m.applyOptions(options)
+	m.encodeForm(option)
+	m.Engine.ServeHTTP(&m.Response, m.ctx.Request)
 
 	json.Unmarshal(m.Response.Body.Bytes(), &response)
 
-	return Response{Body: m.Response.Body.String(), Json: response, Status: m.Response.Code}
+	return Response{Body: m.Response.Body.String(), Json: response, Status: m.Response.Code, Context: m.ctx}
 }
 
-func (m *Mock) GET(endpoint string) Response {
-	return m.request("GET", fmt.Sprintf("%s%s", m.BasePath, endpoint))
+func (m *Mock) applyOptions(options []RequestOptions) RequestOptions {
+	resp := RequestOptions{}
+
+	if len(options) != 1 {
+		return resp
+	}
+
+	option := options[0]
+
+	for _, cookie := range option.Cookies {
+		m.ctx.SetCookie(cookie["key"], cookie["value"], 0, "", "/", false, false)
+	}
+
+	return option
 }
 
-func (m *Mock) POST(endpoint string, form gin.H) Response {
-	return m.request("POST", fmt.Sprintf("%s%s", m.BasePath, endpoint))
+func (m *Mock) encodeForm(options RequestOptions) {
+	if options.Form == nil {
+		return
+	}
+
+	data := url.Values{}
+
+	for key, value := range options.Form {
+		data.Set(key, value.(string))
+	}
+
+	encoded := strings.NewReader(data.Encode())
+	m.ctx.Request, _ = http.NewRequest(m.ctx.Request.Method, m.ctx.Request.URL.Path, encoded)
+	m.ctx.Request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+}
+
+func (m *Mock) GET(endpoint string, options ...RequestOptions) Response {
+	return m.request(http.MethodGet, endpoint, options...)
+}
+
+func (m *Mock) POST(endpoint string, options ...RequestOptions) Response {
+	return m.request(http.MethodPost, endpoint, options...)
 }
