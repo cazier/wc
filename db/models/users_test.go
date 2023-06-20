@@ -19,7 +19,7 @@ func TestNewCookie(t *testing.T) {
 
 	start := time.Now()
 
-	cookie := NewCookie("secret")
+	cookie := NewCookie("session", "secret")
 	assert.Equal("secret", cookie.Value)
 	assert.WithinDuration(start, cookie.CreatedAt, time.Since(start))
 }

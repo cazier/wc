@@ -15,7 +15,7 @@ type User struct {
 	Email   string `gorm:"unique"`
 	Salt    Base64 `gorm:"type:string"`
 	Hash    Base64 `gorm:"type:string"`
-	Session Cookie `gorm:"embedded"`
+	Session Cookie `gorm:"embedded;embeddedPrefix:session_"`
 }
 
 func (u User) IsNil() bool {
@@ -23,16 +23,17 @@ func (u User) IsNil() bool {
 }
 
 type Cookie struct {
+	Name      string
 	Value     string
 	CreatedAt time.Time
 }
 
-func NewCookie(value string) Cookie {
-	return Cookie{Value: value, CreatedAt: time.Now()}
+func NewCookie(name, value string) Cookie {
+	return Cookie{Name: name, Value: value, CreatedAt: time.Now()}
 }
 
 func (c Cookie) IsTooOld(lifetime time.Duration) bool {
-	return !c.CreatedAt.Add(lifetime).After(time.Now())
+	return c.CreatedAt.Add(lifetime).Before(time.Now())
 }
 
 type Base64 []byte
