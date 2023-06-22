@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 	"net/http"
+	"os"
 	"reflect"
 	"strconv"
 	"strings"
@@ -17,15 +18,17 @@ import (
 	test "github.com/cazier/wc/testing"
 	"github.com/cazier/wc/version"
 	"github.com/cazier/wc/web/exceptions"
+	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
+	"gorm.io/gorm"
 )
 
 var m test.Mock
 
-func init() {
+func TestMain(tm *testing.M) {
 	m = test.NewMock(
 		&test.MockOptions{
-			Callback: Init,
+			Callback: func(db *gorm.DB, g *gin.Engine) { Init(db, g); load.Init(db, g) },
 			Models: []any{
 				&models.Country{},
 				&models.Player{},
@@ -36,11 +39,11 @@ func init() {
 
 	m.BasePath = group.BasePath()
 
-	load.Init(m.Database)
-
 	load.Teams(test.Path("teams.yaml"))
 	load.Matches(test.Path("matches.yaml"))
 	load.Players(test.Path("players.yaml"))
+
+	os.Exit(tm.Run())
 }
 
 func assertException(t *testing.T, response test.Response, status int, exception error, messages ...string) {

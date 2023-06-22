@@ -5,6 +5,7 @@ import (
 	"log"
 
 	database "github.com/cazier/wc/db"
+	"github.com/gin-gonic/gin"
 
 	"github.com/cazier/wc/db/load/utils"
 	"github.com/cazier/wc/db/models"
@@ -14,7 +15,7 @@ import (
 var db *gorm.DB
 var cache map[string]models.Country
 
-func Init(database *gorm.DB) {
+func Init(database *gorm.DB, engine *gin.Engine) {
 	db = database
 }
 

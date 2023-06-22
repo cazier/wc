@@ -8,28 +8,9 @@ import (
 
 	"github.com/cazier/wc/db/models"
 	test "github.com/cazier/wc/testing"
-	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 	"gopkg.in/yaml.v3"
-	"gorm.io/gorm"
 )
-
-func init() {
-	load_setup()
-}
-
-func load_setup() {
-	test.NewMock(
-		&test.MockOptions{
-			Callback: func(db *gorm.DB, g *gin.Engine) { Init(db) },
-			Models: []any{
-				&models.Country{},
-				&models.Player{},
-				&models.Match{},
-			},
-		},
-	)
-}
 
 var TempDir string
 var TestCountryData = map[string]string{
@@ -39,13 +20,30 @@ var TestCountryData = map[string]string{
 }
 var Characters = []string{"A", "B", "C", "D", "E", "F", "G", "H"}
 
-func TestMain(m *testing.M) {
+var m test.Mock
+
+func TestMain(tm *testing.M) {
 	TempDir, _ = os.MkdirTemp("", "go_test")
 
-	status := m.Run()
+	m = test.NewMock(
+		&test.MockOptions{
+			Callback: Init,
+			Models: []any{
+				&models.Country{},
+				&models.Player{},
+				&models.Match{},
+			},
+		},
+	)
+
+	status := tm.Run()
 
 	os.RemoveAll(TempDir)
 	os.Exit(status)
+}
+
+func reload_db() {
+	db = m.OpenDB()
 }
 
 func createYaml(data interface{}, file string) string {
@@ -202,21 +200,23 @@ func TestPlayers(t *testing.T) {
 	assert.Len(rows, int(num))
 }
 
-func TestCache(t *testing.T) {
+func TestCacheClosed(t *testing.T) {
 	assert := assert.New(t)
 
 	// Depending on the test order, this may have been filled by the TestTeam function
 	cache = nil
 
-	sql, _ := db.DB()
-	sql.Close()
+	m.CloseDB()
+	defer reload_db()
 
 	_, err := cacheCountries()
 	assert.ErrorContains(err, "sql: database is closed")
+}
 
-	load_setup()
+func TestCache(t *testing.T) {
+	assert := assert.New(t)
 
-	_, err = cacheCountries()
+	_, err := cacheCountries()
 	assert.ErrorContains(err, "cannot import match data when there are no countries in the table")
 
 	TestTeams(t)

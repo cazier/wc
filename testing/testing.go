@@ -37,7 +37,6 @@ type Mock struct {
 	Response httptest.ResponseRecorder
 	BasePath string
 	models   []any
-	options  *MockOptions
 	ctx      *gin.Context
 }
 
@@ -54,15 +53,13 @@ func NewMock(options *MockOptions) Mock {
 	m := Mock{
 		Engine: engine,
 		models: make([]any, len(options.Models)),
-		options: &MockOptions{
-			Callback: options.Callback,
-		},
 	}
 	copy(m.models, options.Models)
+
 	m.Database = m.OpenDB()
 
-	if m.options.Callback != nil {
-		m.options.Callback(m.Database, m.Engine)
+	if options.Callback != nil {
+		options.Callback(m.Database, m.Engine)
 	}
 
 	return m
@@ -70,22 +67,26 @@ func NewMock(options *MockOptions) Mock {
 
 func (m Mock) OpenDB() *gorm.DB {
 	dialect := sqlite.Open(":memory:")
-	db, _ := gorm.Open(
-		dialect,
-		&gorm.Config{
-			Logger: logger.New(
-				log.New(os.Stdout, "\n", log.LstdFlags),
-				logger.Config{
-					Colorful: true,
-					LogLevel: logger.LogLevel(logger.Info),
-				},
-			),
-		},
-	)
-	// db, _ := gorm.Open(dialect)
-	db.AutoMigrate(m.models...)
 
-	return db
+	if _, ok := os.LookupEnv("VERBOSE_TESTING"); ok {
+		m.Database, _ = gorm.Open(
+			dialect,
+			&gorm.Config{
+				Logger: logger.New(
+					log.New(os.Stdout, "\n", log.LstdFlags),
+					logger.Config{
+						Colorful: true,
+						LogLevel: logger.LogLevel(logger.Info),
+					},
+				),
+			},
+		)
+	} else {
+		m.Database, _ = gorm.Open(dialect)
+	}
+	m.Database.AutoMigrate(m.models...)
+
+	return m.Database
 }
 
 func (m Mock) CloseDB() {
@@ -97,6 +98,7 @@ func (m Mock) CloseDB() {
 type Response struct {
 	Status  int
 	Body    string
+	Headers http.Header
 	Context *gin.Context
 	Json    map[string]any
 }
@@ -119,7 +121,7 @@ func (m *Mock) request(method, endpoint string, options ...RequestOptions) Respo
 
 	json.Unmarshal(m.Response.Body.Bytes(), &response)
 
-	return Response{Body: m.Response.Body.String(), Json: response, Status: m.Response.Code, Context: m.ctx}
+	return Response{Body: m.Response.Body.String(), Json: response, Headers: m.Response.Header(), Status: m.Response.Code, Context: m.ctx}
 }
 
 func (m *Mock) applyOptions(options []RequestOptions) RequestOptions {

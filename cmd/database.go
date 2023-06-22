@@ -41,7 +41,7 @@ var importCmd = &cobra.Command{
 	Short: "Import details from a yaml file into the database",
 	Run: func(cmd *cobra.Command, args []string) {
 		db := databaseInit(true)
-		load.Init(db)
+		load.Init(db, nil)
 
 		if importTeamPath != "" {
 			load.Teams(importTeamPath)
