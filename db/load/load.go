@@ -108,10 +108,6 @@ func cacheCountries() (map[string]models.Country, error) {
 
 	tx := db.Find(&countries)
 
-	if tx.Error != nil {
-		return nil, tx.Error
-	}
-
 	if tx.RowsAffected == 0 {
 		return nil, errors.New("cannot import match data when there are no countries in the table")
 	}

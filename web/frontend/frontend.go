@@ -35,6 +35,7 @@ func addRoutes() {
 	g.POST("/register", registerPost)
 	g.GET("/login", loginGet)
 	g.POST("/login", loginPost)
+	g.GET("/secret", secret)
 }
 
 func loadStaticAssets() {
@@ -53,16 +54,20 @@ func registerGet(c *gin.Context) {
 }
 
 func registerPost(c *gin.Context) {
-	auth.Create(c)
+	status, message := auth.Create(c)
 
-	// switch status {
-	// case http.StatusAccepted:
-	// 	c.HTML(status, "secret.go.tmpl", map[string]any{})
-	// case http.StatusNotAcceptable, http.StatusUnauthorized:
-	// 	c.HTML(status, "login.go.tmpl", map[string]any{})
-	// default:
-	// 	c.HTML(http.StatusInternalServerError, "error.go.tmpl", map[string]any{})
-	// }
+	switch status {
+	case http.StatusFound:
+		c.Redirect(status, "/secret")
+	case http.StatusInternalServerError:
+		c.HTML(status, "error.go.tmpl", nil)
+	default:
+		c.HTML(status, "register.go.tmpl", message)
+	}
+}
+
+func secret(c *gin.Context) {
+	c.HTML(http.StatusOK, "secret.go.tmpl", map[string]any{})
 }
 
 func loginGet(c *gin.Context) {
@@ -70,14 +75,14 @@ func loginGet(c *gin.Context) {
 }
 
 func loginPost(c *gin.Context) {
-	status := auth.Login(c)
+	status, message := auth.Login(c)
 
 	switch status {
-	case http.StatusAccepted:
-		c.HTML(status, "secret.go.tmpl", map[string]any{})
-	case http.StatusNotAcceptable, http.StatusUnauthorized:
-		c.HTML(status, "login.go.tmpl", map[string]any{})
+	case http.StatusFound:
+		c.Redirect(status, "/secret")
+	case http.StatusInternalServerError:
+		c.HTML(status, "error.go.tmpl", nil)
 	default:
-		c.HTML(http.StatusInternalServerError, "error.go.tmpl", map[string]any{})
+		c.HTML(status, "login.go.tmpl", message)
 	}
 }

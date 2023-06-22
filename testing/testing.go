@@ -89,12 +89,6 @@ func (m Mock) OpenDB() *gorm.DB {
 	return m.Database
 }
 
-func (m Mock) CloseDB() {
-	sql, _ := m.Database.DB()
-
-	sql.Close()
-}
-
 type Response struct {
 	Status  int
 	Body    string
@@ -116,12 +110,17 @@ func (m *Mock) request(method, endpoint string, options ...RequestOptions) Respo
 
 	m.ctx.Request, _ = http.NewRequest(method, fmt.Sprintf("%s%s", m.BasePath, endpoint), nil)
 	option := m.applyOptions(options)
-	m.encodeForm(option)
+	encodeForm(m.ctx, option.Form)
 	m.Engine.ServeHTTP(&m.Response, m.ctx.Request)
 
 	json.Unmarshal(m.Response.Body.Bytes(), &response)
 
-	return Response{Body: m.Response.Body.String(), Json: response, Headers: m.Response.Header(), Status: m.Response.Code, Context: m.ctx}
+	return Response{
+		Body:    m.Response.Body.String(),
+		Json:    response,
+		Headers: m.Response.Header(),
+		Status:  m.Response.Code,
+	}
 }
 
 func (m *Mock) applyOptions(options []RequestOptions) RequestOptions {
@@ -140,20 +139,24 @@ func (m *Mock) applyOptions(options []RequestOptions) RequestOptions {
 	return option
 }
 
-func (m *Mock) encodeForm(options RequestOptions) {
-	if options.Form == nil {
+func encodeForm(ctx *gin.Context, values map[string]any) {
+	if values == nil {
 		return
 	}
 
 	data := url.Values{}
 
-	for key, value := range options.Form {
+	for key, value := range values {
 		data.Set(key, value.(string))
 	}
 
 	encoded := strings.NewReader(data.Encode())
-	m.ctx.Request, _ = http.NewRequest(m.ctx.Request.Method, m.ctx.Request.URL.Path, encoded)
-	m.ctx.Request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+	if ctx.Request != nil {
+		ctx.Request, _ = http.NewRequest(ctx.Request.Method, ctx.Request.URL.Path, encoded)
+	} else {
+		ctx.Request, _ = http.NewRequest(http.MethodPost, "", encoded)
+	}
+	ctx.Request.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 }
 
 func (m *Mock) GET(endpoint string, options ...RequestOptions) Response {
@@ -162,4 +165,11 @@ func (m *Mock) GET(endpoint string, options ...RequestOptions) Response {
 
 func (m *Mock) POST(endpoint string, options ...RequestOptions) Response {
 	return m.request(http.MethodPost, endpoint, options...)
+}
+
+func (m *Mock) Form(data map[string]any) *gin.Context {
+	context, _ := gin.CreateTestContext(httptest.NewRecorder())
+	encodeForm(context, data)
+
+	return context
 }

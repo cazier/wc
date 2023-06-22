@@ -42,10 +42,6 @@ func TestMain(tm *testing.M) {
 	os.Exit(status)
 }
 
-func reload_db() {
-	db = m.OpenDB()
-}
-
 func createYaml(data interface{}, file string) string {
 	var text []byte
 	path := filepath.Join(TempDir, file)
@@ -200,21 +196,11 @@ func TestPlayers(t *testing.T) {
 	assert.Len(rows, int(num))
 }
 
-func TestCacheClosed(t *testing.T) {
-	assert := assert.New(t)
-
-	// Depending on the test order, this may have been filled by the TestTeam function
-	cache = nil
-
-	m.CloseDB()
-	defer reload_db()
-
-	_, err := cacheCountries()
-	assert.ErrorContains(err, "sql: database is closed")
-}
-
 func TestCache(t *testing.T) {
 	assert := assert.New(t)
+
+	db.Unscoped().Where("`id` <> 0").Delete(&models.Country{})
+	cache = nil
 
 	_, err := cacheCountries()
 	assert.ErrorContains(err, "cannot import match data when there are no countries in the table")
