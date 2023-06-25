@@ -20,11 +20,11 @@ function loadGroupStage(group) {
 function getCookie(name) {
     const cookies = document.cookie;
 
-    for (cookie in cookies.split(';')) {
+    for (var cookie in cookies.split(';')) {
         var [key, value] = cookie.split('=');
         if (key == name) {
-            return value
+            return value;
         }
     }
-    return null
+    return null;
 }
