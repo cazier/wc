@@ -50,12 +50,12 @@ func TestRegisterPost(t *testing.T) {
 	response := m.POST(
 		"/register",
 		test.RequestOptions{
-			Form: gin.H{"email": "register@email.com", "password": "password", "confirm": "password"},
+			Form: gin.H{"name": "register", "email": "register@email.com", "password": "pass", "confirm": "pass"},
 		},
 	)
 
 	assert.Equal(http.StatusFound, response.Status)
-	assert.Equal("/secret", response.Headers.Get("Location"))
+	assert.Equal("/home", response.Headers.Get("Location"))
 }
 
 func TestRegisterBad(t *testing.T) {
@@ -64,7 +64,7 @@ func TestRegisterBad(t *testing.T) {
 	response := m.POST(
 		"/register",
 		test.RequestOptions{
-			Form: gin.H{"email": "register@email.com", "confirm": "password"},
+			Form: gin.H{"name": "register", "email": "register@email.com", "confirm": "pass"},
 		},
 	)
 	assert.Equal(http.StatusNotAcceptable, response.Status)
@@ -73,7 +73,7 @@ func TestRegisterBad(t *testing.T) {
 	response = m.POST(
 		"/register",
 		test.RequestOptions{
-			Form: gin.H{"email": "register@email.com", "password": "password", "confirm": "passw0rd"},
+			Form: gin.H{"name": "register", "email": "register@email.com", "password": "pass", "confirm": "badpass"},
 		},
 	)
 	assert.Equal(http.StatusNotAcceptable, response.Status)
@@ -82,17 +82,17 @@ func TestRegisterBad(t *testing.T) {
 	m.POST(
 		"/register",
 		test.RequestOptions{
-			Form: gin.H{"email": "register@email.com", "password": "password", "confirm": "password"},
+			Form: gin.H{"name": "register", "email": "register@email.com", "password": "pass", "confirm": "pass"},
 		},
 	)
 	response = m.POST(
 		"/register",
 		test.RequestOptions{
-			Form: gin.H{"email": "register@email.com", "password": "password", "confirm": "password"},
+			Form: gin.H{"name": "register", "email": "register@email.com", "password": "pass", "confirm": "pass"},
 		},
 	)
 	assert.Equal(http.StatusNotAcceptable, response.Status)
-	assert.Contains(response.Body, "an account with this email address already exists")
+	assert.Contains(response.Body, "an account with this name or email address already exists")
 }
 
 func TestLoginPost(t *testing.T) {
@@ -101,17 +101,59 @@ func TestLoginPost(t *testing.T) {
 	m.POST(
 		"/register",
 		test.RequestOptions{
-			Form: gin.H{"email": "login@email.com", "password": "password", "confirm": "password"},
+			Form: gin.H{"name": "login", "email": "login@email.com", "password": "pass", "confirm": "pass"},
 		},
 	)
 
 	response := m.POST(
 		"/login",
 		test.RequestOptions{
-			Form: gin.H{"email": "login@email.com", "password": "password"},
+			Form: gin.H{"email": "login@email.com", "password": "pass"},
 		},
 	)
 
 	assert.Equal(http.StatusFound, response.Status)
-	assert.Equal("/secret", response.Headers.Get("Location"))
+	assert.Equal("/home", response.Headers.Get("Location"))
+
+	response = m.POST(
+		"/login",
+		test.RequestOptions{
+			Form: gin.H{"email": "login@email.com", "password": "badpass"},
+		},
+	)
+
+	assert.Equal(http.StatusUnauthorized, response.Status)
+	assert.Contains(response.Body, "invalid username or password")
+}
+
+func TestLoadAuthorized(t *testing.T) {
+	assert := assert.New(t)
+
+	response := m.GET("/home")
+	assert.Equal(http.StatusTemporaryRedirect, response.Status)
+	assert.Equal("/login", response.Headers.Get("Location"))
+
+	response = m.POST(
+		"/register",
+		test.RequestOptions{
+			Form: gin.H{"name": "authorized", "email": "authorized@email.com", "password": "pass", "confirm": "pass"},
+		},
+	)
+
+	response = m.WithSetCookie(response).GET("/home")
+
+	assert.Equal(http.StatusOK, response.Status)
+	assert.Contains(response.Body, "authorized")
+
+	response = m.POST(
+		"/login",
+		test.RequestOptions{
+			Form: gin.H{"email": "authorized@email.com", "password": "pass"},
+		},
+	)
+
+	response = m.WithSetCookie(response).GET("/home")
+
+	assert.Equal(http.StatusOK, response.Status)
+	assert.Contains(response.Body, "authorized")
 }

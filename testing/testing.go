@@ -9,6 +9,7 @@ import (
 	"net/url"
 	"os"
 	"path"
+	"regexp"
 	"runtime"
 	"strings"
 
@@ -32,12 +33,13 @@ func Path(name string) string {
 }
 
 type Mock struct {
-	Engine   *gin.Engine
-	Database *gorm.DB
-	Response httptest.ResponseRecorder
-	BasePath string
-	models   []any
-	ctx      *gin.Context
+	Engine         *gin.Engine
+	Database       *gorm.DB
+	Response       httptest.ResponseRecorder
+	BasePath       string
+	models         []any
+	ctx            *gin.Context
+	cookieCallback func(m *Mock)
 }
 
 type MockOptions struct {
@@ -79,10 +81,11 @@ func (m Mock) OpenDB() *gorm.DB {
 						LogLevel: logger.LogLevel(logger.Info),
 					},
 				),
+				TranslateError: true,
 			},
 		)
 	} else {
-		m.Database, _ = gorm.Open(dialect)
+		m.Database, _ = gorm.Open(dialect, &gorm.Config{TranslateError: true})
 	}
 	m.Database.AutoMigrate(m.models...)
 
@@ -98,19 +101,26 @@ type Response struct {
 }
 
 type RequestOptions struct {
-	Cookies []map[string]string
+	Cookies map[string]string
 	Form    map[string]any
 }
 
 func (m *Mock) request(method, endpoint string, options ...RequestOptions) Response {
-
 	var response map[string]any
 	m.Response = *httptest.NewRecorder()
 	m.ctx = gin.CreateTestContextOnly(&m.Response, m.Engine)
 
 	m.ctx.Request, _ = http.NewRequest(method, fmt.Sprintf("%s%s", m.BasePath, endpoint), nil)
-	option := m.applyOptions(options)
-	encodeForm(m.ctx, option.Form)
+
+	if m.cookieCallback != nil {
+		m.cookieCallback(m)
+		m.cookieCallback = nil
+	}
+
+	for _, option := range options {
+		encodeForm(m.ctx, option.Form)
+	}
+
 	m.Engine.ServeHTTP(&m.Response, m.ctx.Request)
 
 	json.Unmarshal(m.Response.Body.Bytes(), &response)
@@ -123,20 +133,17 @@ func (m *Mock) request(method, endpoint string, options ...RequestOptions) Respo
 	}
 }
 
-func (m *Mock) applyOptions(options []RequestOptions) RequestOptions {
-	resp := RequestOptions{}
+func (m *Mock) WithSetCookie(from Response) *Mock {
+	setCookie := from.Headers.Get("Set-Cookie")
 
-	if len(options) != 1 {
-		return resp
+	pattern := regexp.MustCompile("session=(.*?);")
+	cookie := pattern.FindStringSubmatch(setCookie)
+
+	m.cookieCallback = func(m *Mock) {
+		m.ctx.Request.AddCookie(&http.Cookie{Name: "session", Value: cookie[1]})
 	}
 
-	option := options[0]
-
-	for _, cookie := range option.Cookies {
-		m.ctx.SetCookie(cookie["key"], cookie["value"], 0, "", "/", false, false)
-	}
-
-	return option
+	return m
 }
 
 func encodeForm(ctx *gin.Context, values map[string]any) {

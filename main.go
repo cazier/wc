@@ -1,8 +1,6 @@
 package main
 
-import (
-	"github.com/cazier/wc/cmd"
-)
+import "github.com/cazier/wc/cmd"
 
 func main() {
 	// viper.SetConfigName("config.toml")

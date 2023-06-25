@@ -16,3 +16,15 @@ function loadGroupStage(group) {
             console.log(response);
         });
 }
+
+function getCookie(name) {
+    const cookies = document.cookie;
+
+    for (cookie in cookies.split(';')) {
+        var [key, value] = cookie.split('=');
+        if (key == name) {
+            return value
+        }
+    }
+    return null
+}

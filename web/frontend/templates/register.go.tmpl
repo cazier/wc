@@ -9,7 +9,16 @@
             <h2 class="title">Register</h2>
             <div class="columns is-centered">
                 <div class="column is-one-third">
-                    <form id="register" action="/register" method="POST">
+                    <form id="register" method="POST">
+                        <div class="field">
+                            <label class="label">Profile Name</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" type="text" name="name" id="name" placeholder="Gianni Infantino" value="Gianni Infantino">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-id-card"></i>
+                                </span>
+                            </div>
+                        </div>
                         <div class="field">
                             <label class="label">Email</label>
                             <div class="control has-icons-left has-icons-right">
@@ -31,12 +40,12 @@
                             </div>
                         </div>
                         <div class="field">
-                            <label class="label">Password</label>
+                            <label class="label">Confirm</label>
                             <div class="control has-icons-left has-icons-right">
                                 <input class="input" type="password" name="confirm" id="confirm"
                                     placeholder="corruption" value="corruption">
                                 <span class="icon is-small is-left">
-                                    <i class="fas fa-lock"></i>
+                                    <i class="fas fa-circle-check"></i>
                                 </span>
                             </div>
                         </div>
@@ -47,12 +56,12 @@
                                 </button>
                             </p>
                         </div>
+                        <input type="hidden" id="csrf" value="{{.csrf}}" />
                     </form>
                 </div>
             </div>
         </div>
     </section>
 </body>
-<script src="/assets/main.js"></script>
-
+{{template "messenger" .}}
 </html>

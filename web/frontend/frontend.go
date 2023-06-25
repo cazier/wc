@@ -6,6 +6,7 @@ import (
 	"io/fs"
 	"net/http"
 
+	"github.com/cazier/wc/db/models"
 	"github.com/cazier/wc/web/auth"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
@@ -30,12 +31,14 @@ func Init(database *gorm.DB, engine *gin.Engine) {
 }
 
 func addRoutes() {
-	g.GET("/group", group)
-	g.GET("/register", registerGet)
-	g.POST("/register", registerPost)
 	g.GET("/login", loginGet)
+	g.GET("/register", registerGet)
 	g.POST("/login", loginPost)
-	g.GET("/secret", secret)
+	g.POST("/register", registerPost)
+
+	r := g.Group("", auth.Authorized())
+	r.GET("/home", home)
+	r.GET("/group", group)
 }
 
 func loadStaticAssets() {
@@ -58,7 +61,7 @@ func registerPost(c *gin.Context) {
 
 	switch status {
 	case http.StatusFound:
-		c.Redirect(status, "/secret")
+		c.Redirect(status, "/home")
 	case http.StatusInternalServerError:
 		c.HTML(status, "error.go.tmpl", nil)
 	default:
@@ -66,12 +69,22 @@ func registerPost(c *gin.Context) {
 	}
 }
 
-func secret(c *gin.Context) {
-	c.HTML(http.StatusOK, "secret.go.tmpl", map[string]any{})
+func home(c *gin.Context) {
+	status, _ := c.Get(auth.AuthStatusKey)
+	user, _ := c.Get(auth.UserKey)
+
+	switch status.(int) {
+	case http.StatusAccepted:
+		c.HTML(http.StatusOK, "home.go.tmpl", user.(models.User).Serialize())
+	case http.StatusUnauthorized:
+		c.Redirect(http.StatusTemporaryRedirect, "/login")
+	default:
+		c.HTML(http.StatusInternalServerError, "error.go.tmpl", nil)
+	}
 }
 
 func loginGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "login.go.tmpl", map[string]any{})
+	c.HTML(http.StatusOK, "login.go.tmpl", gin.H{})
 }
 
 func loginPost(c *gin.Context) {
@@ -79,7 +92,7 @@ func loginPost(c *gin.Context) {
 
 	switch status {
 	case http.StatusFound:
-		c.Redirect(status, "/secret")
+		c.Redirect(status, "/home")
 	case http.StatusInternalServerError:
 		c.HTML(status, "error.go.tmpl", nil)
 	default:

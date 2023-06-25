@@ -42,7 +42,7 @@ func open(database gorm.Dialector, logLevel int, logPath string, purge Purge) {
 		},
 	)
 
-	Database, err = gorm.Open(database, &gorm.Config{Logger: newLogger})
+	Database, err = gorm.Open(database, &gorm.Config{Logger: newLogger, TranslateError: true})
 
 	if err != nil {
 		log.Fatalf("Could not connect to the database. %s", err)
