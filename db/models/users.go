@@ -3,6 +3,7 @@ package models
 import (
 	"database/sql/driver"
 	"encoding/base64"
+	"encoding/json"
 	"fmt"
 	"time"
 
@@ -12,28 +13,39 @@ import (
 type User struct {
 	gorm.Model
 
-	Email   string `gorm:"unique"`
-	Salt    Base64 `gorm:"type:string"`
-	Hash    Base64 `gorm:"type:string"`
-	Session Cookie `gorm:"embedded;embeddedPrefix:session_"`
+	Name    string `gorm:"unique" json:"name"`
+	Email   string `gorm:"unique" json:"email"`
+	Salt    Base64 `gorm:"type:string" json:"-"`
+	Hash    Base64 `gorm:"type:string" json:"-"`
+	Session Token  `gorm:"embedded;embeddedPrefix:session_" json:"-"`
+	Csrf    Token  `gorm:"embedded;embeddedPrefix:csrf_" json:"-"`
 }
 
 func (u User) IsNil() bool {
-	return u.Email == "" && u.Salt == nil && u.Hash == nil && u.Session == Cookie{} && u.Model == gorm.Model{}
+	return u.Email == "" && u.Salt == nil && u.Hash == nil && u.Session == Token{} && u.Model == gorm.Model{}
 }
 
-type Cookie struct {
+func (u User) Serialize() map[string]any {
+	data := make(map[string]any)
+
+	j, _ := json.Marshal(u)
+	json.Unmarshal(j, &data)
+
+	return data
+}
+
+type Token struct {
 	Name      string
 	Value     string
 	CreatedAt time.Time
 }
 
-func NewCookie(name, value string) Cookie {
-	return Cookie{Name: name, Value: value, CreatedAt: time.Now()}
+func NewToken(name, value string) Token {
+	return Token{Name: name, Value: value, CreatedAt: time.Now()}
 }
 
-func (c Cookie) IsTooOld(lifetime time.Duration) bool {
-	return c.CreatedAt.Add(lifetime).Before(time.Now())
+func (t Token) IsValid(lifetime time.Duration) bool {
+	return t.CreatedAt.Before(time.Now()) && t.CreatedAt.Add(lifetime).After(time.Now())
 }
 
 type Base64 []byte

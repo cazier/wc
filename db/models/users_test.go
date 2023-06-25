@@ -19,15 +19,15 @@ func TestNewCookie(t *testing.T) {
 
 	start := time.Now()
 
-	cookie := NewCookie("session", "secret")
+	cookie := NewToken("session", "secret")
 	assert.Equal("secret", cookie.Value)
 	assert.WithinDuration(start, cookie.CreatedAt, time.Since(start))
 }
-func TestCookieIsTooOld(t *testing.T) {
+func TestTimedTokenIsValid(t *testing.T) {
 	assert := assert.New(t)
 
 	duration, _ := time.ParseDuration("-1h")
 
-	assert.True(Cookie{CreatedAt: time.Now()}.IsTooOld(duration))
-	assert.False(Cookie{CreatedAt: time.Now()}.IsTooOld(duration.Abs()))
+	assert.False(Token{CreatedAt: time.Now()}.IsValid(duration))
+	assert.True(Token{CreatedAt: time.Now()}.IsValid(duration.Abs()))
 }
