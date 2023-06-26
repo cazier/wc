@@ -11,7 +11,7 @@ import (
 )
 
 type User struct {
-	gorm.Model
+	gorm.Model `json:"-"`
 
 	Name    string `gorm:"unique" json:"name"`
 	Email   string `gorm:"unique" json:"email"`
@@ -25,8 +25,8 @@ func (u User) IsNil() bool {
 	return u.Email == "" && u.Salt == nil && u.Hash == nil && u.Session == Token{} && u.Model == gorm.Model{}
 }
 
-func (u User) Serialize() map[string]any {
-	data := make(map[string]any)
+func (u User) Serialize() map[string]string {
+	data := make(map[string]string)
 
 	j, _ := json.Marshal(u)
 	json.Unmarshal(j, &data)
@@ -51,13 +51,13 @@ func (t Token) IsValid(lifetime time.Duration) bool {
 type Base64 []byte
 
 func (b *Base64) Scan(value interface{}) error {
-	bytes, ok := value.(string)
+	plaintext, ok := value.(string)
 
 	if !ok {
 		return fmt.Errorf("could not unmarshall database value: %s", value)
 	}
 
-	decode, err := base64.StdEncoding.DecodeString(bytes)
+	decode, err := base64.StdEncoding.DecodeString(plaintext)
 
 	if err == nil {
 		*b = Base64(decode)
