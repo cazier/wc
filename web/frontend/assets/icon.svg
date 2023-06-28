@@ -1,76 +1,38 @@
-<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg">
-    <defs></defs>
-    <circle id="1" />
-    <circle id="2" />
-    <path id="c" fill="none"></path>
-    <path id="w" fill="none" stroke-linejoin="bevel" stroke-linecap="butt"></path>
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="400px" height="525px"
+   xmlns:xlink="http://www.w3.org/1999/xlink" stroke="lightgreen" fill="transparent" stroke-width="15">
+   <g>
+      <path id="_svg_logo_card" stroke-linecap="round" d="
+      M 125 330
+      l -60 0
+      q -25 0 -25 -25
+      l 0 -275
+      q 0 -25 25 -25
+      l 175 0
+      q 25 0 25 25
+      l 0 65
+      m 0 35
+      l 0 175
+      q 0 25 -25 25
+      " />
 
+      <path id="_svg_logo_thumb" stroke-linecap="round" d="
+      M 225 355
+      l 0 -100
+      a 40 40 0 0 0 -80 0
+      l 0 120
+      q 0 35 30 75
+      t 30 75
+      " />
 
-    <script>
-        var shiftX = 25;
-        var shiftY = 40;
-        var radius = 24;
-        var height = 16;
-        var width = 3;
-        var colorA = "#8E56BA";
-        var colorB = "#343a40";
-        alpha = 90;
-
-        function DrawC(id, centerX, centerY, radius, alpha, stroke, width) {
-            function dx() {
-                return radius * Math.cos(alpha / 2 * Math.PI / 180.0)
-            };
-            function dy() {
-                return radius * Math.sin(alpha / 2 * Math.PI / 180.0)
-            };
-
-            d = [
-                "M", centerX + dx(), centerY - dy(),
-                "a", radius, radius, 0, 1, 0, 0, dy() * 2
-            ]
-
-            document.getElementById(id).setAttribute('d', d.join(" "))
-            document.getElementById(id).setAttribute('stroke-width', width)
-            document.getElementById(id).setAttribute('stroke', stroke)
-        };
-
-        function DrawW(id, centerX, centerY, centerHeight, radius, stroke, width) {
-            function xmax() {
-                return Math.sqrt(radius ** 2 - centerHeight ** 2)
-            };
-
-            d = [
-                "M", centerX - xmax(), centerY - centerHeight,
-                "L",
-                centerX - (xmax() / 2), centerY + centerHeight,
-                centerX, centerY - (centerHeight * 0.25),
-                centerX + (xmax() / 2), centerY + centerHeight,
-                centerX + xmax(), centerY - centerHeight,
-            ]
-
-            document.getElementById(id).setAttribute('d', d.join(" "))
-            document.getElementById(id).setAttribute('stroke-width', width)
-            document.getElementById(id).setAttribute('stroke', stroke)
-        }
-
-        function DrawCircle(id, centerX , centerY, radius, fill, stroke, width) {
-            circle = document.getElementById(id)
-            circle.setAttribute('cx', centerX)
-            circle.setAttribute('cy', centerY)
-            if (fill == 'none') {
-                circle.setAttribute('r', radius - (width / 2))
-                circle.setAttribute('fill-opacity', 0)
-            } else {
-                circle.setAttribute('r', radius)
-                circle.setAttribute('fill', fill)
-            }
-            circle.setAttribute('stroke', stroke)
-            circle.setAttribute('stroke-width', width)
-        }
-
-        DrawCircle(1, shiftX, shiftY, radius, 'none', colorA, width);
-        DrawCircle(2, shiftX * 3, shiftY, radius, colorA, 'none');
-        DrawC('c', shiftX * 3, shiftY, height, alpha, colorB, width);
-        DrawW('w', shiftX, shiftY, height, radius, colorB, width);
-    </script>
+      <path id="_svg_logo_hand" transform="rotate(10 330 525)" stroke-linecap="round" d="
+      M 330 525
+      l 0 -110
+      m 0 -35
+      l 0 -35
+      q 0 -35 -35 -50
+      t -50 -20
+      " />
+   </g>
 </svg>
