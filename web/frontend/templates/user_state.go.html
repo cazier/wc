@@ -1,0 +1,17 @@
+{{define "user_navbar"}}
+{{if not .user }}
+<a class="button is-primary" href="/register">
+  <strong>Sign up</strong>
+</a>
+<a class="button is-link" href="/login">
+  Log in
+</a>
+{{ else }}
+<a class="button is-ghost" href="/profile">
+  <strong>{{ .user.name }}</strong>
+</a>
+<a class="button is-light" href="/logout">
+  Log out
+</a>
+{{end}}
+{{end}}

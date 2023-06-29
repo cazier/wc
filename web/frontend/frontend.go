@@ -37,6 +37,7 @@ func addRoutes() {
 	g.POST("/register", registerPost)
 
 	r := g.Group("", auth.Authorized())
+	r.GET("/", home)
 	r.GET("/home", home)
 	r.GET("/group", group)
 }
@@ -49,11 +50,11 @@ func loadStaticAssets() {
 }
 
 func group(c *gin.Context) {
-	c.HTML(200, "index.go.tmpl", map[string]any{})
+	c.HTML(200, "index.go.html", map[string]any{})
 }
 
 func registerGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "register.go.tmpl", map[string]any{})
+	c.HTML(http.StatusOK, "register.go.html", gin.H{"user": nil})
 }
 
 func registerPost(c *gin.Context) {
@@ -63,9 +64,9 @@ func registerPost(c *gin.Context) {
 	case http.StatusFound:
 		c.Redirect(status, "/home")
 	case http.StatusInternalServerError:
-		c.HTML(status, "error.go.tmpl", nil)
+		c.HTML(status, "error.go.html", nil)
 	default:
-		c.HTML(status, "register.go.tmpl", message)
+		c.HTML(status, "register.go.html", message)
 	}
 }
 
@@ -75,16 +76,16 @@ func home(c *gin.Context) {
 
 	switch status.(int) {
 	case http.StatusAccepted:
-		c.HTML(http.StatusOK, "home.go.tmpl", user.(models.User).Serialize())
+		c.HTML(http.StatusOK, "home.go.html", gin.H{"user": user.(models.User).Serialize()})
 	case http.StatusUnauthorized:
 		c.Redirect(http.StatusTemporaryRedirect, "/login")
 	default:
-		c.HTML(http.StatusInternalServerError, "error.go.tmpl", nil)
+		c.HTML(http.StatusInternalServerError, "error.go.html", nil)
 	}
 }
 
 func loginGet(c *gin.Context) {
-	c.HTML(http.StatusOK, "login.go.tmpl", gin.H{})
+	c.HTML(http.StatusOK, "login.go.html", gin.H{"user": nil})
 }
 
 func loginPost(c *gin.Context) {
@@ -94,8 +95,8 @@ func loginPost(c *gin.Context) {
 	case http.StatusFound:
 		c.Redirect(status, "/home")
 	case http.StatusInternalServerError:
-		c.HTML(status, "error.go.tmpl", nil)
+		c.HTML(status, "error.go.html", nil)
 	default:
-		c.HTML(status, "login.go.tmpl", message)
+		c.HTML(status, "login.go.html", message)
 	}
 }
