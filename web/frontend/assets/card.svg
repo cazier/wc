@@ -1,0 +1,36 @@
+<!-- https://coolors.co/06aed5-ff715b-7f6a93-f8c630-43b929 -->
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="560px" height="560px"
+   xmlns:xlink="http://www.w3.org/1999/xlink" stroke="#FF715B" fill="transparent" stroke-width="20">
+   <g id="card" transform="rotate(-20 280 280)">
+      <path id="_svg_logo_card" stroke-linecap="round" d="
+      M 185 345
+      l -40 0
+      q -25 0 -25 -25
+      l 0 -275
+      q 0 -25 25 -25
+      l 175 0
+      q 25 0 25 25
+      l 0 275
+      q 0 25 -25 25
+      l -5 0
+      " />
+
+      <path id="_svg_logo_thumb" stroke-linecap="round" d="
+      M 285 370
+      l 0 -100
+      a 35 35 0 0 0 -70 0
+      l 0 120
+      q 0 35 30 75
+      t 30 75
+      " />
+
+      <path id="_svg_logo_hand" transform="rotate(10 410 540)" stroke-linecap="round" d="
+      M 410 540
+      l 0 -110
+      m 0 -35
+      l 0 -35
+      q 0 -35 -35 -50
+      t -40 -17
+      " />
+   </g>
+</svg>
