@@ -39,6 +39,7 @@ func Authorized() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if user, ok := getUser(c); !ok {
 			c.Set(AuthStatusKey, http.StatusUnauthorized)
+			c.Set(UserKey, models.User{})
 		} else {
 			c.Set(AuthStatusKey, http.StatusAccepted)
 			c.Set(UserKey, user)

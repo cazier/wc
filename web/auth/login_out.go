@@ -60,6 +60,18 @@ func Login(c *gin.Context) (int, map[string]any) {
 	return http.StatusUnauthorized, gin.H{"message": "invalid username or password"}
 }
 
+func Update(c *gin.Context) (int, map[string]any) {
+	type form struct {
+		Email       string `form:"email"`
+		Password    string `form:"password" binding:"required"`
+		NewPassword string `form:"new"`
+		Confirm     string `form:"confirm"`
+		Csrf        string `form:"csrf" binding:"required"`
+	}
+
+	return 0, nil
+}
+
 func withCookie(c *gin.Context, user models.User) {
 	user.Session = models.NewToken("session", generateCookie())
 	save(user)

@@ -2,6 +2,7 @@ package frontend
 
 import (
 	"embed"
+	"fmt"
 	"html/template"
 	"io/fs"
 	"net/http"
@@ -31,6 +32,8 @@ func Init(database *gorm.DB, engine *gin.Engine) {
 }
 
 func addRoutes() {
+	g.Use()
+
 	g.GET("/login", loginGet)
 	g.GET("/register", registerGet)
 	g.POST("/login", loginPost)
@@ -38,8 +41,9 @@ func addRoutes() {
 
 	r := g.Group("", auth.Authorized())
 	r.GET("/", home)
-	r.GET("/home", home)
 	r.GET("/group", group)
+	r.GET("/profile", profileGet)
+	r.POST("/profile", profilePost)
 }
 
 func loadStaticAssets() {
@@ -59,29 +63,13 @@ func registerGet(c *gin.Context) {
 
 func registerPost(c *gin.Context) {
 	status, message := auth.Create(c)
-
-	switch status {
-	case http.StatusFound:
-		c.Redirect(status, "/home")
-	case http.StatusInternalServerError:
-		c.HTML(status, "error.go.html", nil)
-	default:
-		c.HTML(status, "register.go.html", message)
-	}
+	postRoute(c, status, "/", "register.go.html", message)
 }
 
 func home(c *gin.Context) {
 	status, _ := c.Get(auth.AuthStatusKey)
 	user, _ := c.Get(auth.UserKey)
-
-	switch status.(int) {
-	case http.StatusAccepted:
-		c.HTML(http.StatusOK, "home.go.html", gin.H{"user": user.(models.User).Serialize()})
-	case http.StatusUnauthorized:
-		c.Redirect(http.StatusTemporaryRedirect, "/login")
-	default:
-		c.HTML(http.StatusInternalServerError, "error.go.html", nil)
-	}
+	postRoute(c, status.(int), "home.go.html", "/", gin.H{"user": user.(models.User).Serialize()})
 }
 
 func loginGet(c *gin.Context) {
@@ -90,13 +78,29 @@ func loginGet(c *gin.Context) {
 
 func loginPost(c *gin.Context) {
 	status, message := auth.Login(c)
+	postRoute(c, status, "/", "login.go.html", message)
+}
 
+func profileGet(c *gin.Context) {
+	user, _ := c.Get(auth.UserKey)
+	fmt.Println(user)
+	c.HTML(http.StatusOK, "profile.go.html", gin.H{"user": nil})
+}
+
+func profilePost(c *gin.Context) {
+	status, message := auth.Update(c)
+	postRoute(c, status, "/", "profile.go.html", message)
+}
+
+func postRoute(c *gin.Context, status int, target, fallback string, message map[string]any) {
 	switch status {
 	case http.StatusFound:
-		c.Redirect(status, "/home")
+		c.Redirect(status, target)
+	case http.StatusOK:
+		c.HTML(status, target, message)
 	case http.StatusInternalServerError:
 		c.HTML(status, "error.go.html", nil)
 	default:
-		c.HTML(status, "login.go.html", message)
+		c.HTML(status, fallback, message)
 	}
 }

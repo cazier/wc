@@ -29,7 +29,27 @@
             "mode": "auto",
             "program": "${workspaceFolder}/main.go",
             "args": [
-                "api",
+                "api", "--db", "wc.db", "--sqlite"
+            ]
+        },
+        {
+            "name": "Run Passwords",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/main.go",
+            "args": [
+                "passwords",
+            ]
+        },
+        {
+            "name": "Run Frontend",
+            "type": "go",
+            "request": "launch",
+            "mode": "auto",
+            "program": "${workspaceFolder}/main.go",
+            "args": [
+                "api", "--db", "memory", "--sqlite"
             ]
         }
     ]

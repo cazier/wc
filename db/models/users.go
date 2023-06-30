@@ -26,6 +26,10 @@ func (u User) IsNil() bool {
 }
 
 func (u User) Serialize() map[string]string {
+	if u.IsNil() {
+		return nil
+	}
+
 	data := make(map[string]string)
 
 	j, _ := json.Marshal(u)

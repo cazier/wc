@@ -46,6 +46,10 @@ func TestUserSerialize(t *testing.T) {
 
 	assert.False(user.IsNil())
 	assert.EqualValues(map[string]string{"name": "serialize", "email": "serialize@email.com"}, user.Serialize())
+
+	user = User{}
+	assert.True(user.IsNil())
+	assert.Nil(user.Serialize())
 }
 
 func TestScanner(t *testing.T) {

@@ -55,7 +55,7 @@ func TestRegisterPost(t *testing.T) {
 	)
 
 	assert.Equal(http.StatusFound, response.Status)
-	assert.Equal("/home", response.Headers.Get("Location"))
+	assert.Equal("/", response.Headers.Get("Location"))
 }
 
 func TestRegisterBad(t *testing.T) {
@@ -113,7 +113,7 @@ func TestLoginPost(t *testing.T) {
 	)
 
 	assert.Equal(http.StatusFound, response.Status)
-	assert.Equal("/home", response.Headers.Get("Location"))
+	assert.Equal("/", response.Headers.Get("Location"))
 
 	response = m.POST(
 		"/login",
@@ -129,7 +129,7 @@ func TestLoginPost(t *testing.T) {
 func TestLoadAuthorized(t *testing.T) {
 	assert := assert.New(t)
 
-	response := m.GET("/home")
+	response := m.GET("/")
 	assert.Equal(http.StatusTemporaryRedirect, response.Status)
 	assert.Equal("/login", response.Headers.Get("Location"))
 
@@ -140,10 +140,10 @@ func TestLoadAuthorized(t *testing.T) {
 		},
 	)
 
-	response = m.WithSetCookie(response).GET("/home")
+	response = m.WithSetCookie(response).GET("/")
 
 	assert.Equal(http.StatusOK, response.Status)
-	assert.Contains(response.Body, "authorized")
+	assert.Contains(response.Body, "Log out")
 
 	response = m.POST(
 		"/login",
@@ -152,8 +152,8 @@ func TestLoadAuthorized(t *testing.T) {
 		},
 	)
 
-	response = m.WithSetCookie(response).GET("/home")
+	response = m.WithSetCookie(response).GET("/")
 
 	assert.Equal(http.StatusOK, response.Status)
-	assert.Contains(response.Body, "authorized")
+	assert.Contains(response.Body, "Log out")
 }
