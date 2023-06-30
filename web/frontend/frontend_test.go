@@ -68,7 +68,7 @@ func TestRegisterBad(t *testing.T) {
 		},
 	)
 	assert.Equal(http.StatusNotAcceptable, response.Status)
-	assert.Contains(response.Body, "invalid username or password")
+	assert.Contains(response.Body, "invalid account details. please try again")
 
 	response = m.POST(
 		"/register",

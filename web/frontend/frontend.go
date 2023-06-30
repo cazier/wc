@@ -36,13 +36,13 @@ func addRoutes() {
 
 	g.GET("/login", get)
 	g.GET("/register", get)
-	g.POST("/login", loginPost)
-	g.POST("/register", registerPost)
+	g.POST("/login", loginPost, middlewares.Post())
+	g.POST("/register", registerPost, middlewares.Post())
 
 	r := g.Group("", auth.Authorized())
 	r.GET("/", get)
 	r.GET("/profile", get)
-	r.POST("/profile", profilePost)
+	r.POST("/profile", profilePost, middlewares.Post())
 }
 
 func loadStaticAssets() {
@@ -64,29 +64,29 @@ func get(c *gin.Context) {
 }
 
 func registerPost(c *gin.Context) {
-	status, message := auth.Create(c)
-	postRoute(c, status, "/", "register.go.html", message)
+	c.Set(middlewares.RedirectKey, "/")
+	auth.Create(c)
 }
 
 func loginPost(c *gin.Context) {
-	status, message := auth.Login(c)
-	postRoute(c, status, "/", "login.go.html", message)
+	c.Set(middlewares.RedirectKey, "/")
+	auth.Login(c)
 }
 
 func profilePost(c *gin.Context) {
-	status, message := auth.Update(c)
-	postRoute(c, status, "/", "profile.go.html", message)
+	c.Set(middlewares.RedirectKey, "/profile")
+	auth.Update(c)
 }
 
 func postRoute(c *gin.Context, status int, target, fallback string, message map[string]any) {
-	switch status {
-	case http.StatusFound:
-		c.Redirect(status, target)
-	case http.StatusOK:
-		c.HTML(status, target, message)
-	case http.StatusInternalServerError:
-		c.HTML(status, "error.go.html", nil)
-	default:
-		c.HTML(status, fallback, message)
-	}
+	// switch status {
+	// case http.StatusFound:
+	// 	c.Redirect(status, target)
+	// case http.StatusOK:
+	// 	c.HTML(status, target, message)
+	// case http.StatusInternalServerError:
+	// 	c.HTML(status, "error.go.html", nil)
+	// default:
+	// 	c.HTML(status, fallback, message)
+	// }
 }

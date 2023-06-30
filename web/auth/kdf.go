@@ -7,6 +7,7 @@ import (
 	"crypto/rand"
 
 	"github.com/cazier/wc/db/models"
+	"github.com/cazier/wc/web/exceptions"
 	"golang.org/x/crypto/argon2"
 	"gorm.io/gorm"
 )
@@ -17,15 +18,13 @@ const saltLength = 16
 const hashLength = 64
 const iterations = 10
 
-var ErrAccountExists error = errors.New("an account with this name or email address already exists")
-
 func create(name, email, password string) (models.User, error) {
 	var dest models.User
 
 	tx := db.Where(models.User{Name: name, Email: email}).FirstOrCreate(&dest)
 
 	if (tx.Error == nil && tx.RowsAffected != 1) || errors.Is(tx.Error, gorm.ErrDuplicatedKey) {
-		return dest, ErrAccountExists
+		return dest, exceptions.ErrAccountExists
 	}
 
 	dest.Salt = generateSalt()

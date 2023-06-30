@@ -4,12 +4,11 @@ import (
 	"crypto/rand"
 	"encoding/base64"
 	"net/http"
+	"net/url"
 	"strings"
 	"time"
 
 	"github.com/cazier/wc/db/models"
-	"github.com/cazier/wc/web/exceptions"
-	"github.com/cazier/wc/web/frontend/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -26,12 +25,10 @@ const SESSION_LIFTIME = 3 * 24 * time.Hour
 func Authorized() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		if user, ok := getUser(c); !ok {
-			ttl := middlewares.TemplateName("/login")
-			c.HTML(
-				http.StatusUnauthorized,
-				ttl,
-				gin.H{"message": exceptions.ErrUnauthorized.Error()},
-			)
+			//TODO: Store the desired page internally and load that, as desired?
+			c.Redirect(http.StatusTemporaryRedirect, "/login")
+			// target := encodeParams("/login", map[string]any{"redirect": c.FullPath()})
+			// c.Redirect(http.StatusFound, target)
 			c.Abort()
 		} else {
 			c.Set(AuthStatusKey, http.StatusAccepted)
@@ -73,4 +70,20 @@ func getUser(c *gin.Context) (models.User, bool) {
 
 func addSessionCookie(c *gin.Context, cookie string) {
 	c.SetCookie("session", cookie, int(SESSION_LIFTIME.Seconds()), "", "", false, true)
+}
+
+func encodeParams(path string, params map[string]any) string {
+	encode, _ := url.Parse(path)
+	v, _ := url.ParseQuery(encode.RawQuery)
+
+	for key, value := range params {
+		if v.Has(key) {
+			continue
+		}
+		v.Add(key, value.(string))
+	}
+
+	encode.RawQuery = v.Encode()
+
+	return encode.String()
 }

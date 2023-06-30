@@ -7,6 +7,7 @@ import (
 	"testing"
 
 	test "github.com/cazier/wc/testing"
+	"github.com/cazier/wc/web/exceptions"
 	"github.com/gin-gonic/gin"
 
 	"github.com/cazier/wc/db/models"
@@ -141,43 +142,46 @@ func TestGetUser(t *testing.T) {
 func TestCreate(t *testing.T) {
 	assert := assert.New(t)
 
-	status, message := Create(
-		m.Form(map[string]any{"name": "create", "email": "create@email.com", "password": "pass", "confirm": "pass"}),
-	)
-	assert.Equal(http.StatusFound, status)
-	assert.Nil(message)
+	mf := test.MockForm{}
+	type msa map[string]any
 
-	status, message = Create(m.Form(map[string]any{"email": "create@email.com", "confirm": "password"}))
-	assert.Equal(http.StatusNotAcceptable, status)
-	assert.EqualValues("invalid username or password", message["message"])
+	Create(mf.Form(msa{"name": "create", "email": "create@email.com", "password": "pass", "confirm": "pass"}))
+	assert.Empty(mf.Errors())
 
-	status, message = Create(
-		m.Form(map[string]any{"name": "create", "email": "create@email.com", "password": "pass", "confirm": "badpass"}),
-	)
-	assert.Equal(http.StatusNotAcceptable, status)
-	assert.EqualValues("passwords do not match", message["message"])
+	Create(mf.Form(msa{"email": "create@email.com", "confirm": "password"}))
+	assert.Contains(mf.Errors(), exceptions.ErrAccountDetailsInvalid.Error())
 
-	status, message = Create(
-		m.Form(map[string]any{"name": "create", "email": "create@email.com", "password": "pass", "confirm": "pass"}),
-	)
-	assert.Equal(http.StatusNotAcceptable, status)
-	assert.EqualValues("an account with this name or email address already exists", message["message"])
+	Create(mf.Form(msa{"name": "create", "email": "create@email.com", "password": "pass", "confirm": "badpass"}))
+	assert.Contains(mf.Errors(), exceptions.ErrAccountPasswordMismatch.Error())
+
+	Create(mf.Form(msa{"name": "create", "email": "create@email.com", "password": "pass", "confirm": "pass"}))
+	assert.Contains(mf.Errors(), exceptions.ErrAccountExists.Error())
 }
 
 func TestLogin(t *testing.T) {
 	assert := assert.New(t)
 
-	Create(m.Form(map[string]any{"email": "login@email.com", "password": "password", "confirm": "password"}))
+	mf := test.MockForm{}
+	type msa map[string]any
 
-	status, message := Login(m.Form(map[string]any{"email": "login@email.com", "password": "password"}))
-	assert.Equal(http.StatusFound, status)
-	assert.Nil(message)
+	Create(mf.Form(msa{"email": "login@email.com", "password": "password", "confirm": "password"}))
 
-	status, message = Login(m.Form(map[string]any{"email": "login@email.com"}))
-	assert.Equal(http.StatusNotAcceptable, status)
-	assert.EqualValues("invalid username or password", message["message"])
+	Login(mf.Form(msa{"email": "login@email.com", "password": "password"}))
+	assert.Empty(mf.Errors())
 
-	status, message = Login(m.Form(map[string]any{"email": "login@email.com", "password": "wrongpassword"}))
-	assert.Equal(http.StatusUnauthorized, status)
-	assert.EqualValues("invalid username or password", message["message"])
+	Login(mf.Form(msa{"email": "login@email.com"}))
+	assert.Contains(mf.Errors(), exceptions.ErrAccountDetailsInvalid.Error())
+
+	Login(mf.Form(msa{"email": "login@email.com", "password": "wrongpassword"}))
+	assert.Contains(mf.Errors(), exceptions.ErrUnauthorized.Error())
+}
+
+func TestEncodeQueries(t *testing.T) {
+	assert := assert.New(t)
+
+	values := map[string]any{"a": "1", "b": "2"}
+	assert.Equal("/encode?a=1&b=2", encodeParams("/encode", values))
+	assert.Equal("/encode?a=1&b=2", encodeParams(encodeParams("/encode", values), values))
+
+	assert.Equal("/encode/subdirectory?a+a=b+b", encodeParams("/encode/subdirectory", map[string]any{"a a": "b b"}))
 }

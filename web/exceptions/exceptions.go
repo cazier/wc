@@ -67,8 +67,7 @@ func Message(err error) string {
 	}
 }
 
-var ErrUnauthorized error = errors.New("you must be logged in to access this page")
-
+var ErrUnauthorized error = errors.New("invalid username or password. please try again")
 var ErrAccountExists error = errors.New("an account with this name or email address already exists")
-var ErrAccountDetailsInvalid error = errors.New("invalid username or password. please try again")
+var ErrAccountDetailsInvalid error = errors.New("invalid account details. please try again")
 var ErrAccountPasswordMismatch error = errors.New("passwords do not match")

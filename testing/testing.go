@@ -174,9 +174,22 @@ func (m *Mock) POST(endpoint string, options ...RequestOptions) Response {
 	return m.request(http.MethodPost, endpoint, options...)
 }
 
-func (m *Mock) Form(data map[string]any) *gin.Context {
-	context, _ := gin.CreateTestContext(httptest.NewRecorder())
-	encodeForm(context, data)
+type MockForm struct {
+	context *gin.Context
+}
 
-	return context
+func (mf *MockForm) Form(data map[string]any) *gin.Context {
+	mf.context, _ = gin.CreateTestContext(httptest.NewRecorder())
+	encodeForm(mf.context, data)
+	return mf.context
+}
+
+func (mf *MockForm) Errors() []string {
+	response := make([]string, len(mf.context.Errors))
+
+	for index, err := range mf.context.Errors {
+		response[index] = err.Err.Error()
+	}
+
+	return response
 }

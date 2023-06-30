@@ -2,13 +2,13 @@ package auth
 
 import (
 	"errors"
-	"net/http"
 
 	"github.com/cazier/wc/db/models"
+	"github.com/cazier/wc/web/exceptions"
 	"github.com/gin-gonic/gin"
 )
 
-func Create(c *gin.Context) (int, map[string]any) {
+func Create(c *gin.Context) {
 	type form struct {
 		Name     string `form:"name" binding:"required"`
 		Email    string `form:"email" binding:"required"`
@@ -20,24 +20,26 @@ func Create(c *gin.Context) (int, map[string]any) {
 	data := form{}
 
 	if err := c.ShouldBind(&data); err != nil {
-		return http.StatusNotAcceptable, gin.H{"message": "invalid username or password"}
+		c.Error(exceptions.ErrAccountDetailsInvalid)
+		return
 	}
 
 	if data.Password != data.Confirm {
-		return http.StatusNotAcceptable, gin.H{"message": "passwords do not match"}
+		c.Error(exceptions.ErrAccountPasswordMismatch)
+		return
 	}
 
 	user, err := create(data.Name, data.Email, data.Password)
 
-	if err != nil && errors.Is(err, ErrAccountExists) {
-		return http.StatusNotAcceptable, gin.H{"message": err.Error()}
+	if err != nil && errors.Is(err, exceptions.ErrAccountExists) {
+		c.Error(exceptions.ErrAccountExists)
+		return
 	}
 
 	withCookie(c, user)
-	return http.StatusFound, nil
 }
 
-func Login(c *gin.Context) (int, map[string]any) {
+func Login(c *gin.Context) {
 	type form struct {
 		Email    string `form:"email" binding:"required"`
 		Password string `form:"password" binding:"required"`
@@ -47,20 +49,21 @@ func Login(c *gin.Context) (int, map[string]any) {
 	data := form{}
 
 	if err := c.ShouldBind(&data); err != nil {
-		return http.StatusNotAcceptable, gin.H{"message": "invalid username or password"}
+		c.Error(exceptions.ErrAccountDetailsInvalid)
+		return
 	}
 
 	user := retrieve(models.User{Email: data.Email})
 
 	if isValid(user.Email, data.Password) {
 		withCookie(c, user)
-		return http.StatusFound, nil
+		return
 	}
 
-	return http.StatusUnauthorized, gin.H{"message": "invalid username or password"}
+	c.Error(exceptions.ErrUnauthorized)
 }
 
-func Update(c *gin.Context) (int, map[string]any) {
+func Update(c *gin.Context) {
 	type form struct {
 		Email       string `form:"email"`
 		Password    string `form:"password" binding:"required"`
@@ -69,7 +72,7 @@ func Update(c *gin.Context) (int, map[string]any) {
 		Csrf        string `form:"csrf" binding:"required"`
 	}
 
-	return 0, nil
+	return
 }
 
 func withCookie(c *gin.Context, user models.User) {
