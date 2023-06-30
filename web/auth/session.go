@@ -8,6 +8,8 @@ import (
 	"time"
 
 	"github.com/cazier/wc/db/models"
+	"github.com/cazier/wc/web/exceptions"
+	"github.com/cazier/wc/web/frontend/middlewares"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,6 +23,23 @@ const sessionCookieLength = 128
 
 const SESSION_LIFTIME = 3 * 24 * time.Hour
 
+func Authorized() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		if user, ok := getUser(c); !ok {
+			ttl := middlewares.TemplateName("/login")
+			c.HTML(
+				http.StatusUnauthorized,
+				ttl,
+				gin.H{"message": exceptions.ErrUnauthorized.Error()},
+			)
+			c.Abort()
+		} else {
+			c.Set(AuthStatusKey, http.StatusAccepted)
+			c.Set(UserKey, user)
+		}
+	}
+}
+
 func generateCookie() string {
 	id := make([]byte, sessionCookieLength)
 	rand.Read(id)
@@ -33,18 +52,6 @@ func generateCsrf() string {
 	rand.Read(id)
 
 	return base64.URLEncoding.EncodeToString(id)
-}
-
-func Authorized() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		if user, ok := getUser(c); !ok {
-			c.Set(AuthStatusKey, http.StatusUnauthorized)
-			c.Set(UserKey, models.User{})
-		} else {
-			c.Set(AuthStatusKey, http.StatusAccepted)
-			c.Set(UserKey, user)
-		}
-	}
 }
 
 func getUser(c *gin.Context) (models.User, bool) {

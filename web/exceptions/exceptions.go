@@ -1,6 +1,7 @@
 package exceptions
 
 import (
+	"errors"
 	"net/http"
 	"strconv"
 
@@ -65,3 +66,9 @@ func Message(err error) string {
 		return "an unknown error occurred; please try again"
 	}
 }
+
+var ErrUnauthorized error = errors.New("you must be logged in to access this page")
+
+var ErrAccountExists error = errors.New("an account with this name or email address already exists")
+var ErrAccountDetailsInvalid error = errors.New("invalid username or password. please try again")
+var ErrAccountPasswordMismatch error = errors.New("passwords do not match")
