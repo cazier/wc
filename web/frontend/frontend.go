@@ -39,7 +39,7 @@ func addRoutes() {
 	g.POST("/login", loginPost, middlewares.Post())
 	g.POST("/register", registerPost, middlewares.Post())
 
-	r := g.Group("", auth.Authorized())
+	r := g.Group("", middlewares.Authorized())
 	r.GET("/", get)
 	r.GET("/profile", get)
 	r.POST("/profile", profilePost, middlewares.Post())

@@ -6,6 +6,7 @@ import (
 	net "net/url"
 	"path"
 
+	"github.com/cazier/wc/web/auth"
 	"github.com/cazier/wc/web/exceptions"
 	"github.com/gin-gonic/gin"
 )
@@ -13,21 +14,25 @@ import (
 var TemplateKey = "Template"
 var RedirectKey = "RedirectTarget"
 
-func AssignTemplate() gin.HandlerFunc {
+func Authorized() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		c.Set(TemplateKey, TemplateName(c.FullPath()))
+		if user, ok := auth.GetUser(c); !ok {
+			//TODO: Store the desired page internally and load that, as desired?
+			// target := encodeParams("/login", map[string]any{"redirect": c.FullPath()})
+			// c.Redirect(http.StatusFound, target)
+			c.Redirect(http.StatusTemporaryRedirect, "/login")
+			c.Abort()
+		} else {
+			c.Set(auth.StatusKey, http.StatusAccepted)
+			c.Set(auth.UserKey, user)
+		}
 	}
 }
 
-func TemplateName(url string) string {
-	parsed, _ := net.Parse(url)
-	base := path.Base(parsed.Path)
-
-	if base == "/" {
-		base = "home"
+func AssignTemplate() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		c.Set(TemplateKey, templateName(c.FullPath()))
 	}
-
-	return fmt.Sprintf("%s.go.html", base)
 }
 
 func Post() gin.HandlerFunc {
@@ -38,11 +43,11 @@ func Post() gin.HandlerFunc {
 			err := c.Errors[0].Err
 			switch err {
 			case exceptions.ErrAccountExists, exceptions.ErrAccountPasswordMismatch, exceptions.ErrAccountDetailsInvalid:
-				c.HTML(http.StatusNotAcceptable, TemplateName("/"), gin.H{"message": err.Error()})
+				c.HTML(http.StatusNotAcceptable, templateName("/"), gin.H{"message": err.Error()})
 			case exceptions.ErrUnauthorized:
-				c.HTML(http.StatusUnauthorized, TemplateName("/"), gin.H{"message": err.Error()})
+				c.HTML(http.StatusUnauthorized, templateName("/"), gin.H{"message": err.Error()})
 			default:
-				c.HTML(http.StatusInternalServerError, TemplateName("/error"), gin.H{})
+				c.HTML(http.StatusInternalServerError, templateName("/error"), gin.H{})
 			}
 			c.Abort()
 			return
@@ -50,4 +55,15 @@ func Post() gin.HandlerFunc {
 
 		c.Redirect(http.StatusFound, c.GetString(RedirectKey))
 	}
+}
+
+func templateName(url string) string {
+	parsed, _ := net.Parse(url)
+	base := path.Base(parsed.Path)
+
+	if base == "/" {
+		base = "home"
+	}
+
+	return fmt.Sprintf("%s.go.html", base)
 }

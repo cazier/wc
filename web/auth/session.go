@@ -3,7 +3,6 @@ package auth
 import (
 	"crypto/rand"
 	"encoding/base64"
-	"net/http"
 	"net/url"
 	"strings"
 	"time"
@@ -15,27 +14,12 @@ import (
 // var secret = []byte("correcthorsebatterystaple")
 
 const UserKey = "User"
-const AuthStatusKey = "Authorization"
+const StatusKey = "Authorization"
 
 const csrfLength = 64
 const sessionCookieLength = 128
 
 const SESSION_LIFTIME = 3 * 24 * time.Hour
-
-func Authorized() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		if user, ok := getUser(c); !ok {
-			//TODO: Store the desired page internally and load that, as desired?
-			c.Redirect(http.StatusTemporaryRedirect, "/login")
-			// target := encodeParams("/login", map[string]any{"redirect": c.FullPath()})
-			// c.Redirect(http.StatusFound, target)
-			c.Abort()
-		} else {
-			c.Set(AuthStatusKey, http.StatusAccepted)
-			c.Set(UserKey, user)
-		}
-	}
-}
 
 func generateCookie() string {
 	id := make([]byte, sessionCookieLength)
@@ -51,7 +35,7 @@ func generateCsrf() string {
 	return base64.URLEncoding.EncodeToString(id)
 }
 
-func getUser(c *gin.Context) (models.User, bool) {
+func GetUser(c *gin.Context) (models.User, bool) {
 	session, err := c.Cookie("session")
 	blank := models.User{}
 
@@ -59,7 +43,7 @@ func getUser(c *gin.Context) (models.User, bool) {
 		return blank, false
 	}
 
-	user := retrieve(models.User{Session: models.Token{Value: session}})
+	user := db.retrieve(models.User{Session: models.Token{Value: session}})
 
 	if user.IsNil() || !user.Session.IsValid(SESSION_LIFTIME) {
 		return blank, false

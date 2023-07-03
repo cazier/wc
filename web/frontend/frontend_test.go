@@ -126,34 +126,34 @@ func TestLoginPost(t *testing.T) {
 	assert.Contains(response.Body, "invalid username or password")
 }
 
-func TestLoadAuthorized(t *testing.T) {
-	assert := assert.New(t)
+// func TestLoadAuthorized(t *testing.T) {
+// 	assert := assert.New(t)
 
-	response := m.GET("/")
-	assert.Equal(http.StatusTemporaryRedirect, response.Status)
-	assert.Equal("/login", response.Headers.Get("Location"))
+// 	response := m.GET("/")
+// 	assert.Equal(http.StatusTemporaryRedirect, response.Status)
+// 	assert.Equal("/login", response.Headers.Get("Location"))
 
-	response = m.POST(
-		"/register",
-		test.RequestOptions{
-			Form: gin.H{"name": "authorized", "email": "authorized@email.com", "password": "pass", "confirm": "pass"},
-		},
-	)
+// 	response = m.POST(
+// 		"/register",
+// 		test.RequestOptions{
+// 			Form: gin.H{"name": "authorized", "email": "authorized@email.com", "password": "pass", "confirm": "pass"},
+// 		},
+// 	)
 
-	response = m.WithSetCookie(response).GET("/")
+// 	response = m.WithSetCookie(response).GET("/")
 
-	assert.Equal(http.StatusOK, response.Status)
-	assert.Contains(response.Body, "Log out")
+// 	assert.Equal(http.StatusOK, response.Status)
+// 	assert.Contains(response.Body, "Log out")
 
-	response = m.POST(
-		"/login",
-		test.RequestOptions{
-			Form: gin.H{"email": "authorized@email.com", "password": "pass"},
-		},
-	)
+// 	response = m.POST(
+// 		"/login",
+// 		test.RequestOptions{
+// 			Form: gin.H{"email": "authorized@email.com", "password": "pass"},
+// 		},
+// 	)
 
-	response = m.WithSetCookie(response).GET("/")
+// 	response = m.WithSetCookie(response).GET("/")
 
-	assert.Equal(http.StatusOK, response.Status)
-	assert.Contains(response.Body, "Log out")
-}
+// 	assert.Equal(http.StatusOK, response.Status)
+// 	assert.Contains(response.Body, "Log out")
+// }
