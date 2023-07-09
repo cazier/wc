@@ -1,7 +1,7 @@
 {{template "head"}}
 
 <body>
-    {{template "navbar"}}
+    {{template "navbar" .}}
     <section class="section">
         <div class="container">
             <h2 class="title">Update Profile</h2>
@@ -9,19 +9,27 @@
                 <div class="column is-one-third">
                     <form id="login" method="POST">
                         <div class="field">
-                            <label class="label">Email</label>
+                            <label class="label">Change Name</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="text" name="email" id="email" placeholder="{{ .user.email }}" value="{{ .user.email }}">
+                                <input class="input" type="text" name="name" id="name" placeholder="{{ .user.name }}">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-envelope"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="field">
-                            <label class="label">Password</label>
+                            <label class="label">Change Email</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password" name="password" id="password"
-                                    placeholder="corruption" value="corruption">
+                                <input class="input" type="text" name="email" id="email" placeholder="{{ .user.email }}">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label class="label">New Password</label>
+                            <div class="control has-icons-left has-icons-right">
+                                <input class="input" type="password" name="password" id="password" placeholder="password" value="corruption">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                 </span>
@@ -30,8 +38,7 @@
                         <div class="field">
                             <label class="label">Confirm</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password" name="confirm" id="confirm"
-                                    placeholder="corruption" value="corruption">
+                                <input class="input" type="password" name="confirm" id="confirm" placeholder="password" value="corruption">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-circle-check"></i>
                                 </span>
@@ -40,25 +47,16 @@
                         <div class="field">
                             <label class="label">Password</label>
                             <div class="control has-icons-left has-icons-right">
-                                <input class="input" type="password" name="password" id="password"
-                                    placeholder="corruption" value="corruption">
+                                <input class="input" type="password" required name="password" id="password" placeholder="password" value="corruption">
                                 <span class="icon is-small is-left">
                                     <i class="fas fa-lock"></i>
                                 </span>
                             </div>
                         </div>
                         <div class="field">
-                            <div class="control">
-                                <label class="checkbox">
-                                    <input type="checkbox">
-                                    Remember me
-                            </div>
-                            </label>
-                        </div>
-                        <div class="field">
                             <p class="control">
-                                <button type="submit" class="button is-success">
-                                    Login
+                                <button type="submit" class="button is-success is-fullwidth">
+                                    Apply Changes
                                 </button>
                             </p>
                         </div>

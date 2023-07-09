@@ -36,7 +36,7 @@ func TestLogin(t *testing.T) {
 	mf := test.NewMockForm()
 	type msa map[string]any
 
-	Create(mf.Form(msa{"email": "login@email.com", "password": "password", "confirm": "password"}))
+	Create(mf.Form(msa{"email": "login@email.com", "name": "login", "password": "password", "confirm": "password"}))
 
 	Login(mf.Form(msa{"email": "login@email.com", "password": "password"}))
 	assert.Empty(mf.Errors())
@@ -46,4 +46,20 @@ func TestLogin(t *testing.T) {
 
 	Login(mf.Form(msa{"email": "login@email.com", "password": "wrongpassword"}))
 	assert.Contains(mf.Errors(), exceptions.ErrUnauthorized.Error())
+}
+
+func TestWithCookie(t *testing.T) {
+	assert := assert.New(t)
+
+	mf := test.NewMockForm()
+	type msa map[string]any
+
+	Create(mf.Form(msa{"email": "login@email.com", "name": "login", "password": "password", "confirm": "password"}))
+
+	Login(mf.Form(msa{"email": "login@email.com", "password": "password"}))
+	assert.Empty(mf.Errors())
+
+	cookie, err := mf.Context.Cookie("session")
+	assert.Nil(err)
+	assert.NotZero(cookie)
 }

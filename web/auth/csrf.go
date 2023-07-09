@@ -1,7 +1,6 @@
 package auth
 
 import (
-	"net/http"
 	"time"
 
 	"github.com/cazier/wc/db/models"
@@ -17,25 +16,25 @@ func init() {
 const CsrfKey = "csrf"
 const csrf_lifetime = time.Minute * 10
 
-func IncludeCsrfToken() gin.HandlerFunc {
-	return func(c *gin.Context) {
-		token := generateCsrf()
+// func IncludeCsrfToken() gin.HandlerFunc {
+// 	return func(c *gin.Context) {
+// 		token := generateCsrf()
 
-		if session, err := c.Cookie("session"); err == nil {
-			user := retrieve(models.User{Session: models.Token{Value: session}})
+// 		if session, err := c.Cookie("session"); err == nil {
+// 			user := retrieve(models.User{Session: models.Token{Value: session}})
 
-			if user.IsNil() {
-				c.AbortWithStatus(http.StatusUnauthorized)
-				return
-			}
+// 			if user.IsNil() {
+// 				c.AbortWithStatus(http.StatusUnauthorized)
+// 				return
+// 			}
 
-			user.Csrf = models.NewToken("csrf", token)
-			c.Set(CsrfKey, token)
-			return
-		}
-		c.AbortWithStatus(http.StatusUnauthorized)
-	}
-}
+// 			user.Csrf = models.NewToken("csrf", token)
+// 			c.Set(CsrfKey, token)
+// 			return
+// 		}
+// 		c.AbortWithStatus(http.StatusUnauthorized)
+// 	}
+// }
 
 func GetToken(c *gin.Context) string {
 	return storage["infantino@fifa.com"].Value
