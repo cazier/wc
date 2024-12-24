@@ -1,0 +1,2 @@
+- Looks like the match dates may be wrong. (i.e., Nigeria vs. Canada is before New Zealand vs. Norway?)
+- Case insensitive matching doesn't work with unicode special characters on sqlite. (particularly with vietnamese names "TRẦN THỊ THU")
